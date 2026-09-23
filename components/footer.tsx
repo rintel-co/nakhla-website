@@ -24,6 +24,7 @@ export function Footer() {
               <li><Link href="/about">About</Link></li>
               <li><Link href="/products">Products</Link></li>
               <li><Link href="/careers">Careers</Link></li>
+              <li><Link href="/gallery">Gallery</Link></li>
               <li>contact@nbarari.com</li>
             </ul>
           </div>

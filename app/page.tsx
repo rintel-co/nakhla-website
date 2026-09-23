@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CategoryMark } from "@/components/icons";
+import { CategoryMark, UserMark } from "@/components/icons";
 import { Newsletter } from "@/components/newsletter";
 import { ProductGrid } from "@/components/product-grid";
 import { WhatsAppLink } from "@/components/whatsapp-link";
@@ -12,8 +12,8 @@ export default function HomePage() {
       <div className="wrap hero">
         <div>
           <p className="eyebrow">Riyadh · Wholesale since 2021</p>
-          <h1>Quality foods<br />for every<br /><em>Saudi shelf.</em></h1>
-          <p className="lede">Nakhla Al Barari imports and distributes rice, pulses, oil, spices, canned food, and drinks to grocery chains, hotels, hypermarkets, and walk-in trade.</p>
+          <h1>Authentic foods<br />supplied across<br /><em>Saudi Arabia.</em></h1>
+          <p className="lede">Rice, pulses, oil, spices, canned food, and drinks — imported and distributed to grocery chains, hotels, hypermarkets, and walk-in trade.</p>
           <div className="cta-row">
             <Link className="pill solid" href="/products">Explore products</Link>
             <a className="pill" href="#order">Order process</a>
@@ -22,7 +22,7 @@ export default function HomePage() {
         <div className="hero-visual">
           <div className="blob green" />
           <div className="blob" />
-          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80" alt="Fresh produce arranged for retail" />
+          <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=80" alt="Spices arranged for wholesale" />
           <aside className="float-card">
             <div className="avatars" aria-hidden="true"><i>L</i><i>N</i><i>S</i></div>
             <div><b>6 branches</b><span>Across Saudi Arabia</span></div>
@@ -51,7 +51,7 @@ export default function HomePage() {
       <section>
         <div className="wrap split">
           <div className="portrait">
-            <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=900&q=80" alt="Market stall of fresh food" />
+            <img src="https://images.unsplash.com/photo-1545601445-4d6a0a0565f0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Market stall of fresh food" />
             <div className="mini">
               <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=200&q=80" alt="" />
               <div><b>Al Azima Baked Beans</b><span>24 × 400 · canned food</span></div>
@@ -87,16 +87,16 @@ export default function HomePage() {
           <div className="quotes">
             <article className="quote">
               <p>“Their distribution network and logistics have consistently ensured we receive high-quality products on time.”</p>
-              <div className="who"><b>Abdul Latheef</b><span>CEO & Managing Director, Laqsa Hypermarket, Riyadh</span></div>
+              <div className="who"><UserMark /><div><b>Abdul Latheef</b><span>CEO & Managing Director, Laqsa Hypermarket, Riyadh</span></div></div>
             </article>
             <div className="side-quotes">
               <article>
                 <p>“Reliable distribution and efficient logistics. A dependable partner for any retailer.”</p>
-                <div className="who"><b>Oathad Al Khima</b><span>CEO, Sheroora</span></div>
+                <div className="who"><UserMark /><div><b>Oathad Al Khima</b><span>CEO, Sheroora</span></div></div>
               </article>
               <article>
                 <p>“One of our top 5 customers in the central region. Sales, payment, and distribution have progressed year after year.”</p>
-                <div className="who"><b>Ramadan Hassan</b><span>GT Supervisor, Nestlé Saudi Arabia</span></div>
+                <div className="who"><UserMark /><div><b>Ramadan Hassan</b><span>GT Supervisor, Nestlé Saudi Arabia</span></div></div>
               </article>
             </div>
           </div>

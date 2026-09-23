@@ -125,6 +125,15 @@ export function CategoryMark({ name }: { name: string }) {
   );
 }
 
+export function UserMark() {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <circle cx="24" cy="18" r="6.5" {...stroke} />
+      <path d="M12 36c1.8-7 6.5-10 12-10s10.2 3 12 10" {...green} />
+    </svg>
+  );
+}
+
 export function LogoMark() {
   return (
     <span  aria-hidden="true">
