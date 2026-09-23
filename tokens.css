@@ -1,0 +1,33 @@
+/* Nakhla Al Barari — direction 02
+   Follows the GroFood-style grocery layout: white page, pastel category
+   tiles, coral action, fresh green mark. Palm 500 from the live site
+   stays as the wordmark accent. */
+
+:root {
+  --ink: #1c1c1c;
+  --muted: #5c6560;
+  --line: #ece7e1;
+  --page: #fffbf7;
+  --white: #ffffff;
+
+  --green: #2f6b22;
+  --green-bright: #93c02c;
+  --coral: #ff8a3d;
+  --coral-deep: #f0712a;
+
+  --pink: #ffe8e4;
+  --mint: #e5f6e8;
+  --peach: #fff0dc;
+  --sky: #e7f1fb;
+  --lilac: #f7e8f3;
+  --cream: #f4f6e4;
+  --aqua: #e5f6f4;
+  --footer: #fde8df;
+
+  --font: "Plus Jakarta Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-ar: "IBM Plex Sans Arabic", "Plus Jakarta Sans", sans-serif;
+
+  --radius: 22px;
+  --shadow: 0 16px 40px rgba(40, 32, 24, 0.08);
+  --page-width: 1160px;
+}

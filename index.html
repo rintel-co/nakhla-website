@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nakhla Al Barari — Wholesale food</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="tokens.css" />
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font-family: inherit; }
+    .wrap { width: min(var(--page-width), calc(100% - 40px)); margin: 0 auto; }
+
+    header.site {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(255, 251, 247, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+    }
+    header.site.scrolled { border-bottom-color: var(--line); }
+    .bar {
+      display: flex; align-items: center; gap: 22px;
+      height: 76px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; min-width: 190px; }
+    .logo-mark {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--green); color: white;
+      display: grid; place-items: center;
+    }
+    .logo strong { display: block; font-size: 15px; letter-spacing: -0.03em; line-height: 1.1; }
+    .logo span { display: block; font-family: var(--font-ar); font-size: 11px; color: var(--muted); direction: rtl; text-align: left; }
+    nav.main { display: flex; gap: 22px; font-size: 14.5px; font-weight: 600; color: #3d4440; }
+    nav.main a.active { color: var(--green); }
+    .bar-tools { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+    .search {
+      display: flex; align-items: center; gap: 8px;
+      background: white; border: 1px solid var(--line); border-radius: 999px;
+      padding: 0 14px; height: 42px; width: 220px;
+    }
+    .search input {
+      border: 0; outline: 0; width: 100%; background: transparent; font-size: 14px;
+    }
+    .icon-btn, .pill {
+      height: 42px; border-radius: 999px; border: 1px solid var(--line);
+      background: white; font-weight: 700; font-size: 14px; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .icon-btn { width: 42px; position: relative; }
+    .pill { padding: 0 16px; }
+    .pill.solid { background: var(--coral); border-color: var(--coral); color: #1c1c1c; }
+    .pill.green { background: var(--green); border-color: var(--green); color: white; }
+    .count {
+      position: absolute; top: -4px; right: -4px;
+      background: var(--green); color: white; border-radius: 99px;
+      font-size: 10px; min-width: 16px; height: 16px; display: none;
+      align-items: center; justify-content: center; padding: 0 4px;
+    }
+    .count.on { display: flex; }
+
+    .hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 28px; align-items: center; padding: 36px 0 20px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--mint); color: var(--green); font-weight: 700;
+      font-size: 13px; border-radius: 999px; padding: 6px 12px; margin: 0 0 16px;
+    }
+    h1 {
+      font-size: clamp(42px, 5vw, 64px); line-height: 1.02; letter-spacing: -0.045em;
+      font-weight: 800; margin: 0 0 16px;
+    }
+    h1 em {
+      font-style: normal;
+      background-image: linear-gradient(var(--green-bright), var(--green-bright));
+      background-repeat: no-repeat;
+      background-size: 100% 8px;
+      background-position: 0 88%;
+    }
+    .lede { color: var(--muted); max-width: 46ch; margin: 0 0 22px; font-size: 16.5px; }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-visual { position: relative; min-height: 460px; }
+    .blob {
+      position: absolute; inset: 30px 20px 20px 40px;
+      background: #ffe1c4;
+      border-radius: 46% 54% 48% 52% / 42% 38% 62% 58%;
+    }
+    .blob.green {
+      inset: 10px 50px 50px 10px;
+      background: #d9f0b4;
+      border-radius: 58% 42% 60% 40% / 40% 55% 45% 60%;
+      z-index: 0;
+    }
+    .hero-visual img {
+      position: absolute; z-index: 1;
+      width: 86%; height: 420px; object-fit: cover;
+      left: 8%; top: 18px;
+      border-radius: 48% 52% 46% 54% / 38% 42% 58% 62%;
+    }
+    .float-card {
+      position: absolute; z-index: 2; right: 0; top: 36px;
+      background: white; border-radius: 18px; box-shadow: var(--shadow);
+      padding: 12px 14px; display: flex; gap: 10px; align-items: center; width: 180px;
+    }
+    .float-card b { display: block; font-size: 18px; letter-spacing: -0.03em; }
+    .float-card span { font-size: 12px; color: var(--muted); }
+    .avatars { display: flex; }
+    .avatars i {
+      width: 28px; height: 28px; border-radius: 50%; border: 2px solid white;
+      margin-left: -8px; display: block; font-style: normal; font-size: 10px; font-weight: 800;
+      color: white; display: grid; place-items: center;
+    }
+    .avatars i:first-child { margin-left: 0; background: #e4572e; }
+    .avatars i:nth-child(2) { background: #2f6b22; }
+    .avatars i:nth-child(3) { background: #d4a017; }
+
+    section { padding: 56px 0; }
+    .center { text-align: center; }
+    h2 { font-size: 36px; letter-spacing: -0.04em; margin: 0 0 8px; line-height: 1.1; }
+    .sub { color: var(--muted); margin: 0 auto 28px; max-width: 52ch; }
+
+    .cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .cat {
+      border: 0; border-radius: 26px; min-height: 168px; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+      font-weight: 800; font-size: 16px; color: var(--ink);
+    }
+    .cat small { font-weight: 600; color: var(--muted); font-size: 12px; }
+    .cat.on { outline: 2px solid var(--green); }
+    .cat svg { width: 42px; height: 42px; }
+
+    .split { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 48px; align-items: center; }
+    .portrait {
+      width: min(420px, 100%); aspect-ratio: 1; margin: 0 auto; position: relative;
+    }
+    .portrait::before {
+      content: ""; position: absolute; inset: 12px -8px -8px 12px;
+      background: var(--coral); border-radius: 50%;
+    }
+    .portrait img { position: relative; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .mini {
+      position: absolute; right: -10px; bottom: 28px; z-index: 1;
+      background: white; border-radius: 18px; box-shadow: var(--shadow);
+      padding: 12px; display: flex; gap: 10px; align-items: center; width: 230px;
+    }
+    .mini img { width: 64px; height: 64px; object-fit: cover; border-radius: 12px; }
+    .mini b { display: block; font-size: 14px; }
+    .mini span { color: var(--muted); font-size: 12px; }
+    .points { display: grid; gap: 14px; margin-top: 22px; }
+    .point { display: grid; grid-template-columns: 42px 1fr; gap: 12px; align-items: start; }
+    .point i {
+      width: 42px; height: 42px; border-radius: 12px; background: var(--mint); color: var(--green);
+      display: grid; place-items: center; font-style: normal;
+    }
+    .point b { display: block; }
+    .point span { color: var(--muted); font-size: 14px; }
+
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .card {
+      background: white; border-radius: 22px; padding: 12px 12px 16px;
+      box-shadow: 0 8px 24px rgba(40, 32, 24, 0.04);
+    }
+    .card .shot {
+      height: 128px; border-radius: 16px; overflow: hidden; position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card .shot svg { width: 64px; height: 64px; }
+    .card .shot .brand {
+      position: absolute; left: 12px; bottom: 10px;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green);
+    }
+    .card img { width: 100%; height: 100%; object-fit: cover; }
+    .card h3 { font-size: 16px; margin: 12px 0 2px; letter-spacing: -0.02em; }
+    .card p { margin: 0; color: var(--muted); font-size: 13px; }
+    .card .row { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+    .add {
+      border: 0; background: var(--ink); color: white; border-radius: 999px;
+      height: 34px; padding: 0 12px; font-weight: 700; font-size: 12px; cursor: pointer;
+    }
+    .add.added { background: var(--green); }
+    .empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 28px; }
+
+    .quotes { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 16px; }
+    .quote {
+      background: #fff1ee; border-radius: 28px; padding: 32px;
+    }
+    .quote p { font-size: 22px; letter-spacing: -0.03em; line-height: 1.35; margin: 0 0 18px; font-weight: 700; }
+    .who b { display: block; }
+    .who span { color: var(--muted); font-size: 13px; }
+    .side-quotes { display: grid; gap: 16px; }
+    .side-quotes article { background: white; border-radius: 22px; padding: 18px 18px 16px; }
+    .side-quotes p { margin: 0 0 12px; font-size: 14.5px; }
+
+    .order {
+      display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 28px; align-items: center;
+      background: white; border-radius: 32px; padding: 28px;
+    }
+    .phone {
+      background: #1c1c1c; color: white; border-radius: 32px; padding: 18px 16px 16px;
+      width: min(300px, 100%); margin: 0 auto;
+    }
+    .phone header { display: flex; justify-content: space-between; font-size: 12px; opacity: 0.7; margin-bottom: 16px; }
+    .bubble { background: #245c32; border-radius: 16px 16px 4px 16px; padding: 10px 12px; margin: 0 0 8px 32px; font-size: 13px; }
+    .bubble.them { background: #2a2a2a; border-radius: 16px 16px 16px 4px; margin: 0 32px 8px 0; }
+    .steps { display: grid; gap: 16px; }
+    .step { display: grid; grid-template-columns: 36px 1fr; gap: 12px; }
+    .step b:first-child, .num {
+      width: 36px; height: 36px; border-radius: 50%; background: var(--peach);
+      display: grid; place-items: center; font-weight: 800;
+    }
+    .step h3 { margin: 0; font-size: 16px; }
+    .step p { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+
+    .brands { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .brand {
+      background: white; border-radius: 999px; padding: 12px 18px; font-weight: 800;
+      letter-spacing: -0.03em; color: #3d4440;
+    }
+
+    .news { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; }
+    .story {
+      background: white; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 180px 1fr;
+    }
+    .story img { width: 100%; height: 100%; object-fit: cover; min-height: 160px; }
+    .story div { padding: 18px; }
+    .story h3 { margin: 6px 0; font-size: 18px; letter-spacing: -0.03em; }
+    .story p { margin: 0; color: var(--muted); font-size: 14px; }
+    .tag { font-size: 12px; font-weight: 800; color: var(--green); letter-spacing: 0.04em; text-transform: uppercase; }
+
+    .letter {
+      border-radius: 28px; overflow: hidden; min-height: 280px; position: relative;
+      display: grid; place-items: center; color: white; text-align: center;
+    }
+    .letter img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .letter .veil { position: absolute; inset: 0; background: rgba(28, 28, 28, 0.45); }
+    .letter form { position: relative; z-index: 1; width: min(520px, calc(100% - 32px)); }
+    .letter h2 { color: white; }
+    .letter p { color: rgba(255,255,255,0.88); }
+    .letter .join { display: flex; gap: 8px; background: white; border-radius: 999px; padding: 6px; }
+    .letter input { flex: 1; border: 0; outline: 0; padding: 0 12px; font-size: 14px; }
+    .done { display: none; font-weight: 700; }
+    .done.on { display: block; }
+
+    footer.site { background: var(--footer); padding: 48px 0 20px; margin-top: 20px; }
+    .foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 24px; }
+    footer h3 { margin: 0 0 10px; font-size: 14px; }
+    footer ul { list-style: none; margin: 0; padding: 0; color: #5c4036; font-size: 14px; }
+    footer li { margin: 0 0 6px; }
+    .legal { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 28px; font-size: 12px; color: #7a5b50; }
+
+    .drawer {
+      position: fixed; right: 16px; top: 88px; width: min(320px, calc(100% - 32px));
+      background: white; border-radius: 20px; box-shadow: var(--shadow); padding: 16px;
+      display: none; z-index: 30;
+    }
+    .drawer.on { display: block; }
+    .drawer h3 { margin: 0 0 8px; }
+    .drawer li { font-size: 14px; margin: 0 0 6px; }
+    .menu-btn { display: none; }
+
+    @media (max-width: 980px) {
+      nav.main { display: none; }
+      nav.main.open {
+        display: flex; flex-direction: column; position: absolute; top: 76px; left: 0; right: 0;
+        background: var(--page); padding: 12px 20px 18px; border-bottom: 1px solid var(--line);
+      }
+      .menu-btn { display: inline-flex; }
+      .search { display: none; }
+      .hero, .split, .quotes, .order, .news, .foot, .grid, .cats { grid-template-columns: 1fr 1fr; }
+      .hero, .split, .quotes, .order, .news, .foot { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 380px; }
+      .story { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .grid, .cats { grid-template-columns: 1fr; }
+      h1 { font-size: 40px; }
+      h2 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap bar">
+      <a class="logo" href="#top">
+        <span class="logo-mark" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 16V7M9 7C9 4 7 2 4 2c0 3 2 5 5 5zm0 0c0-3 2-5 5-5 0 3-2 5-5 5z" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
+        <span>
+          <strong>Nakhla Al Barari</strong>
+          <span>شركة نخلة البراري</span>
+        </span>
+      </a>
+      <button class="icon-btn menu-btn" type="button" id="menuBtn" aria-label="Menu">☰</button>
+      <nav class="main" id="nav">
+        <a class="active" href="#top">Home</a>
+        <!-- <a href="#categories">Products</a>
+        <a href="#branches">Branches</a>
+        <a href="#partners">Partners</a>
+        <a href="#journal">Journal</a>
+        <a href="#contact">Contact</a> -->
+      </nav>
+      <div class="bar-tools">
+        <label class="search">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.5" stroke="#5c6560"/><path d="M10.5 10.5L14 14" stroke="#5c6560" stroke-linecap="round"/></svg>
+          <input id="q" type="search" placeholder="Search the catalogue" aria-label="Search the catalogue" />
+        </label>
+        <button class="icon-btn" id="listBtn" type="button" aria-label="Trade list">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3h10l-1 7H4L3 3zM6 13a1 1 0 100-2 1 1 0 000 2zm5 0a1 1 0 100-2 1 1 0 000 2z" stroke="#1c1c1c" stroke-width="1.4"/></svg>
+          <span class="count" id="count">0</span>
+        </button>
+        <a class="pill" href="#contact">Trade account</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap hero">
+      <div>
+        <p class="eyebrow">Riyadh · Wholesale since 2021</p>
+        <h1>Quality foods<br />for every<br /><em>Saudi shelf.</em></h1>
+        <p class="lede">Nakhla Al Barari imports and distributes rice, pulses, oil, spices, canned food, and drinks to grocery chains, hotels, hypermarkets, and walk-in trade.</p>
+        <div class="cta-row">
+          <a class="pill solid" href="#catalogue">Explore products</a>
+          <a class="pill" href="#order">Order process</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="blob green"></div>
+        <div class="blob"></div>
+        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80" alt="Fresh produce arranged for retail" />
+        <aside class="float-card">
+          <div class="avatars" aria-hidden="true"><i>L</i><i>N</i><i>S</i></div>
+          <div><b>6 branches</b><span>Across Saudi Arabia</span></div>
+        </aside>
+      </div>
+    </div>
+
+    <section id="categories">
+      <div class="wrap">
+        <div class="center">
+          <h2>Shop by category</h2>
+          <p class="sub">Rice, pulses, spices, canned food, sauces, oil, sugar, and drinks.</p>
+        </div>
+        <div class="cats" id="cats"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split">
+        <div class="portrait">
+          <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=900&q=80" alt="Market stall of fresh food" />
+          <div class="mini">
+            <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=200&q=80" alt="" />
+            <div><b>Al Azima Baked Beans</b><span>24 × 400 · canned food</span></div>
+          </div>
+        </div>
+        <div>
+          <h2>Stocked for hotels, hypermarkets, and grocery counters.</h2>
+          <p class="sub" style="margin-left:0">From corporations and 5-star hotels to walk-in customers, including commissions and consulates in Riyadh.</p>
+          <div class="points">
+            <div class="point"><i>✓</i><div><b>Nationwide distribution</b><span>Riyadh HQ, Aziziyah, Dammam, Hail, Qassim, and Hafar Al Batin.</span></div></div>
+            <div class="point"><i>✓</i><div><b>Pack sizes for trade</b><span>Cases, tins, and bulk bags — 40 kg rice down to retail multipacks.</span></div></div>
+            <div class="point"><i>✓</i><div><b>A list, then a branch</b><span>Build a trade list here and send it on WhatsApp. Prices stay with the sales desk.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalogue">
+      <div class="wrap">
+        <div class="center">
+          <h2>Our products</h2>
+          <p class="sub" id="catCount">The same eight lines featured on the Nakhla Al Barari homepage.</p>
+        </div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </section>
+
+    <section id="partners">
+      <div class="wrap">
+        <div class="center">
+          <h2>What our partners say</h2>
+          <p class="sub">Retailers and a supplier, in their words.</p>
+        </div>
+        <div class="quotes">
+          <article class="quote">
+            <p>“Their distribution network and logistics have consistently ensured we receive high-quality products on time.”</p>
+            <div class="who"><b>Abdul Latheef</b><span>CEO & Managing Director, Laqsa Hypermarket, Riyadh</span></div>
+          </article>
+          <div class="side-quotes">
+            <article>
+              <p>“Reliable distribution and efficient logistics. A dependable partner for any retailer.”</p>
+              <div class="who"><b>Oathad Al Khima</b><span>CEO, Sheroora</span></div>
+            </article>
+            <article>
+              <p>“One of our top 5 customers in the central region. Sales, payment, and distribution have progressed year after year.”</p>
+              <div class="who"><b>Ramadan Hassan</b><span>GT Supervisor, Nestlé Saudi Arabia</span></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="order">
+      <div class="wrap">
+        <div class="order">
+          <div class="phone" aria-hidden="true">
+            <header><span>WhatsApp</span><span>+966 555 729 077</span></header>
+            <div class="bubble them">Al Azima Sweet Corn 24×340, two cases. Bhai Bhai Sella 40 kg, ten bags.</div>
+            <div class="bubble">Received. Riyadh branch can load this tomorrow morning.</div>
+            <div class="bubble them">Also Mama’s Choice mayo 4×3.78 L.</div>
+          </div>
+          <div>
+            <h2>Order the way trade already works.</h2>
+            <p class="sub" style="margin-left:0">No public checkout. The catalogue is for building a list. Confirmation, price, and delivery stay with the branch.</p>
+            <div class="steps">
+              <div class="step"><span class="num">1</span><div><h3>Search or browse</h3><p>The homepage selection: sweet corn, milk, chickpeas, foul, baked beans, pineapple, and kidney beans.</p></div></div>
+              <div class="step"><span class="num">2</span><div><h3>Add lines to a trade list</h3><p>Pack size stays on the card. Quantity is confirmed with sales.</p></div></div>
+              <div class="step"><span class="num">3</span><div><h3>Send it on WhatsApp</h3><p>The list opens a chat to +966 555729077, or email contact@nbarari.com.</p></div></div>
+            </div>
+            <div class="cta-row" style="margin-top:18px">
+              <a class="pill green" id="waSend" href="https://wa.me/966555729077" target="_blank" rel="noopener">Send list on WhatsApp</a>
+              <a class="pill" href="https://nakhlaalbarari.com/wp-content/uploads/2026/06/Nakhla-Al-Barari-Product-Catalogue-.pdf" target="_blank" rel="noopener">Download catalogue</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="branches">
+      <div class="wrap center">
+        <h2>Brands on the floor</h2>
+        <p class="sub">House and partner labels we distribute.</p>
+        <div class="brands">
+          <span class="brand">Al Azima</span>
+          <span class="brand">Bhai Bhai</span>
+          <span class="brand">Kaneez</span>
+          <span class="brand">Mama’s Choice</span>
+          <span class="brand">Royal Palm</span>
+          <span class="brand">Fresh</span>
+          <span class="brand">Yes Sir</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="journal">
+      <div class="wrap">
+        <div class="center">
+          <h2>From the company</h2>
+          <p class="sub">A note from the range, and the files buyers ask for.</p>
+        </div>
+        <div class="news">
+          <article class="story">
+            <img src="https://images.unsplash.com/photo-1515543904379-3d757afe72e4?auto=format&fit=crop&w=600&q=80" alt="Canned beans" />
+            <div>
+              <div class="tag">Journal</div>
+              <h3>A delicious and nutritious meal solution</h3>
+              <p>Al Azima baked beans in tomato paste. Heat and serve for breakfast, wraps, or a side.</p>
+            </div>
+          </article>
+          <article class="story">
+            <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80" alt="Rice" />
+            <div>
+              <div class="tag">Catalogue</div>
+              <h3>Product catalogue and company profile</h3>
+              <p>Download the current PDF range, or the company profile. CR 1010679869 · VAT 310835914300003.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="letter">
+          <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1600&q=80" alt="" />
+          <div class="veil"></div>
+          <form id="news">
+            <h2>Weekly offers, when we have them.</h2>
+            <p>Promotions used to go out as a flipbook. Leave an email and the branch can send the next list.</p>
+            <div class="join">
+              <input type="email" required placeholder="Email address" aria-label="Email address" />
+              <button class="pill solid" type="submit">Notify me</button>
+            </div>
+            <p class="done" id="done">Saved for the next offer list.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site" id="contact">
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <strong>Nakhla Al Barari Trading Co.</strong>
+          <p style="color:#5c4036;max-width:32ch">Al Masani Dist., Domat Al Jandal Street, Riyadh. Warehouses 26 and 27.</p>
+        </div>
+        <div>
+          <h3>Branches</h3>
+          <ul>
+            <li>Riyadh HQ · +966 555729077</li>
+            <li>Aziziyah · +966 541485467</li>
+            <li>Dammam · +966 567823172</li>
+            <li>Hail · +966 592512514</li>
+            <li>Hafar Al Batin · +966 599661665</li>
+            <li>Qassim · +966 580056440</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#partners">Partners</a></li>
+            <li><a href="#catalogue">Catalogue</a></li>
+            <li><a href="https://nakhlaalbarari.com/careers/" target="_blank" rel="noopener">Careers</a></li>
+            <li>contact@nbarari.com</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Follow</h3>
+          <ul>
+            <li><a href="https://www.instagram.com/nakhlaalbarari" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/@nakhlaalbarari" target="_blank" rel="noopener">TikTok</a></li>
+            <li><a href="https://x.com/NakhlaAlBarari" target="_blank" rel="noopener">X</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="legal">
+        <span>© 2026 Nakhla Al Barari Trading Co.</span>
+        <span>CR 1010679869 · VAT 310835914300003</span>
+      </div>
+    </div>
+  </footer>
+
+  <aside class="drawer" id="drawer" aria-live="polite">
+    <h3>Trade list</h3>
+    <ul id="list"></ul>
+    <a class="pill green" id="waList" href="https://wa.me/966555729077" target="_blank" rel="noopener">Send on WhatsApp</a>
+  </aside>
+
+  <script>
+    const productIcons = {
+      corn: "<path d='M24 8c5 0 9 3 9 8v14c0 7-4 12-9 12s-9-5-9-12V16c0-5 4-8 9-8z' stroke='#1c1c1c' stroke-width='1.6'/><path d='M18 18h12M18 24h12M18 30h12' stroke='#2f6b22' stroke-width='1.6' stroke-linecap='round'/>",
+      milk: "<path d='M16 18l3-6h10l3 6v18a2 2 0 01-2 2H18a2 2 0 01-2-2V18z' stroke='#1c1c1c' stroke-width='1.6'/><path d='M16 18h16M19 26h10' stroke='#2f6b22' stroke-width='1.6' stroke-linecap='round'/>",
+      jar: "<path d='M18 14h12v3H18z' stroke='#1c1c1c' stroke-width='1.6'/><path d='M16 17h16v4c0 9-3 16-8 16s-8-7-8-16v-4z' stroke='#1c1c1c' stroke-width='1.6'/><circle cx='21' cy='28' r='1.4' fill='#2f6b22'/><circle cx='27' cy='30' r='1.4' fill='#2f6b22'/><circle cx='24' cy='25' r='1.4' fill='#2f6b22'/>",
+      bowl: "<path d='M12 22h24c0 8-5 14-12 14S12 30 12 22z' stroke='#1c1c1c' stroke-width='1.6'/><path d='M16 22c1-5 4-8 8-8s7 3 8 8' stroke='#2f6b22' stroke-width='1.6'/><circle cx='20' cy='27' r='1.3' fill='#2f6b22'/><circle cx='26' cy='28' r='1.3' fill='#2f6b22'/>",
+      can: "<ellipse cx='24' cy='14' rx='9' ry='3.2' stroke='#1c1c1c' stroke-width='1.6'/><path d='M15 14v18c0 2 4 4 9 4s9-2 9-4V14' stroke='#1c1c1c' stroke-width='1.6'/><path d='M15 22h18' stroke='#2f6b22' stroke-width='1.6'/>",
+      pineapple: "<path d='M24 18c7 2 9 8 7 16-2 6-12 8-14 1-2-8 0-15 7-17z' stroke='#1c1c1c' stroke-width='1.6'/><path d='M24 18l-2-6M24 17l3-6M21 14l-3-4M27 13l4-3' stroke='#2f6b22' stroke-width='1.6' stroke-linecap='round'/><path d='M20 26l4 3 4-3M20 31l4 3 4-3' stroke='#2f6b22' stroke-width='1.4' stroke-linecap='round'/>",
+      beans: "<path d='M15 28c0-6 4-10 8-8 3 1 5 5 4 9-1 5-6 7-10 5-2-1-2-4-2-6z' stroke='#1c1c1c' stroke-width='1.6'/><path d='M25 22c5-2 10 1 10 6 0 4-3 7-7 6-4-1-6-5-3-12z' stroke='#2f6b22' stroke-width='1.6'/>"
+    };
+    const products = [
+      { name: "Al Azima Sweet Corn (Dura) 24×340", cat: "Canned", brand: "Al Azima", slug: "al-azima-sweet-corn-dura-24x340", icon: "corn" },
+      { name: "Al Azima Analogue Milk 48×170", cat: "Canned", brand: "Al Azima", slug: "al-azima-analogue-milk-48x170", icon: "milk" },
+      { name: "Al Azima Chick Peas Glass 12×580", cat: "Canned", brand: "Al Azima", slug: "al-azima-chick-peas-glass-12x580", icon: "jar" },
+      { name: "Al Azima Chick Peas Glass 12×370", cat: "Canned", brand: "Al Azima", slug: "al-azima-chick-peas-glass-12x370", icon: "jar" },
+      { name: "Al Azima Foul Mudammes 24×400", cat: "Canned", brand: "Al Azima", slug: "al-azima-foul-mudammes-24x400", icon: "bowl" },
+      { name: "Al Azima Baked Beans 24×400", cat: "Canned", brand: "Al Azima", slug: "al-azima-baked-beans-24x400", icon: "can" },
+      { name: "Al Azima Pineapple Slice 24×565", cat: "Canned", brand: "Al Azima", slug: "al-azima-pineapple-slice-24x565", icon: "pineapple" },
+      { name: "Al Azima Red Kidney Beans 24×400", cat: "Canned", brand: "Al Azima", slug: "al-azima-red-kidney-beans-24x400", icon: "beans" }
+    ];
+    const icons = {
+      Rice: "<path d='M8 28c2 6 8 10 16 10s14-4 16-10' stroke='#1c1c1c' stroke-width='1.6' fill='none'/><path d='M14 28c1-8 4-14 10-14s9 6 10 14' stroke='#2f6b22' stroke-width='1.6' fill='none'/>",
+      Pulses: "<circle cx='18' cy='22' r='5' stroke='#1c1c1c' stroke-width='1.6'/><circle cx='30' cy='26' r='5' stroke='#2f6b22' stroke-width='1.6'/>",
+      Spices: "<path d='M24 34V16' stroke='#1c1c1c' stroke-width='1.6'/><path d='M24 20c6-2 10-8 8-12-6 2-10 8-8 12zM24 24c-6-1-11-6-10-11 6 1 10 7 10 11z' stroke='#2f6b22' stroke-width='1.6' fill='none'/>",
+      Canned: "<rect x='16' y='12' width='16' height='24' rx='4' stroke='#1c1c1c' stroke-width='1.6'/><path d='M16 18h16M16 30h16' stroke='#2f6b22' stroke-width='1.6'/>",
+      Sauce: "<path d='M20 14h8l2 6H18l2-6zM18 20h12l-1 16a4 4 0 01-4 3h-2a4 4 0 01-4-3l-1-16z' stroke='#1c1c1c' stroke-width='1.6' fill='none'/><path d='M20 28h8' stroke='#2f6b22' stroke-width='1.6'/>",
+      Oil: "<path d='M24 10c6 8 8 12 8 16a8 8 0 11-16 0c0-4 2-8 8-16z' stroke='#1c1c1c' stroke-width='1.6' fill='none'/><path d='M20 28c2 2 6 2 8 0' stroke='#2f6b22' stroke-width='1.6'/>",
+      Sugar: "<path d='M16 18h16l-2 16H18L16 18z' stroke='#1c1c1c' stroke-width='1.6' fill='none'/><path d='M20 18c0-3 2-5 4-5s4 2 4 5' stroke='#2f6b22' stroke-width='1.6' fill='none'/>",
+      Drinks: "<path d='M16 14h16l-2 18a6 6 0 01-6 5h0a6 6 0 01-6-5L16 14z' stroke='#1c1c1c' stroke-width='1.6' fill='none'/><path d='M20 22h8' stroke='#2f6b22' stroke-width='1.6'/><path d='M22 14c1-3 4-4 6-3' stroke='#2f6b22' stroke-width='1.6' fill='none'/>",
+      Others: "<rect x='14' y='14' width='8' height='8' rx='2' stroke='#1c1c1c' stroke-width='1.6'/><rect x='26' y='14' width='8' height='8' rx='2' stroke='#2f6b22' stroke-width='1.6'/><rect x='14' y='26' width='8' height='8' rx='2' stroke='#2f6b22' stroke-width='1.6'/><rect x='26' y='26' width='8' height='8' rx='2' stroke='#1c1c1c' stroke-width='1.6'/>"
+    };
+    const tone = {
+      Rice: "#fff0dc", Pulses: "#e5f6e8", Spices: "#ffe8e4", Canned: "#e7f1fb",
+      Sauce: "#f7e8f3", Oil: "#f4f6e4", Sugar: "#fff6ea", Drinks: "#e5f6f4", Others: "#f3efe8"
+    };
+    const cats = [
+      ["Rice", "9 lines", "#fff0dc"],
+      ["Pulses", "15 lines", "#e5f6e8"],
+      ["Spices", "10 lines", "#ffe8e4"],
+      ["Canned", "20 lines", "#e7f1fb"],
+      ["Sauce", "18 lines", "#f7e8f3"],
+      ["Oil", "4 lines", "#f4f6e4"],
+      ["Sugar", "4 lines", "#fff6ea"],
+      ["Drinks", "7 lines", "#e5f6f4"],
+      ["Others", "12 lines", "#f3efe8"]
+    ];
+    const list = [];
+    const grid = document.getElementById("grid");
+    const catsEl = document.getElementById("cats");
+    const count = document.getElementById("count");
+    const drawer = document.getElementById("drawer");
+    const listEl = document.getElementById("list");
+
+    cats.forEach(([name, meta, color]) => {
+      const b = document.createElement("button");
+      b.className = "cat";
+      b.style.background = color;
+      b.innerHTML = "<svg viewBox='0 0 48 48' fill='none'>" + icons[name] + "</svg><span>" + name + "</span><small>" + meta + "</small>";
+      b.addEventListener("click", () => {
+        document.getElementById("catalogue").scrollIntoView({ behavior: "smooth" });
+      });
+      catsEl.appendChild(b);
+    });
+
+    function render() {
+      const q = document.getElementById("q").value.trim().toLowerCase();
+      const shown = products.filter(p => (p.name + " " + p.brand).toLowerCase().includes(q));
+      const label = document.getElementById("catCount");
+      if (label) label.textContent = q ? shown.length + " of the homepage selection." : "The same eight lines featured on the Nakhla Al Barari homepage.";
+      grid.innerHTML = shown.length ? "" : "<p class='empty'>None of the homepage products match that search.</p>";
+      shown.forEach((p) => {
+        const inList = list.includes(p.slug);
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = "<div class='shot' style='background:" + (tone[p.cat] || "#f3efe8") + "'><svg viewBox='0 0 48 48' fill='none' aria-hidden='true'>" + productIcons[p.icon] + "</svg><span class='brand'>" + p.brand + "</span></div><h3>" + p.name + "</h3><p>" + p.cat + "</p><div class='row'><span></span><button class='add" + (inList ? " added" : "") + "' type='button'>" + (inList ? "Added" : "Add to list") + "</button></div>";
+        card.querySelector("button").addEventListener("click", () => toggle(p.slug));
+        grid.appendChild(card);
+      });
+    }
+
+    function toggle(slug) {
+      const i = list.indexOf(slug);
+      if (i >= 0) list.splice(i, 1); else list.push(slug);
+      count.textContent = list.length;
+      count.classList.toggle("on", list.length > 0);
+      const names = list.map(s => (products.find(p => p.slug === s) || {}).name || s);
+      listEl.innerHTML = names.map(n => "<li>" + n + "</li>").join("") || "<li>Nothing added yet.</li>";
+      const text = encodeURIComponent("Nakhla Al Barari trade list:\n" + names.map(n => "• " + n).join("\n"));
+      const href = "https://wa.me/966555729077?text=" + text;
+      document.getElementById("waList").href = href;
+      document.getElementById("waSend").href = list.length ? href : "https://wa.me/966555729077";
+      drawer.classList.add("on");
+      render();
+    }
+
+    document.getElementById("q").addEventListener("input", render);
+    document.getElementById("listBtn").addEventListener("click", () => drawer.classList.toggle("on"));
+    document.getElementById("menuBtn").addEventListener("click", () => document.getElementById("nav").classList.toggle("open"));
+    document.getElementById("news").addEventListener("submit", e => {
+      e.preventDefault();
+      document.getElementById("done").classList.add("on");
+      e.target.reset();
+    });
+    document.addEventListener("click", e => {
+      if (!drawer.contains(e.target) && e.target.closest("#listBtn") == null && !e.target.closest(".add")) drawer.classList.remove("on");
+    });
+    addEventListener("scroll", () => document.querySelector("header.site").classList.toggle("scrolled", scrollY > 4));
+    render();
+  </script>
+</body>
+</html>
