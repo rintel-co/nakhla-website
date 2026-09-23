@@ -47,12 +47,13 @@ export const brands = [
 ];
 
 export const branches = [
-  { name: "Riyadh HQ", phone: "+966 555729077", address: "Al Masani Dist., Domat Al Jandal Street. Warehouses 26 and 27." },
-  { name: "Aziziyah", phone: "+966 541485467", address: "Al Basala Street, Riyadh 14512." },
-  { name: "Dammam", phone: "+966 567823172", address: "Muhammadiyah Street, Dammam." },
-  { name: "Hail", phone: "+966 592512514", address: "King Khalid Road, behind NCB, Imam Shafi Street." },
-  { name: "Hafar Al Batin", phone: "+966 599661665", address: "Al Baladiyah, Hafar Al Batin." },
-  { name: "Qassim", phone: "+966 580056440", address: "Al Ramish Al Sufla, Al Yarmouk Dist., Buraidah." },
+  { name: "Riyadh HQ", phone: "+966 555729077", address: "Al Masani Dist., Domat Al Jandal Street. Warehouses 26 and 27.", map: "https://maps.app.goo.gl/anTLTVx3jad5wwhQA" },
+  { name: "Riyadh", phone: "+966 555729077", address: "Al Masani Dist., Domat Al Jandal Street, Riyadh.", map: "https://maps.app.goo.gl/CP7s8pQuqmb4mrhJ6" },
+  { name: "Aziziyah", phone: "+966 541485467", address: "Al Basala Street, Riyadh 14512.", map: "https://maps.app.goo.gl/JDEEwrNRChwGug288" },
+  { name: "Dammam", phone: "+966 567823172", address: "Muhammadiyah Street, Dammam.", map: "https://maps.app.goo.gl/RaAKm89WGHxNqxBLA" },
+  { name: "Hail", phone: "+966 592512514", address: "King Khalid Road, behind NCB, Imam Shafi Street.", map: "https://maps.app.goo.gl/wa5yMYisNWX9NwFM6" },
+  { name: "Hafar Al Batin", phone: "+966 599661665", address: "Al Baladiyah, Hafar Al Batin.", map: "https://maps.app.goo.gl/BWRK8pD2GvstN7A6A" },
+  { name: "Qassim", phone: "+966 580056440", address: "Al Ramish Al Sufla, Al Yarmouk Dist., Buraidah.", map: "https://maps.app.goo.gl/wy2Fv6qV5oTkv4tW9" },
 ];
 
 export const CATALOGUE_PDF = "https://nakhlaalbarari.com/wp-content/uploads/2026/06/Nakhla-Al-Barari-Product-Catalogue-.pdf";

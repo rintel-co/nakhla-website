@@ -258,25 +258,12 @@ h2 { font-size: 36px; letter-spacing: -0.04em; margin: 0 0 8px; line-height: 1.1
 .step h3 { margin: 0; font-size: 16px; }
 .step p { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
 
-.brand-carousel {
-  display: grid; grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center; gap: 12px; margin-top: 8px;
-}
-.brand-track {
-  display: flex; gap: 28px; overflow: hidden;
-  scroll-snap-type: x mandatory;
-}
-.brand-slide {
-  flex: 0 0 140px; height: 88px; margin: 0; scroll-snap-align: start;
-  background: white; border-radius: 18px;
+.brands { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 8px; }
+.brands figure {
+  margin: 0; height: 88px; background: white; border-radius: 18px;
   display: grid; place-items: center; padding: 12px 16px;
 }
-.brand-slide img { max-width: 100%; max-height: 64px; object-fit: contain; }
-.brand-nav {
-  width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line);
-  background: white; color: var(--ink); cursor: pointer;
-  display: grid; place-items: center;
-}
+.brands img { max-width: 100%; max-height: 64px; object-fit: contain; }
 
 .news { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; }
 .story {
@@ -334,6 +321,7 @@ footer li { margin: 0 0 6px; }
 }
 @media (max-width: 640px) {
   .grid, .cats { grid-template-columns: 1fr; }
+  .brands { grid-template-columns: 1fr 1fr; }
   h1 { font-size: 40px; }
   h2 { font-size: 30px; }
 }
@@ -349,7 +337,9 @@ footer li { margin: 0 0 6px; }
   background: white; border-radius: 22px; padding: 20px;
 }
 .branch h2 { font-size: 20px; margin: 0 0 6px; }
-.branch p { margin: 0; color: var(--muted); }
+.branch p { margin: 0 0 6px; color: var(--muted); }
+.branch p:last-child { margin-bottom: 0; }
+.branch .map { color: var(--green); font-weight: 700; }
 .about-split { display: grid; grid-template-columns: minmax(260px, 1.2fr) repeat(3, 1fr); gap: 16px; margin-top: 48px; align-items: start; }
 .about-split .people { grid-template-columns: 1fr; }
 .about-split > div > h2 { font-size: 22px; margin: 0 0 12px; }

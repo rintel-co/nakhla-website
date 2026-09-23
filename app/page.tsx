@@ -3,8 +3,7 @@ import { CategoryMark, UserMark } from "@/components/icons";
 import { Newsletter } from "@/components/newsletter";
 import { ProductGrid } from "@/components/product-grid";
 import { WhatsAppLink } from "@/components/whatsapp-link";
-import { BrandCarousel } from "@/components/brand-carousel";
-import { categories, CATALOGUE_PDF } from "@/lib/catalog";
+import { brands, categories, CATALOGUE_PDF } from "@/lib/catalog";
 
 export default function HomePage() {
   return (
@@ -25,7 +24,7 @@ export default function HomePage() {
           <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=80" alt="Spices arranged for wholesale" />
           <aside className="float-card">
             <div className="avatars" aria-hidden="true"><i>L</i><i>N</i><i>S</i></div>
-            <div><b>6 branches</b><span>Across Saudi Arabia</span></div>
+            <div><b>7 branches</b><span>Across Saudi Arabia</span></div>
           </aside>
         </div>
       </div>
@@ -133,7 +132,13 @@ export default function HomePage() {
         <div className="wrap center">
           <h2>Brands on the floor</h2>
           <p className="sub">House and partner labels we distribute.</p>
-          <BrandCarousel />
+          <div className="brands">
+            {brands.map((brand) => (
+              <figure key={brand.name}>
+                <img src={brand.src} alt={brand.name} />
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 

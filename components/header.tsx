@@ -55,7 +55,7 @@ export function Header() {
             ))}
           </nav>
           <div className="bar-tools">
-            <label className="search">
+            {/* <label className="search">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <circle cx="7" cy="7" r="4.5" stroke="#5c6560" />
                 <path d="M10.5 10.5L14 14" stroke="#5c6560" strokeLinecap="round" />
@@ -70,7 +70,7 @@ export function Header() {
                   if (pathname !== "/" && pathname !== "/products") router.push("/products");
                 }}
               />
-            </label>
+            </label> */}
             <button className="icon-btn" type="button" aria-label="Trade list" onClick={() => setOpen(!open)}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 3h10l-1 7H4L3 3zM6 13a1 1 0 100-2 1 1 0 000 2zm5 0a1 1 0 100-2 1 1 0 000 2z" stroke="#1c1c1c" strokeWidth="1.4" />

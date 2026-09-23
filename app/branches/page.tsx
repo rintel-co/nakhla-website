@@ -10,13 +10,14 @@ export default function BranchesPage() {
         <div className="wrap">
           <p className="eyebrow">Saudi Arabia</p>
           <h1>Branches</h1>
-          <p className="lede">Headquarters in Riyadh, with branches in Aziziyah, Dammam, Hail, Hafar Al Batin, and Qassim.</p>
+          <p className="lede">Headquarters and a branch in Riyadh, plus Aziziyah, Dammam, Hail, Hafar Al Batin, and Qassim.</p>
           <div className="branch-list">
             {branches.map((branch) => (
               <article className="branch" key={branch.name}>
                 <h2>{branch.name}</h2>
                 <p>{branch.address}</p>
                 <p><a href={`tel:${branch.phone.replace(/\s/g, "")}`}>{branch.phone}</a></p>
+                <p><a className="map" href={branch.map} target="_blank" rel="noopener">Google Maps</a></p>
               </article>
             ))}
           </div>
