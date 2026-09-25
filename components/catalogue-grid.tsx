@@ -1,9 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { CategoryMark } from "@/components/icons";
 import { useTrade } from "@/components/trade-context";
-import { catalogue, catalogueTabs } from "@/lib/catalogue";
+import { catalogue, catalogueBrands, catalogueTabs } from "@/lib/catalogue";
 
 const tones: Record<string, string> = {
   Rice: "#fff0dc",
@@ -31,37 +31,92 @@ const markName: Record<string, string> = {
 
 export function CatalogueGrid({ initialTab = "All Products" }: { initialTab?: string }) {
   const start = catalogueTabs.includes(initialTab as (typeof catalogueTabs)[number]) ? initialTab : "All Products";
-  const [tab, setTab] = useState(start);
+  const [category, setCategory] = useState(start);
+  const [brand, setBrand] = useState("All brands");
+  const catalogueRef = useRef<HTMLDivElement>(null);
   const { query, slugs, toggle } = useTrade();
+
+  function scrollToFilters() {
+    const el = catalogueRef.current;
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - 76;
+    if (window.scrollY > top) window.scrollTo({ top, behavior: "smooth" });
+  }
 
   const shown = useMemo(() => {
     const q = query.trim().toLowerCase();
     return catalogue.filter((item) => {
-      const inTab = tab === "All Products" || item.cats.includes(tab);
+      const inCategory = category === "All Products" || item.cats.includes(category);
+      const inBrand = brand === "All brands" || item.brand === brand;
       const text = (item.name + " " + item.brand + " " + item.cats.join(" ")).toLowerCase();
-      return inTab && text.includes(q);
+      return inCategory && inBrand && text.includes(q);
     });
-  }, [tab, query]);
+  }, [category, brand, query]);
+
+  const scope = [category === "All Products" ? "" : category, brand === "All brands" ? "" : brand].filter(Boolean);
 
   return (
-    <>
-      <div className="tabs" role="tablist" aria-label="Product categories">
-        {catalogueTabs.map((name) => (
-          <button key={name} type="button" role="tab" aria-selected={tab === name} className={tab === name ? "tab on" : "tab"} onClick={() => setTab(name)}>
-            {name}
-          </button>
-        ))}
+    <div className="catalogue" ref={catalogueRef}>
+      <div className="filters">
+        <label className="filter">
+          <span>Category</span>
+          <select
+            value={category}
+            onChange={(event) => {
+              setCategory(event.target.value);
+              scrollToFilters();
+            }}
+          >
+            {catalogueTabs.map((name) => (
+              <option key={name} value={name}>{name === "All Products" ? "All categories" : name}</option>
+            ))}
+          </select>
+        </label>
+        <label className="filter">
+          <span>Brand</span>
+          <select
+            value={brand}
+            onChange={(event) => {
+              setBrand(event.target.value);
+              scrollToFilters();
+            }}
+          >
+            <option value="All brands">All brands</option>
+            {catalogueBrands.map((name) => (
+              <option key={name} value={name}>{name}</option>
+            ))}
+          </select>
+        </label>
+        {scope.length > 0 && (
+          <div className="reset-filters">
+            <button
+              type="button"
+              className="filter-clear"
+              onClick={() => {
+                setCategory("All Products");
+                setBrand("All brands");
+                scrollToFilters();
+              }}
+            >
+              Clear filters
+            </button>
+          </div>
+        )}
       </div>
-      <p className="sub">{shown.length} lines{tab === "All Products" ? " on the Nakhla Al Barari products page" : ` in ${tab}`}.</p>
+      <p className="sub">{shown.length} products{scope.length ? ` in ${scope.join(" · ")}` : ""}.</p>
       <div className="grid">
-        {shown.length === 0 && <p className="empty">No products match that search in this category.</p>}
+        {shown.length === 0 && <p className="empty">No products match those filters.</p>}
         {shown.map((item) => {
           const cat = item.cats[0];
           const added = slugs.includes(item.slug);
           return (
             <article className="card" key={item.slug}>
               <div className="shot" style={{ background: tones[cat] ?? "#f3efe8" }}>
-                <CategoryMark name={markName[cat] ?? "Others"} />
+                {item.image ? (
+                  <img src={item.image} alt="" />
+                ) : (
+                  <CategoryMark name={markName[cat] ?? "Others"} />
+                )}
                 <span className="brand">{item.brand}</span>
               </div>
               <h3>{item.name}</h3>
@@ -76,6 +131,6 @@ export function CatalogueGrid({ initialTab = "All Products" }: { initialTab?: st
           );
         })}
       </div>
-    </>
+    </div>
   );
 }

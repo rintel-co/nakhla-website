@@ -1,6 +1,5 @@
 "use client";
 
-import { ProductMark } from "@/components/icons";
 import { useTrade } from "@/components/trade-context";
 import { products } from "@/lib/catalog";
 
@@ -20,7 +19,7 @@ export function ProductGrid() {
           return (
             <article className="card" key={product.slug}>
               <div className="shot" style={{ background: "#e7f1fb" }}>
-                <ProductMark icon={product.icon} />
+                <img src={product.image} alt="" />
                 <span className="brand">{product.brand}</span>
               </div>
               <h3>{product.name}</h3>

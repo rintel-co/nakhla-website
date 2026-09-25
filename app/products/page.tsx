@@ -21,11 +21,13 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
 
   return (
     <main>
-      <section className="page-intro">
-        <div className="wrap center">
-          <p className="eyebrow">Best in quality</p>
-          <h1>Products</h1>
-          <p style={{ maxWidth: 800 }} className="lede center">Nakhla Al Barari Trading Company operates as an FMCG wholesale company. It engages in the wholesale of food items and drinks. The company sells through business-to-business, discount, wholesale, and retail channels in Saudi Arabia. Founded in 2021 and headquartered in Riyadh.</p>
+      <section className="page-intro products-page">
+        <div className="wrap">
+          <div className="center">
+            <p className="eyebrow">Best in quality</p>
+            <h1>Products</h1>
+            <p style={{ maxWidth: 800 }} className="lede center">Nakhla Al Barari Trading Company operates as an FMCG wholesale company. It engages in the wholesale of food items and drinks. The company sells through business-to-business, discount, wholesale, and retail channels in Saudi Arabia. Founded in 2021 and headquartered in Riyadh.</p>
+          </div>
           <CatalogueGrid initialTab={initialTab} />
         </div>
       </section>

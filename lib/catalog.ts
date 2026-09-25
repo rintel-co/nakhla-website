@@ -6,17 +6,18 @@ export type Product = {
   brand: string;
   slug: string;
   icon: ProductIcon;
+  image: string;
 };
 
 export const products: Product[] = [
-  { name: "Al Azima Sweet Corn (Dura) 24×340", cat: "Canned", brand: "Al Azima", slug: "al-azima-sweet-corn-dura-24x340", icon: "corn" },
-  { name: "Al Azima Analogue Milk 48×170", cat: "Canned", brand: "Al Azima", slug: "al-azima-analogue-milk-48x170", icon: "milk" },
-  { name: "Al Azima Chick Peas Glass 12×580", cat: "Canned", brand: "Al Azima", slug: "al-azima-chick-peas-glass-12x580", icon: "jar" },
-  { name: "Al Azima Chick Peas Glass 12×370", cat: "Canned", brand: "Al Azima", slug: "al-azima-chick-peas-glass-12x370", icon: "jar" },
-  { name: "Al Azima Foul Mudammes 24×400", cat: "Canned", brand: "Al Azima", slug: "al-azima-foul-mudammes-24x400", icon: "bowl" },
-  { name: "Al Azima Baked Beans 24×400", cat: "Canned", brand: "Al Azima", slug: "al-azima-baked-beans-24x400", icon: "can" },
-  { name: "Al Azima Pineapple Slice 24×565", cat: "Canned", brand: "Al Azima", slug: "al-azima-pineapple-slice-24x565", icon: "pineapple" },
-  { name: "Al Azima Red Kidney Beans 24×400", cat: "Canned", brand: "Al Azima", slug: "al-azima-red-kidney-beans-24x400", icon: "beans" },
+  { name: "Al Azima Sweet Corn (Dura) 24×340", cat: "Canned", brand: "Al Azima", slug: "al-azima-sweet-corn-dura-24x340", icon: "corn", image: "https://nakhlaalbarari.com/wp-content/uploads/2026/06/AL-AZIMA-SWEET-CORN-DURA-24X340GRM-300x375.avif" },
+  { name: "Al Azima Analogue Milk 48×170", cat: "Canned", brand: "Al Azima", slug: "al-azima-analogue-milk-48x170", icon: "milk", image: "https://nakhlaalbarari.com/wp-content/uploads/2026/06/AL-AZIMA-ANALOGUE-MILK-48X170ML-300x375.avif" },
+  { name: "Al Azima Chick Peas Glass 12×580", cat: "Canned", brand: "Al Azima", slug: "al-azima-chick-peas-glass-12x580", icon: "jar", image: "https://nakhlaalbarari.com/wp-content/uploads/2026/06/AL-AZIMA-CHICK-PEAS-GLASS-12X580GM-300x375.avif" },
+  { name: "Al Azima Chick Peas Glass 12×370", cat: "Canned", brand: "Al Azima", slug: "al-azima-chick-peas-glass-12x370", icon: "jar", image: "https://nakhlaalbarari.com/wp-content/uploads/2026/06/AL-AZIMA-CHICK-PEAS-GLASS-12X370GM-300x375.avif" },
+  { name: "Al Azima Foul Mudammes 24×400", cat: "Canned", brand: "Al Azima", slug: "al-azima-foul-mudammes-24x400", icon: "bowl", image: "https://nakhlaalbarari.com/wp-content/uploads/2026/06/AL-AZIMA-FOUL-MUDAMMES-24X400GM-1-300x375.avif" },
+  { name: "Al Azima Baked Beans 24×400", cat: "Canned", brand: "Al Azima", slug: "al-azima-baked-beans-24x400", icon: "can", image: "https://nakhlaalbarari.com/wp-content/uploads/2026/06/AL-AZIMA-BAKED-BEANS-24X400-GM-300x375.avif" },
+  { name: "Al Azima Pineapple Slice 24×565", cat: "Canned", brand: "Al Azima", slug: "al-azima-pineapple-slice-24x565", icon: "pineapple", image: "https://nakhlaalbarari.com/wp-content/uploads/2026/06/AL-AZIMA-PINEAPPLE-SLICE-24X565GM-300x375.avif" },
+  { name: "Al Azima Red Kidney Beans 24×400", cat: "Canned", brand: "Al Azima", slug: "al-azima-red-kidney-beans-24x400", icon: "beans", image: "https://nakhlaalbarari.com/wp-content/uploads/2026/06/AL-AZIMA-RED-KIDNEY-BEANS-24X400GM-1-300x375.avif" },
 ];
 
 export const categories = [

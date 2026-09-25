@@ -21,7 +21,14 @@ export default function HomePage() {
         <div className="hero-visual">
           <div className="blob green" />
           <div className="blob" />
-          <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=80" alt="Spices arranged for wholesale" />
+          <video
+            src="https://nakhlaalbarari.com/wp-content/uploads/2026/06/Nakhla-Al-Barari-Trading-Co-Hero-Video.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-label="Nakhla Al Barari"
+          />
           <aside className="float-card">
             <div className="avatars" aria-hidden="true"><i>L</i><i>N</i><i>S</i></div>
             <div><b>7 branches</b><span>Across Saudi Arabia</span></div>
@@ -73,6 +80,7 @@ export default function HomePage() {
           <div className="center">
             <h2>Our products</h2>
             <ProductGrid />
+            <Link className="pill green" href="/products" style={{ marginTop: 28 }}>More products</Link>
           </div>
         </div>
       </section>
