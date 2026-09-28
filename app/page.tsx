@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CategoryMark, UserMark } from "@/components/icons";
+import { CategoryMark, StatMark, UserMark } from "@/components/icons";
 import { Newsletter } from "@/components/newsletter";
 import { ProductGrid } from "@/components/product-grid";
 import { WhatsAppLink } from "@/components/whatsapp-link";
@@ -11,28 +11,27 @@ export default function HomePage() {
       <div className="wrap hero">
         <div>
           <p className="eyebrow">Riyadh · Wholesale since 2021</p>
-          <h1>Authentic foods<br />supplied across<br /><em>Saudi Arabia.</em></h1>
+          <h1>Wholesale food<br /><em>across Saudi Arabia.</em></h1>
           <p className="lede">Rice, pulses, oil, spices, canned food, and drinks — imported and distributed to grocery chains, hotels, hypermarkets, and walk-in trade.</p>
           <div className="cta-row">
             <Link className="pill solid" href="/products">Explore products</Link>
             <a className="pill" href="#order">Order process</a>
           </div>
+          <ul className="hero-stats">
+            <li><StatMark name="branches" /><div><b>7</b><span>Branches</span></div></li>
+            <li><StatMark name="categories" /><div><b>9</b><span>Categories</span></div></li>
+            <li><StatMark name="founded" /><div><b>2021</b><span>Founded in Riyadh</span></div></li>
+          </ul>
         </div>
         <div className="hero-visual">
-          <div className="blob green" />
-          <div className="blob" />
           <video
-            src="https://nakhlaalbarari.com/wp-content/uploads/2026/06/Nakhla-Al-Barari-Trading-Co-Hero-Video.mp4"
+            src="/hero.mp4"
             autoPlay
             muted
             loop
             playsInline
             aria-label="Nakhla Al Barari"
           />
-          <aside className="float-card">
-            <div className="avatars" aria-hidden="true"><i>L</i><i>N</i><i>S</i></div>
-            <div><b>7 branches</b><span>Across Saudi Arabia</span></div>
-          </aside>
         </div>
       </div>
 

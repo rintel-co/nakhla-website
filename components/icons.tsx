@@ -125,6 +125,33 @@ export function CategoryMark({ name }: { name: string }) {
   );
 }
 
+export function StatMark({ name }: { name: "branches" | "categories" | "founded" }) {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      {name === "branches" && (
+        <>
+          <path d="M24 40s10-9 10-16a10 10 0 10-20 0c0 7 10 16 10 16z" {...stroke} />
+          <circle cx="24" cy="24" r="3.2" {...green} />
+        </>
+      )}
+      {name === "categories" && (
+        <>
+          <rect x="12" y="12" width="10" height="10" rx="2" {...stroke} />
+          <rect x="26" y="12" width="10" height="10" rx="2" {...green} />
+          <rect x="12" y="26" width="10" height="10" rx="2" {...green} />
+          <rect x="26" y="26" width="10" height="10" rx="2" {...stroke} />
+        </>
+      )}
+      {name === "founded" && (
+        <>
+          <rect x="12" y="14" width="24" height="22" rx="3" {...stroke} />
+          <path d="M12 22h24M18 12v6M30 12v6" {...green} />
+        </>
+      )}
+    </svg>
+  );
+}
+
 export function UserMark() {
   return (
     <svg viewBox="0 0 48 48" aria-hidden="true">
