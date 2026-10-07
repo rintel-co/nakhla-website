@@ -30,8 +30,11 @@ export function TradeProvider({ children }: { children: React.ReactNode }) {
   }, [names]);
 
   function toggle(slug: string) {
-    setSlugs((current) => (current.includes(slug) ? current.filter((item) => item !== slug) : [...current, slug]));
-    setOpen(true);
+    setSlugs((current) => {
+      const next = current.includes(slug) ? current.filter((item) => item !== slug) : [...current, slug];
+      setOpen(next.length > 0);
+      return next;
+    });
   }
 
   return (

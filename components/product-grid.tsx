@@ -1,39 +1,34 @@
 "use client";
 
+import Link from "next/link";
 import { useTrade } from "@/components/trade-context";
 import { products } from "@/lib/catalog";
+import { addBtn, addBtnOn, card, shot, shotImg } from "@/lib/ui";
 
 export function ProductGrid() {
   const { query, slugs, toggle } = useTrade();
   const shown = products.filter((product) => (product.name + " " + product.brand).toLowerCase().includes(query.trim().toLowerCase()));
 
   return (
-    <>
-      <p className="sub" id="catCount">
-        {query.trim() ? `${shown.length} of the homepage selection.` : "The same eight lines featured on the Nakhla Al Barari homepage."}
-      </p>
-      <div className="grid">
-        {shown.length === 0 && <p className="empty">None of the homepage products match that search.</p>}
-        {shown.map((product) => {
-          const added = slugs.includes(product.slug);
-          return (
-            <article className="card" key={product.slug}>
-              <div className="shot" style={{ background: "#e7f1fb" }}>
-                <img src={product.image} alt="" />
-                <span className="brand">{product.brand}</span>
+    <div className="grid grid-cols-4 gap-4 max-[980px]:grid-cols-2 max-[640px]:grid-cols-1">
+      {shown.length === 0 && <p className="col-span-full text-sm text-muted">None of these products match that search.</p>}
+      {shown.map((product) => {
+        const added = slugs.includes(product.slug);
+        return (
+          <article className={`${card} flex flex-col transition-colors hover:border-green`} key={product.slug}>
+            <Link href={`/products/${product.slug}`}>
+              <div className={shot}>
+                <img className={shotImg} src={product.image} alt="" />
               </div>
-              <h3>{product.name}</h3>
-              <p>{product.cat}</p>
-              <div className="row">
-                <span />
-                <button className={added ? "add added" : "add"} type="button" onClick={() => toggle(product.slug)}>
-                  {added ? "Added" : "Add to list"}
-                </button>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </>
+              <p className="mt-3 text-xs text-muted">{product.brand} · {product.cat}</p>
+              <h3 className="mt-1 mb-3 text-sm font-medium leading-snug">{product.name}</h3>
+            </Link>
+            <button className={`${added ? addBtnOn : addBtn} mt-auto w-full`} type="button" onClick={() => toggle(product.slug)}>
+              {added ? "Added" : "Add to list"}
+            </button>
+          </article>
+        );
+      })}
+    </div>
   );
 }

@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import { PageBanner } from "@/components/page-banner";
+import { wrap } from "@/lib/ui";
 
 export const metadata: Metadata = { title: "Gallery — Nakhla Al Barari" };
+
+const iftar = "https://nakhlaalbarari.com/wp-content/uploads/2026/07/Nakhla-Al-Barari-Iftar-Party-1-1536x864.avif";
 
 const albums = [
   {
@@ -16,17 +20,21 @@ const albums = [
 export default function GalleryPage() {
   return (
     <main>
-      <section className="page-intro">
-        <div className="wrap">
-          <p className="eyebrow">Company moments</p>
-          <h1>Gallery</h1>
-          <p className="lede">A closer look at products, business activities, and partnerships. These moments reflect the standards of Nakhla Al Barari Trading Company.</p>
+      <PageBanner
+        title="Gallery"
+        kicker="Company moments"
+        lede="A closer look at products, business activities, and partnerships."
+        image={iftar}
+        imageAlt="Nakhla Al Barari iftar gathering"
+      />
+      <section className="py-12">
+        <div className={wrap}>
           {albums.map((album) => (
-            <div className="album" key={album.title}>
-              <h2>{album.title}</h2>
-              <div className="shots">
+            <div className="mt-10 first:mt-0" key={album.title}>
+              <h2 className="mb-3.5 text-[22px]">{album.title}</h2>
+              <div className="grid grid-cols-3 gap-3 max-[800px]:grid-cols-2 max-[640px]:grid-cols-1">
                 {album.photos.map((src, index) => (
-                  <img key={src} src={src} alt={`${album.title}, photo ${index + 1}`} />
+                  <img className="aspect-[16/10] w-full rounded-lg object-cover" key={src} src={src} alt={`${album.title}, photo ${index + 1}`} />
                 ))}
               </div>
             </div>

@@ -1,21 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
 import { CategoryMark } from "@/components/icons";
 import { useTrade } from "@/components/trade-context";
 import { catalogue, catalogueBrands, catalogueTabs } from "@/lib/catalogue";
-
-const tones: Record<string, string> = {
-  Rice: "#fff0dc",
-  "Pulses Legumes & Beans": "#e5f6e8",
-  Spices: "#ffe8e4",
-  Sugar: "#fff6ea",
-  "Canned Food": "#e7f1fb",
-  Sauce: "#f7e8f3",
-  Oil: "#f4f6e4",
-  Others: "#f3efe8",
-  Drinks: "#e5f6f4",
-};
+import { addBtn, addBtnOn, card, shot, shotImg } from "@/lib/ui";
 
 const markName: Record<string, string> = {
   Rice: "Rice",
@@ -29,6 +19,9 @@ const markName: Record<string, string> = {
   Drinks: "Drinks",
 };
 
+const selectClass =
+  "h-11 appearance-none rounded-md border border-line bg-white bg-[linear-gradient(45deg,transparent_50%,#222_50%),linear-gradient(135deg,#222_50%,transparent_50%)] bg-size-[6px_6px,6px_6px] bg-position-[calc(100%-16px)_18px,calc(100%-10px)_18px] bg-no-repeat pr-8 pl-3 text-sm font-medium text-ink";
+
 export function CatalogueGrid({ initialTab = "All Products" }: { initialTab?: string }) {
   const start = catalogueTabs.includes(initialTab as (typeof catalogueTabs)[number]) ? initialTab : "All Products";
   const [category, setCategory] = useState(start);
@@ -39,7 +32,7 @@ export function CatalogueGrid({ initialTab = "All Products" }: { initialTab?: st
   function scrollToFilters() {
     const el = catalogueRef.current;
     if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - 76;
+    const top = el.getBoundingClientRect().top + window.scrollY - 64;
     if (window.scrollY > top) window.scrollTo({ top, behavior: "smooth" });
   }
 
@@ -56,11 +49,12 @@ export function CatalogueGrid({ initialTab = "All Products" }: { initialTab?: st
   const scope = [category === "All Products" ? "" : category, brand === "All brands" ? "" : brand].filter(Boolean);
 
   return (
-    <div className="catalogue" ref={catalogueRef}>
-      <div className="filters">
-        <label className="filter">
-          <span>Category</span>
+    <div ref={catalogueRef}>
+      <div className="sticky top-16 z-[15] flex flex-wrap items-end gap-3 border-b border-line bg-page pt-3 pb-3.5">
+        <label className="grid min-w-[min(240px,100%)] gap-1.5">
+          <span className="text-xs font-medium text-muted">Category</span>
           <select
+            className={selectClass}
             value={category}
             onChange={(event) => {
               setCategory(event.target.value);
@@ -72,9 +66,10 @@ export function CatalogueGrid({ initialTab = "All Products" }: { initialTab?: st
             ))}
           </select>
         </label>
-        <label className="filter">
-          <span>Brand</span>
+        <label className="grid min-w-[min(240px,100%)] gap-1.5">
+          <span className="text-xs font-medium text-muted">Brand</span>
           <select
+            className={selectClass}
             value={brand}
             onChange={(event) => {
               setBrand(event.target.value);
@@ -88,45 +83,40 @@ export function CatalogueGrid({ initialTab = "All Products" }: { initialTab?: st
           </select>
         </label>
         {scope.length > 0 && (
-          <div className="reset-filters">
-            <button
-              type="button"
-              className="filter-clear"
-              onClick={() => {
-                setCategory("All Products");
-                setBrand("All brands");
-                scrollToFilters();
-              }}
-            >
-              Clear filters
-            </button>
-          </div>
+          <button
+            type="button"
+            className="h-11 cursor-pointer self-end rounded-md border border-line bg-white px-4 text-sm font-semibold text-ink hover:bg-soft"
+            onClick={() => {
+              setCategory("All Products");
+              setBrand("All brands");
+              scrollToFilters();
+            }}
+          >
+            Clear filters
+          </button>
         )}
       </div>
-      <p className="sub">{shown.length} products{scope.length ? ` in ${scope.join(" · ")}` : ""}.</p>
-      <div className="grid">
-        {shown.length === 0 && <p className="empty">No products match those filters.</p>}
+      <div className="mt-4 grid grid-cols-4 gap-4 max-[980px]:grid-cols-2 max-[640px]:grid-cols-1">
+        {shown.length === 0 && <p className="col-span-full py-8 text-center text-sm text-muted">No products match those filters.</p>}
         {shown.map((item) => {
           const cat = item.cats[0];
           const added = slugs.includes(item.slug);
           return (
-            <article className="card" key={item.slug}>
-              <div className="shot" style={{ background: tones[cat] ?? "#f3efe8" }}>
-                {item.image ? (
-                  <img src={item.image} alt="" />
-                ) : (
-                  <CategoryMark name={markName[cat] ?? "Others"} />
-                )}
-                <span className="brand">{item.brand}</span>
-              </div>
-              <h3>{item.name}</h3>
-              <p>{cat}</p>
-              <div className="row">
-                <span />
-                <button className={added ? "add added" : "add"} type="button" onClick={() => toggle(item.slug)}>
-                  {added ? "Added" : "Add to list"}
-                </button>
-              </div>
+            <article className={`${card} flex flex-col transition-colors hover:border-green`} key={item.slug}>
+              <Link href={`/products/${item.slug}`}>
+                <div className={shot}>
+                  {item.image ? (
+                    <img className={shotImg} src={item.image} alt="" />
+                  ) : (
+                    <CategoryMark className="h-16 w-16" name={markName[cat] ?? "Others"} />
+                  )}
+                </div>
+                <p className="mt-3 text-xs text-muted">{item.brand} · {cat}</p>
+                <h3 className="mt-1 mb-3 text-sm font-medium leading-snug">{item.name}</h3>
+              </Link>
+              <button className={`${added ? addBtnOn : addBtn} mt-auto w-full`} type="button" onClick={() => toggle(item.slug)}>
+                {added ? "Added" : "Add to list"}
+              </button>
             </article>
           );
         })}

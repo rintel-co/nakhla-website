@@ -20,6 +20,52 @@ export const products: Product[] = [
   { name: "Al Azima Red Kidney Beans 24×400", cat: "Canned", brand: "Al Azima", slug: "al-azima-red-kidney-beans-24x400", icon: "beans", image: "https://nakhlaalbarari.com/wp-content/uploads/2026/06/AL-AZIMA-RED-KIDNEY-BEANS-24X400GM-1-300x375.avif" },
 ];
 
+export const serviceGroups = [
+  {
+    name: "Food Products",
+    summary: "Grocery lines for shops, hotels, and wholesale counters.",
+    note: "We are having 3000 or more food products and are still counting. We deal with all top brands and distributors. We always ensure the quality, quantity, and availability of products.",
+    items: [
+      "Baby Food",
+      "Baking & Jelly",
+      "Can Food Products",
+      "Chocolate",
+      "Coffee",
+      "Confectionary",
+      "Cornflakes, Cereals & Oats",
+      "Dry Fruit (Nuts)",
+      "Grains",
+      "Instant Powder",
+      "Jam, Halawa, Sayil & Honey",
+      "Juban, Qishta & Zubda",
+      "Macaroni & Vermicelli",
+      "Mayonnaise, Hot Sauce",
+      "Milk (Evap, Powder)",
+      "Oil, Ghee & Olive Oil",
+      "Olive & Pickle",
+      "Philippine & Indonesian Foods",
+    ],
+  },
+  {
+    name: "Frozen Foods",
+    summary: "Frozen goods and poultry, held for cold delivery.",
+    note: "We offer a wide range of frozen foods, with 3000+ options and counting. Partnering with top brands and suppliers, we guarantee premium quality, reliable stock, and consistent availability.",
+    items: ["Cold Frozen Items", "Poultry"],
+  },
+  {
+    name: "Soft Drinks & Beverages",
+    summary: "Energy drinks, juice, and flavoured milk.",
+    note: "We provide a diverse selection of soft drinks and beverages, sourcing from leading brands and distributors. We prioritise quality, variety, and reliable availability.",
+    items: ["Beera & Energy Drink", "Juice & Flavoured Milk"],
+  },
+  {
+    name: "Non Food",
+    summary: "Household and personal-care lines stocked with the food range.",
+    note: "We offer a wide range of non-food products, sourced from top brands and suppliers. We focus on quality, variety, and consistent availability to meet your needs.",
+    items: ["Charcoal", "Cosmetic (Personal Body Care)", "Detergent Cleaning Items", "Pampers & Tissue", "Plastic"],
+  },
+];
+
 export const categories = [
   { name: "Rice", meta: "9 lines", color: "#fff0dc" },
   { name: "Pulses", meta: "15 lines", color: "#e5f6e8" },
@@ -58,4 +104,5 @@ export const branches = [
 ];
 
 export const CATALOGUE_PDF = "https://nakhlaalbarari.com/wp-content/uploads/2026/06/Nakhla-Al-Barari-Product-Catalogue-.pdf";
+export const PROFILE_PDF = "https://nakhlaalbarari.com/wp-content/uploads/2026/06/NB-Profile-.pdf";
 export const WHATSAPP = "https://wa.me/966555729077";

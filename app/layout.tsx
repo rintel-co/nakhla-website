@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Arabic, Plus_Jakarta_Sans } from "next/font/google";
+import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { TradeProvider } from "@/components/trade-context";
 import "./globals.css";
 
-const sans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-sans",
-});
-
 const arabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
-  weight: ["500", "600"],
-  variable: "--font-arabic",
+  weight: ["500"],
+  variable: "--font-ar",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -24,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sans.variable} ${arabic.variable}`}>
+    <html lang="en" className={arabic.variable}>
       <body>
         <TradeProvider>
           <Header />
