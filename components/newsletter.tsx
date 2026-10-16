@@ -8,7 +8,7 @@ export function Newsletter() {
   const [done, setDone] = useState(false);
 
   return (
-    <section className="border-t border-line py-14">
+    <section className="border-t border-line bg-leaf/40 py-14">
       <div className={`${wrap} flex flex-wrap items-end justify-between gap-6`}>
         <div className="max-w-md">
           <h2 className="text-2xl font-semibold tracking-[-0.02em]">Weekly offers, when we have them.</h2>

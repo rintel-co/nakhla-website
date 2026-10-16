@@ -4,7 +4,7 @@ export const pill =
   "inline-flex h-11 cursor-pointer items-center justify-center rounded-md border border-green bg-white px-4 text-sm font-semibold text-green transition-colors hover:bg-green hover:text-white";
 
 export const pillSolid =
-  "inline-flex h-11 cursor-pointer items-center justify-center rounded-md border border-green bg-green px-4 text-sm font-semibold text-white transition-colors hover:border-[#245618] hover:bg-[#245618]";
+  "inline-flex h-11 cursor-pointer items-center justify-center rounded-md border border-green bg-green px-4 text-sm font-semibold text-white transition-colors hover:border-green-dark hover:bg-green-dark";
 
 export const pillGreen = pillSolid;
 
@@ -25,7 +25,7 @@ export const sectionHead = "mb-6 flex items-end justify-between gap-4 max-[640px
 
 export const sectionSub = "mt-1 max-w-[80ch] text-sm text-muted";
 
-export const homeSection = "border-t border-line py-14";
+export const homeSection = "border-t border-line bg-leaf/40 py-14";
 
 export const pageBanner = "relative flex h-[420px] overflow-hidden max-[640px]:h-auto max-[640px]:min-h-[380px]";
 
@@ -37,6 +37,6 @@ export const shotImg = "h-full w-full object-contain p-3";
 
 export const brandLabel = "absolute bottom-2 left-3 text-xs text-muted";
 
-export const addBtn = "h-9 cursor-pointer rounded-md border border-line bg-white px-3 text-sm font-semibold text-ink transition-colors hover:border-green hover:text-green";
+export const addBtn = "h-9 cursor-pointer rounded-md border border-line bg-white px-3 text-sm font-semibold text-ink transition-colors hover:border-green hover:bg-leaf hover:text-green";
 
-export const addBtnOn = "h-9 cursor-pointer rounded-md border border-green bg-green px-3 text-sm font-semibold text-white transition-colors hover:border-[#245618] hover:bg-[#245618]";
+export const addBtnOn = "h-9 cursor-pointer rounded-md border border-green bg-green px-3 text-sm font-semibold text-white transition-colors hover:border-green-dark hover:bg-green-dark";

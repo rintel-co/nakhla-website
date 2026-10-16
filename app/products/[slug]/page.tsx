@@ -3,9 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToList } from "@/components/add-to-list";
 import { CategoryMark } from "@/components/icons";
+import { brandHref, enquiryWhatsApp, packDetail } from "@/lib/brand";
 import { catalogue, type CatalogueItem } from "@/lib/catalogue";
 import { productCopy } from "@/lib/product-copy";
-import { card, heading, pill, shot, shotImg, wrap } from "@/lib/ui";
+import { WhatsAppIcon, whatsappBtn } from "@/components/whatsapp-button";
+import { card, heading, pillSolid, shot, shotImg, wrap } from "@/lib/ui";
 
 const markName: Record<string, string> = {
   Rice: "Rice",
@@ -61,7 +63,7 @@ function productSchema(item: CatalogueItem) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: "https://nakhlaalbarari.com/" },
-          { "@type": "ListItem", position: 2, name: "Products", item: "https://nakhlaalbarari.com/products" },
+          { "@type": "ListItem", position: 2, name: "Our Brands", item: "https://nakhlaalbarari.com/products" },
           { "@type": "ListItem", position: 3, name: item.name, item: url },
         ],
       },
@@ -85,7 +87,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   const category = item.cats[0];
   const copy = productCopy(item);
-  const related = catalogue.filter((entry) => entry.slug !== item.slug && entry.cats.includes(category)).slice(0, 4);
+  const pack = packDetail(item.name);
+  const related = catalogue
+    .filter((entry) => entry.slug !== item.slug && entry.cats.includes(category))
+    .sort((a, b) => Number(b.brand === item.brand) - Number(a.brand === item.brand))
+    .slice(0, 4);
 
   return (
     <main>
@@ -96,7 +102,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <ol className="flex flex-wrap items-center gap-2">
               <li><Link className="hover:text-green" href="/">Home</Link></li>
               <li aria-hidden="true">/</li>
-              <li><Link className="hover:text-green" href="/products">Products</Link></li>
+              <li><Link className="hover:text-green" href="/products">Our Brands</Link></li>
+              <li aria-hidden="true">/</li>
+              <li><Link className="hover:text-green" href={brandHref(item.brand)}>{item.brand}</Link></li>
               <li aria-hidden="true">/</li>
               <li aria-current="page" className="text-ink">{item.name}</li>
             </ol>
@@ -114,16 +122,36 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
           <div>
             <p className="text-sm text-muted">
-              {item.brand}
+              <Link className="hover:text-green" href={brandHref(item.brand)}>{item.brand}</Link>
               <span aria-hidden="true"> · </span>
               <Link className="hover:text-green" href={`/products?tab=${encodeURIComponent(category)}`}>{category}</Link>
             </p>
             <h1 className="mt-2 text-[40px] leading-tight font-semibold tracking-[-0.02em] max-[640px]:text-[32px]">{item.name}</h1>
             <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-muted">{copy.summary}</p>
+            <dl className="mt-5 grid max-w-md gap-3 text-sm">
+              <div className="grid grid-cols-[7rem_1fr] gap-3 border-b border-line pb-3">
+                <dt className="text-muted">Brand</dt>
+                <dd><Link className="font-medium hover:text-green" href={brandHref(item.brand)}>{item.brand}</Link></dd>
+              </div>
+              <div className="grid grid-cols-[7rem_1fr] gap-3 border-b border-line pb-3">
+                <dt className="text-muted">Category</dt>
+                <dd className="font-medium">{category}</dd>
+              </div>
+              {pack ? (
+                <div className="grid grid-cols-[7rem_1fr] gap-3 border-b border-line pb-3">
+                  <dt className="text-muted">Pack</dt>
+                  <dd className="font-medium">{pack}</dd>
+                </div>
+              ) : null}
+            </dl>
             <p className="mt-4 text-sm text-ink">{copy.order}</p>
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <AddToList primary className="h-11 min-w-40 px-4" slug={item.slug} />
-              <Link className="text-sm font-semibold text-green" href={`/products?tab=${encodeURIComponent(category)}`}>More in {category}</Link>
+              <Link className={pillSolid} href={`/contact?product=${item.slug}#enquiry`}>Contact Sales</Link>
+              <a className={whatsappBtn} href={enquiryWhatsApp(item)} target="_blank" rel="noopener">
+                <WhatsAppIcon />
+                Request a quote
+              </a>
             </div>
           </div>
         </div>
@@ -132,8 +160,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <section className="border-t border-line py-12">
           <div className={wrap}>
             <div className="mb-6 flex items-end justify-between gap-4">
-              <h2 className={heading}>More in {category}</h2>
-              <Link className="text-sm font-semibold text-green" href={`/products?tab=${encodeURIComponent(category)}`}>View all</Link>
+              <h2 className={heading}>Similar products</h2>
+              <Link className="text-sm font-semibold text-green" href={`/products?tab=${encodeURIComponent(category)}#catalogue`}>View all</Link>
             </div>
             <div className="grid grid-cols-4 gap-4 max-[980px]:grid-cols-2 max-[640px]:grid-cols-1">
               {related.map((entry) => (

@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroLogo } from "@/components/hero-logo";
-import { AudienceMark, StatMark, UserMark } from "@/components/icons";
-import { ServiceTabs } from "@/components/service-tabs";
+import { AudienceMark, GroupMark, StatMark, UserMark } from "@/components/icons";
 import { Newsletter } from "@/components/newsletter";
 import { ProductGrid } from "@/components/product-grid";
 import { WhatsAppLink } from "@/components/whatsapp-link";
+import { FaqList } from "@/components/faq-list";
+import { Nationwide } from "@/components/nationwide";
+import { brandHref } from "@/lib/brand";
 import { brands, branches, CATALOGUE_PDF, PROFILE_PDF, serviceGroups } from "@/lib/catalog";
+import { homeFaqs } from "@/lib/faq";
 import { heading, heroEm, heroTitle, homeSection, pillSolid, sectionHead, sectionSub, wrap } from "@/lib/ui";
 
 const quotes = [
@@ -89,14 +92,7 @@ const homeSchema = {
           name: group.name,
           description: group.note,
           provider: { "@type": "Organization", name: "Nakhla Al Barari Trading Co." },
-          hasOfferCatalog: {
-            "@type": "OfferCatalog",
-            name: group.name,
-            itemListElement: group.items.map((name) => ({
-              "@type": "Offer",
-              itemOffered: { "@type": "Product", name },
-            })),
-          },
+          serviceType: group.name,
         },
       })),
     },
@@ -120,13 +116,12 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
         <HeroLogo />
         <div className={`${wrap} relative mt-auto flex flex-col pb-12 pt-24 text-white max-[640px]:pb-8`}>
-          <p className="mb-3 inline-flex w-fit rounded-full bg-white/20 px-3 py-1 text-sm font-semibold text-white">Riyadh, since 2021</p>
           <h1 className={`${heroTitle} text-white`}>Wholesale food<br /><em className={heroEm}>across Saudi Arabia.</em></h1>
           <p className="mb-6 max-w-[62ch] text-base leading-relaxed text-white/80">Nakhla Al Barari Trading Company is an FMCG wholesaler of food, drinks, and other commodities. We sell through business-to-business, discount, wholesale, and retail channels in Saudi Arabia, headquartered in Riyadh.</p>
           <div className="flex flex-wrap gap-3">
             <Link className={pillSolid} href="/products">Explore products</Link>
-            <a className="inline-flex h-11 items-center justify-center rounded-md border border-white/80 px-4 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-ink" href={PROFILE_PDF} target="_blank" rel="noopener">Company profile</a>
-            <a className="inline-flex h-11 items-center justify-center rounded-md border border-white/80 px-4 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-ink" href="#order">Order process</a>
+            <a className="inline-flex h-11 items-center justify-center rounded-md border border-white/80 px-4 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-green" href={PROFILE_PDF} target="_blank" rel="noopener">Company profile</a>
+            <a className="inline-flex h-11 items-center justify-center rounded-md border border-white/80 px-4 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-green" href="#order">Order process</a>
           </div>
           <dl className="mt-8 flex flex-wrap gap-8 border-t border-white/25 pt-5 text-sm">
             {([
@@ -151,11 +146,20 @@ export default function HomePage() {
           <div className={sectionHead}>
             <div>
               <h2 className={heading} id="services-heading">Our Services</h2>
-              <p className={sectionSub}>Four services. Pick a group, then open the full product list.</p>
+              <p className={sectionSub}>Food products, frozen foods, soft drinks and beverages, and non-food.</p>
             </div>
-            <Link className={pillSolid} href="/products">Our Products</Link>
+            <Link className={pillSolid} href="/services">Our services</Link>
           </div>
-          <ServiceTabs />
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {serviceGroups.map((group) => (
+              <li key={group.name}>
+                <Link className="flex h-full flex-col rounded-lg border border-line bg-white p-4 transition-colors hover:border-green" href={`/services#${group.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`}>
+                  <GroupMark className="h-10 w-10" name={group.name} />
+                  <h3 className="mt-3 text-lg font-semibold">{group.name}</h3>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -215,7 +219,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={homeSection} id="catalogue" aria-labelledby="products-heading">
+      <Nationwide />
+
+      {/* <section className={homeSection} id="catalogue" aria-labelledby="products-heading">
         <div className={wrap}>
           <div className={sectionHead}>
             <div>
@@ -225,6 +231,25 @@ export default function HomePage() {
             <Link className={pillSolid} href="/products">More products</Link>
           </div>
           <ProductGrid />
+        </div>
+      </section> */}
+
+      <section className={homeSection} id="brands" aria-labelledby="brands-heading">
+        <div className={wrap}>
+          <div className={sectionHead}>
+            <div>
+              <h2 className={heading} id="brands-heading">Our Brands</h2>
+              <p className={sectionSub}>House and partner labels we distribute.</p>
+            </div>
+            <Link className={pillSolid} href="/products">Our Brands</Link>
+          </div>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+            {brands.map((brand) => (
+              <Link className="flex h-20 items-center justify-center rounded-lg bg-white px-4 transition-colors hover:bg-leaf" href={brandHref(brand.name)} key={brand.name} aria-label={brand.name}>
+                <img className="max-h-12 max-w-full object-contain" src={brand.src} alt="" />
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -256,43 +281,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-green py-14 text-white" id="order" aria-labelledby="order-heading">
-        <div className={wrap}>
+      <section className="relative overflow-hidden bg-green-dark py-16 text-white" id="order" aria-labelledby="order-heading">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(147,192,44,0.38),transparent_55%),radial-gradient(ellipse_at_bottom_right,rgba(147,192,44,0.16),transparent_48%)]" aria-hidden="true" />
+        <div className={`${wrap} relative`}>
           <h2 className={`${heading} max-w-[60ch] text-white`} id="order-heading">Order the way trade already works.</h2>
           <p className="mt-3 max-w-[52ch] text-base leading-relaxed text-white/80">No public checkout. The catalogue is for building a list. Confirmation, price, and delivery stay with the branch.</p>
           <ol className="mt-8 grid gap-4 md:grid-cols-3">
             {steps.map(([num, title, copy]) => (
-              <li className="rounded-2xl bg-white/10 p-5" key={num}>
-                <p className="text-3xl font-semibold tracking-[-0.03em] text-white">{num}</p>
-                <h3 className="mt-4 text-lg font-semibold">{title}</h3>
+              <li className="rounded-2xl border border-white/10 bg-white/10 p-5" key={num}>
+                <p className="text-3xl font-semibold tracking-[-0.03em] text-green">{num}</p>
+                <h3 className="mt-4 text-lg font-semibold text-white">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-white/80">{copy}</p>
               </li>
             ))}
           </ol>
           <div className="mt-8 flex flex-wrap gap-3">
-            <WhatsAppLink className="inline-flex h-11 items-center justify-center rounded-md bg-white px-4 text-sm font-semibold text-green transition-colors hover:bg-soft">Send list on WhatsApp</WhatsAppLink>
-            <a className="inline-flex h-11 items-center justify-center rounded-md border border-white/70 px-4 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-green" href={CATALOGUE_PDF} target="_blank" rel="noopener">Download catalogue</a>
+            <WhatsAppLink>Send list on WhatsApp</WhatsAppLink>
+            <a className="inline-flex h-11 items-center justify-center rounded-md border border-white/70 px-4 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-green-dark" href={CATALOGUE_PDF} target="_blank" rel="noopener">Download catalogue</a>
           </div>
         </div>
       </section>
 
-      <section className={homeSection} id="brands" aria-labelledby="brands-heading">
-        <div className={wrap}>
-          <div className={sectionHead}>
-            <div>
-              <h2 className={heading} id="brands-heading">Brands on the floor</h2>
-              <p className={sectionSub}>House and partner labels we distribute.</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {brands.map((brand) => (
-              <figure className="m-0 flex h-20 items-center justify-center rounded-lg bg-white px-4" key={brand.name}>
-                <img className="max-h-12 max-w-full object-contain" src={brand.src} alt={brand.name} />
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
+     
 
       <section className={homeSection} id="company" aria-labelledby="company-heading">
         <div className={wrap}>
@@ -328,6 +338,19 @@ export default function HomePage() {
             </div>
           </div>
           <p className="mt-4 text-sm text-muted">CR 1010679869 · VAT 310835914300003</p>
+        </div>
+      </section>
+
+      <section className={homeSection} id="faq" aria-labelledby="faq-heading">
+        <div className={wrap}>
+          <div className={sectionHead}>
+            <div>
+              <h2 className={heading} id="faq-heading">FAQ</h2>
+              <p className={sectionSub}>Wholesale orders, availability, returns, and how to reach us on WhatsApp.</p>
+            </div>
+            {/* <Link className={pillSolid} href="/faq">Full FAQ</Link> */}
+          </div>
+          <FaqList items={homeFaqs} />
         </div>
       </section>
 

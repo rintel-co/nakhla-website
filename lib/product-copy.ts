@@ -12,7 +12,7 @@ const categoryCopy: Record<string, string> = {
   Others: "Honey, milk powder, oats, salt, and other dry grocery lines stocked beside the main categories.",
 };
 
-function brandLine(brand: string) {
+export function brandLine(brand: string) {
   if (brand === "Al Azima") return "Al Azima is a house label in the Nakhla range.";
   if (brand === "Bhai Bhai") return "Bhai Bhai covers rice, spices, pulses, and puffed rice in this catalogue.";
   if (brand === "Kaneez") return "Kaneez is the premium rice label in the range.";

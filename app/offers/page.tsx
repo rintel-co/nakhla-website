@@ -60,7 +60,7 @@ export default async function OffersPage({ searchParams }: { searchParams: Promi
   return (
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(offersSchema()) }} />
-      <section className="relative flex min-h-[420px] overflow-hidden bg-[radial-gradient(ellipse_90%_80%_at_0%_18%,#6d2c78_0%,transparent_58%),radial-gradient(ellipse_72%_90%_at_100%_88%,#1d4f86_0%,transparent_56%),radial-gradient(ellipse_50%_64%_at_74%_6%,#c46a3a_0%,transparent_50%),linear-gradient(165deg,#140e28_0%,#1c1638_50%,#121a30_100%)] text-white max-[640px]:min-h-[380px]">
+      <section className="relative flex min-h-[420px] overflow-hidden bg-[radial-gradient(ellipse_90%_80%_at_0%_18%,#3d7a2a_0%,transparent_58%),radial-gradient(ellipse_72%_90%_at_100%_88%,#0c2408_0%,transparent_56%),radial-gradient(ellipse_50%_64%_at_74%_6%,#c8e9a0_0%,transparent_50%),linear-gradient(165deg,#0c2408_0%,#163d10_52%,#0d2b09_100%)] text-white max-[640px]:min-h-[380px]">
         <HeroLogo />
         <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <g className="offer-spin">
@@ -92,13 +92,13 @@ export default async function OffersPage({ searchParams }: { searchParams: Promi
               </ol>
             </nav>
             <p className="mb-2 text-sm text-white/75">General offers</p>
-            <h1 className="offer-lines max-w-[16ch] text-[52px] leading-[1.05] font-semibold tracking-[-0.03em] max-[640px]:text-[36px]">
+            <h1 className="offer-lines max-w-[16ch] text-[52px] leading-[1.05] font-semibold tracking-[-0.03em] text-white max-[640px]:text-[36px]">
               <span>Weekly offers for every branch.</span>
               <span>This week’s lines, ready to add.</span>
               <span>Each branch confirms the offer.</span>
             </h1>
             <p className="mt-3 max-w-[46ch] text-base leading-relaxed text-white/80">Each branch keeps its own list. The branch confirms the offer before you order.</p>
-            <a className="mt-6 inline-flex h-11 items-center rounded-full bg-white px-5 text-sm font-semibold text-ink transition-colors hover:bg-soft" href="#lists">See this week</a>
+            <a className="mt-6 inline-flex h-11 items-center rounded-full bg-white px-5 text-sm font-semibold text-green transition-colors hover:bg-leaf" href="#lists">See this week</a>
           </div>
           <div className="grid gap-2.5 lg:w-[420px]">
             <div className="grid grid-cols-6 gap-2" aria-label="Offer areas">

@@ -25,7 +25,7 @@ const catalogueBySlug = new Map(catalogue.map((item) => [item.slug, item]));
 function Chip({ active, children, onClick }: { active: boolean; children: string; onClick: () => void }) {
   return (
     <button
-      className={`h-9 shrink-0 cursor-pointer rounded-full px-3.5 text-sm font-semibold transition-colors ${active ? "bg-green text-white" : "border border-line bg-white text-ink hover:border-green"}`}
+      className={`h-9 shrink-0 cursor-pointer rounded-full px-3.5 text-sm font-semibold transition-colors ${active ? "bg-green text-white" : "border border-line bg-white text-ink hover:border-green hover:bg-leaf"}`}
       type="button"
       aria-pressed={active}
       onClick={onClick}
@@ -114,7 +114,7 @@ export function OffersBoard({ initialBranch = "All branches" }: { initialBranch?
             <article className="flex flex-col overflow-hidden rounded-2xl border border-line bg-white" key={`${offer.branch}-${offer.weekStart}-${offer.slug}`}>
               <Link href={`/products/${item.slug}`}>
                 <div className="relative flex h-48 items-center justify-center bg-soft">
-                  <span className="absolute top-2.5 left-2.5 z-[1] rounded-full bg-[#b42318] px-2.5 py-1 text-xs font-semibold text-white">{offer.percent}% off</span>
+                  <span className="absolute top-2.5 left-2.5 z-[1] rounded-full bg-green px-2.5 py-1 text-xs font-semibold text-white">{offer.percent}% off</span>
                   {item.image ? (
                     <img className="h-full w-full object-contain p-3" src={item.image} alt="" />
                   ) : (

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { ProductIcon } from "@/lib/catalog";
-import logo from "@/assets/newLogo.svg";
+import logo from "@/assets/full_logo.svg";
 
 const stroke = { fill: "none", stroke: "#1c1c1c", strokeWidth: 1.6 } as const;
 const green = { fill: "none", stroke: "#2f6b22", strokeWidth: 1.6, strokeLinecap: "round" as const };
@@ -400,6 +400,49 @@ export function AudienceMark({ name, className }: { name: "hotels" | "hypermarke
   );
 }
 
+export function PageMark({ name, className }: { name: "vision" | "mission" | "values" | "usp" | "phone" | "mail"; className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true" className={className}>
+      {name === "vision" && (
+        <>
+          <path d="M8 24c4-8 10-12 16-12s12 4 16 12c-4 8-10 12-16 12S12 32 8 24z" {...stroke} />
+          <circle cx="24" cy="24" r="5" {...green} />
+        </>
+      )}
+      {name === "mission" && (
+        <>
+          <circle cx="24" cy="24" r="12" {...stroke} />
+          <circle cx="24" cy="24" r="4" {...green} />
+          <path d="M24 8v4M24 36v4M8 24h4M36 24h4" {...green} />
+        </>
+      )}
+      {name === "values" && (
+        <>
+          <path d="M24 38l-10-6V16l10-6 10 6v16l-10 6z" {...stroke} />
+          <path d="M24 16v16M18 22l6 4 6-4" {...green} />
+        </>
+      )}
+      {name === "usp" && (
+        <>
+          <path d="M24 8l4 10h10l-8 6 3 10-9-6-9 6 3-10-8-6h10l4-10z" {...stroke} />
+        </>
+      )}
+      {name === "phone" && (
+        <>
+          <path d="M16 12h8l2 6-4 2a16 16 0 008 8l2-4 6 2v8c0 2-2 4-4 4C20 38 10 28 10 16c0-2 2-4 6-4z" {...stroke} />
+          <path d="M30 14c3 1 5 3 6 6" {...green} />
+        </>
+      )}
+      {name === "mail" && (
+        <>
+          <rect x="10" y="14" width="28" height="20" rx="3" {...stroke} />
+          <path d="M12 16l12 10 12-10" {...green} />
+        </>
+      )}
+    </svg>
+  );
+}
+
 export function UserMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 48 48" aria-hidden="true" className={className}>
@@ -411,8 +454,8 @@ export function UserMark({ className }: { className?: string }) {
 
 export function LogoMark() {
   return (
-    <span aria-hidden="true">
-      <Image src={logo} alt="Nakhla Al Barari" width={38} height={38} priority unoptimized />
+    <span aria-hidden="true" className="block h-[38px] w-[186px] shrink-0">
+      <Image className="h-[38px] w-auto" src={logo} alt="" width={499} height={102} priority unoptimized />
     </span>
   );
 }

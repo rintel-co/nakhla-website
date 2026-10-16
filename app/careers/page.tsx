@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { PageBanner } from "@/components/page-banner";
+import { WhatsAppIcon, whatsappBtn } from "@/components/whatsapp-button";
 import { WHATSAPP } from "@/lib/catalog";
-import { pillGreen, wrap } from "@/lib/ui";
+import { wrap } from "@/lib/ui";
 
 export const metadata: Metadata = { title: "Careers — Nakhla Al Barari" };
 
@@ -22,7 +23,10 @@ export default function CareersPage() {
       />
       <section className="py-12">
         <div className={wrap}>
-          <a className={pillGreen} href={href} target="_blank" rel="noopener">Submit resume</a>
+          <a className={whatsappBtn} href={href} target="_blank" rel="noopener">
+            <WhatsAppIcon />
+            Submit resume
+          </a>
         </div>
       </section>
     </main>

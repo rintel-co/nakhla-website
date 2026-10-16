@@ -9,10 +9,14 @@ const iftar = "https://nakhlaalbarari.com/wp-content/uploads/2026/07/Nakhla-Al-B
 const albums = [
   {
     title: "Nakhla Al Barari Iftar Party",
+    date: "2025-03-28",
+    label: "28 March 2025",
     photos: [1, 2, 3, 4, 5, 6, 7].map((n) => `/gallery/iftar-${n}.avif`),
   },
   {
     title: "Nakhla Inauguration",
+    date: "2022-06-14",
+    label: "14 June 2022",
     photos: [1, 2, 3, 4, 5, 6].map((n) => `/gallery/inauguration-${n}.avif`),
   },
 ];
@@ -31,7 +35,10 @@ export default function GalleryPage() {
         <div className={wrap}>
           {albums.map((album) => (
             <div className="mt-10 first:mt-0" key={album.title}>
-              <h2 className="mb-3.5 text-[22px]">{album.title}</h2>
+              <div className="mb-3.5 flex flex-wrap items-baseline justify-between gap-2">
+                <h2 className="text-[22px]">{album.title}</h2>
+                <time className="text-sm font-semibold text-muted" dateTime={album.date}>{album.label}</time>
+              </div>
               <div className="grid grid-cols-3 gap-3 max-[800px]:grid-cols-2 max-[640px]:grid-cols-1">
                 {album.photos.map((src, index) => (
                   <img className="aspect-[16/10] w-full rounded-lg object-cover" key={src} src={src} alt={`${album.title}, photo ${index + 1}`} />

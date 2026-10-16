@@ -5,17 +5,24 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LogoMark } from "@/components/icons";
 import { useTrade } from "@/components/trade-context";
-import { pill, pillGreen, wrap } from "@/lib/ui";
+import { WhatsAppIcon, whatsappBtn } from "@/components/whatsapp-button";
+import { wrap } from "@/lib/ui";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/products", label: "Products" },
-  { href: "/offers", label: "Offers" },
+  { href: "/products", label: "Our Brands" },
+  { href: "/services", label: "Services" },
   { href: "/branches", label: "Branches" },
   { href: "/about", label: "About" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ];
+
+const offersBtn =
+  "inline-flex h-9 items-center justify-center rounded-md border border-green bg-leaf px-3 text-sm font-semibold text-green-dark transition-colors hover:bg-green";
+
+const accountBtn =
+  "inline-flex h-10 items-center justify-center gap-1.5 rounded-md border border-green bg-white px-3 text-sm font-semibold text-green-dark transition-colors hover:bg-leaf";
 
 export function Header() {
   const pathname = usePathname();
@@ -33,39 +40,45 @@ export function Header() {
         <div className={`${wrap} relative flex h-16 items-center gap-3`}>
           <Link className="flex min-w-0 items-center gap-2.5" href="/">
             <LogoMark />
-            <span className="min-w-0">
-              <strong className="block truncate text-sm leading-tight font-semibold">Nakhla Al Barari</strong>
-              <span className="block truncate text-left font-arabic text-[11px] text-muted max-[380px]:hidden" dir="rtl">شركة نخلة البراري</span>
-            </span>
           </Link>
           <div className="absolute left-1/2 max-[980px]:hidden -translate-x-1/2">
-            <nav className="flex gap-6 text-sm font-medium text-ink">
+            <nav className="flex items-center gap-6 text-sm font-medium text-ink">
               {links.map((link) => (
-                <Link key={link.href} className={pathname === link.href ? "text-green" : undefined} href={link.href}>
+                <Link key={link.href} className={pathname === link.href ? "text-green" : "transition-colors hover:text-green"} href={link.href}>
                   {link.label}
                 </Link>
               ))}
+              <Link className={pathname.startsWith("/offers") ? `${offersBtn} bg-green` : offersBtn} href="/offers">Offers</Link>
             </nav>
           </div>
           <div className="ml-auto flex shrink-0 items-center gap-2">
             <button
-              className="relative inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-line bg-white"
+              className={`relative inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border transition-colors ${open ? "border-green bg-green text-green-dark" : "border-line bg-white text-ink hover:border-green hover:bg-leaf"}`}
               type="button"
               aria-label="Trade list"
+              aria-expanded={open}
               onClick={() => {
                 setMenu(false);
                 setOpen(!open);
               }}
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3 3h10l-1 7H4L3 3zM6 13a1 1 0 100-2 1 1 0 000 2zm5 0a1 1 0 100-2 1 1 0 000 2z" stroke="#1c1c1c" strokeWidth="1.4" />
+              <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M2.5 3.5h1.2l1.1 6.2a1 1 0 0 0 1 .8h5.7a1 1 0 0 0 1-.8L13.5 5H4.4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="6.5" cy="13" r="1" fill="currentColor" />
+                <circle cx="11.5" cy="13" r="1" fill="currentColor" />
               </svg>
-              <span className={slugs.length ? "absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-green px-1 text-[10px] text-white" : "hidden"}>
+              <span className={slugs.length ? "absolute -top-1.5 -right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-green-dark px-1 text-[10px] font-semibold text-white" : "hidden"}>
                 {slugs.length}
               </span>
             </button>
             <div className="max-[980px]:hidden">
-              <Link className={pill} href="/contact">Trade account</Link>
+              <Link className={pathname === "/contact" ? `${accountBtn} bg-leaf` : accountBtn} href="/contact">
+                <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="8" cy="5.5" r="2.2" stroke="currentColor" strokeWidth="1.4" />
+                  <path d="M3.5 13.2c.6-2.2 2.3-3.2 4.5-3.2s3.9 1 4.5 3.2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+                Trade account
+              </Link>
             </div>
             <div className="min-[981px]:hidden">
               <button
@@ -84,11 +97,18 @@ export function Header() {
           <div className="border-t border-line min-[981px]:hidden">
             <nav className={`${wrap} flex flex-col py-2 text-sm font-medium text-ink`}>
               {links.map((link) => (
-                <Link key={link.href} className={`py-2.5 ${pathname === link.href ? "text-green" : ""}`} href={link.href}>
+                <Link key={link.href} className={`py-2.5 transition-colors hover:text-green ${pathname === link.href ? "text-green" : ""}`} href={link.href}>
                   {link.label}
                 </Link>
               ))}
-              <Link className="py-2.5 text-green" href="/contact">Trade account</Link>
+              <Link className={`${accountBtn} my-1 w-full`} href="/contact">
+                <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="8" cy="5.5" r="2.2" stroke="currentColor" strokeWidth="1.4" />
+                  <path d="M3.5 13.2c.6-2.2 2.3-3.2 4.5-3.2s3.9 1 4.5 3.2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+                Trade account
+              </Link>
+              <Link className={`my-2 inline-flex h-11 items-center justify-center rounded-md border border-green px-3 text-sm font-semibold text-green-dark ${pathname.startsWith("/offers") ? "bg-green" : "bg-leaf"}`} href="/offers">Offers</Link>
             </nav>
           </div>
         )}
@@ -114,7 +134,10 @@ export function Header() {
         </ul>
         {slugs.length > 0 && (
           <div className="border-t border-line p-3">
-            <a className={`${pillGreen} w-full`} href={href} target="_blank" rel="noopener">Send on WhatsApp</a>
+            <a className={`${whatsappBtn} w-full`} href={href} target="_blank" rel="noopener">
+              <WhatsAppIcon />
+              Send on WhatsApp
+            </a>
           </div>
         )}
       </aside>

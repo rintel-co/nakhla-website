@@ -33,7 +33,7 @@ export function PageBanner({
           </ol>
         </nav>
         {kicker ? <p className="mb-2 text-sm text-white/75">{kicker}</p> : null}
-        <h1 className="max-w-[18ch] text-[40px] leading-tight font-semibold tracking-[-0.02em] max-[640px]:text-[32px]">{title}</h1>
+        <h1 className="max-w-[18ch] text-[40px] leading-tight font-semibold tracking-[-0.02em] text-white max-[640px]:text-[32px]">{title}</h1>
         {lede ? <p className="mt-2 max-w-[54ch] text-white/80">{lede}</p> : null}
       </div>
     </section>
