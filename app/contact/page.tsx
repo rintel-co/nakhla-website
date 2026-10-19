@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { HeroLogo } from "@/components/hero-logo";
-import { StatMark } from "@/components/icons";
+import { PageMark, StatMark } from "@/components/icons";
 import { packDetail } from "@/lib/brand";
 import { WhatsAppIcon } from "@/components/whatsapp-button";
 import { branches } from "@/lib/catalog";
@@ -44,9 +44,10 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
 
   return (
     <main>
-      <section className={`${pageBanner} relative bg-ink text-white`}>
+      <section className={`${pageBanner} relative overflow-hidden bg-ink text-white`}>
         <HeroLogo />
-        <div className={`${wrap} grid h-full items-center gap-8 py-8 lg:grid-cols-[1.05fr_0.95fr]`}>
+        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black to-transparent" />
+        <div className={`${wrap} relative grid h-full items-end gap-8 py-10 max-[640px]:py-8 lg:grid-cols-[1.05fr_0.95fr]`}>
           <div>
             <nav aria-label="Breadcrumb" className="mb-4 text-sm text-white/80">
               <ol className="flex flex-wrap items-center gap-2">
@@ -55,65 +56,69 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
                 <li aria-current="page">{t(locale, contactCopy.title)}</li>
               </ol>
             </nav>
-            <h1 className="text-[40px] leading-tight font-semibold tracking-[-0.02em] text-white max-[640px]:text-[32px]">{t(locale, contactCopy.title)}</h1>
-            <p className="mt-3 max-w-[42ch] text-white/80">{t(locale, contactCopy.lede)}</p>
-            <a className="mt-6 inline-flex h-11 w-fit items-center justify-center rounded-md bg-white px-4 text-sm font-semibold text-green-dark transition-colors hover:bg-leaf" href="#enquiry">{t(locale, contactCopy.sendEnquiry)}</a>
+            <h1 className="hero-in max-w-[14ch] text-4xl leading-tight font-bold tracking-[-0.03em] text-white sm:text-6xl">{t(locale, contactCopy.title)}</h1>
+            <p className="hero-in hero-in-2 mt-4 max-w-[42ch] text-white/80">{t(locale, contactCopy.lede)}</p>
+            <a className="hero-in hero-in-3 mt-6 inline-flex h-11 w-fit items-center justify-center rounded-md bg-white px-4 text-sm font-semibold text-green-dark transition-colors hover:bg-leaf" href="#enquiry">{t(locale, contactCopy.sendEnquiry)}</a>
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            <img className="h-[300px] w-full rounded-lg object-cover object-bottom max-[640px]:h-[200px]" src={exterior} alt={t(locale, contactCopy.exteriorAlt)} />
-            <img className="h-[300px] w-full rounded-lg object-cover max-[640px]:h-[200px]" src={meetingRoom} alt={t(locale, contactCopy.meetingAlt)} />
+          <div className="hero-in hero-in-4 grid grid-cols-2 gap-3">
+            <img className="h-[300px] w-full rounded-3xl object-cover object-bottom max-[640px]:h-[200px]" src={exterior} alt={t(locale, contactCopy.exteriorAlt)} />
+            <img className="h-[300px] w-full rounded-3xl object-cover max-[640px]:h-[200px]" src={meetingRoom} alt={t(locale, contactCopy.meetingAlt)} />
           </div>
         </div>
       </section>
-      <section className="scroll-mt-20 border-b border-line bg-leaf/40 py-12" id="enquiry">
+      <section className="scroll-mt-20 bg-green-dark py-16 text-white sm:py-20" id="enquiry">
         <div className={`${wrap} grid items-start gap-10 lg:grid-cols-[1fr_minmax(0,520px)]`}>
           <div>
-            <h2 className="text-2xl font-semibold">{t(locale, contactCopy.quoteTitle)}</h2>
-            <p className="mt-2 max-w-[46ch] text-muted">{t(locale, contactCopy.quoteLede)}</p>
-            <dl className="mt-6 grid gap-4 text-sm">
-              <div>
-                <dt className="font-medium">{t(locale, contactCopy.address)}</dt>
-                <dd className="text-muted">{t(locale, branchesCopy.addresses["Riyadh HQ"])}</dd>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">{t(locale, contactCopy.quoteTitle)}</h2>
+            <p className="mt-3 max-w-[46ch] text-white/75">{t(locale, contactCopy.quoteLede)}</p>
+            <dl className="mt-8 grid gap-4 text-sm">
+              <div className="relative overflow-hidden rounded-3xl bg-white/10 p-5">
+                <StatMark className="pointer-events-none absolute -bottom-5 -end-2 h-24 w-24 opacity-30 brightness-0 invert" name="branches" />
+                <dt className="relative font-semibold text-white">{t(locale, contactCopy.address)}</dt>
+                <dd className="relative mt-1 text-white/75">{t(locale, branchesCopy.addresses["Riyadh HQ"])}</dd>
               </div>
-              <div>
-                <dt className="font-medium">{t(locale, contactCopy.phone)}</dt>
-                <dd><a className="text-green" href="tel:+966555729077" dir="ltr">+966 555729077</a></dd>
+              <div className="relative overflow-hidden rounded-3xl bg-white/10 p-5">
+                <PageMark className="pointer-events-none absolute -bottom-5 -end-2 h-24 w-24 opacity-30 brightness-0 invert" name="phone" />
+                <dt className="relative font-semibold text-white">{t(locale, contactCopy.phone)}</dt>
+                <dd className="relative mt-1"><a className="font-semibold text-white" href="tel:+966555729077" dir="ltr">+966 555729077</a></dd>
               </div>
-              <div>
-                <dt className="font-medium">{t(locale, contactCopy.email)}</dt>
-                <dd><a className="text-green" href="mailto:contact@nbarari.com" dir="ltr">contact@nbarari.com</a></dd>
+              <div className="relative overflow-hidden rounded-3xl bg-white/10 p-5">
+                <PageMark className="pointer-events-none absolute -bottom-5 -end-2 h-24 w-24 opacity-30 brightness-0 invert" name="mail" />
+                <dt className="relative font-semibold text-white">{t(locale, contactCopy.email)}</dt>
+                <dd className="relative mt-1"><a className="font-semibold text-white" href="mailto:contact@nbarari.com" dir="ltr">contact@nbarari.com</a></dd>
               </div>
             </dl>
           </div>
-          <div className="rounded-lg border border-line bg-white p-5">
+          <div className="rounded-3xl bg-white p-6 text-ink">
             <ContactForm key={message} initialMessage={message} />
           </div>
         </div>
       </section>
-      <section className="py-12" aria-labelledby="branches-heading">
+      <section className="bg-leaf py-16 sm:py-20" aria-labelledby="branches-heading">
         <div className={wrap}>
-          <h2 className="text-2xl font-semibold" id="branches-heading">{t(locale, contactCopy.branches)}</h2>
-          <p className="mt-2 mb-6 max-w-[62ch] text-sm text-muted">{t(locale, contactCopy.branchesLede)}</p>
+          <h2 className="text-3xl font-bold text-green-dark sm:text-4xl" id="branches-heading">{t(locale, contactCopy.branches)}</h2>
+          <p className="mt-3 mb-8 max-w-[62ch] text-ink/70">{t(locale, contactCopy.branchesLede)}</p>
           <div className="grid grid-cols-2 gap-4 max-[640px]:grid-cols-1">
             {branches.map((branch) => {
               const digits = phoneDigits(branch.phone);
               const whatsapp = `https://wa.me/${digits}?text=${encodeURIComponent(fill(locale, chromeCopy.messages.enquiryFor, { name: label(locale, chromeCopy.branches, branch.name) }))}`;
               const active = selected?.name === branch.name;
               return (
-                <article className={`rounded-lg border bg-white p-5 ${branch.name === "Riyadh HQ" ? "sm:col-span-2" : ""} ${active ? "border-green" : "border-line"}`} key={branch.name}>
-                  <h3 className="mb-1.5 flex items-center gap-2 text-xl">
-                    <StatMark className="h-7 w-7 shrink-0" name="branches" />
+                <article className={`group relative overflow-hidden rounded-3xl bg-white p-6 ${branch.name === "Riyadh HQ" ? "sm:col-span-2" : ""} ${active ? "ring-2 ring-green" : ""}`} key={branch.name}>
+                  <StatMark className="pointer-events-none absolute -bottom-6 -end-3 h-28 w-28 opacity-15 transition duration-300 group-hover:scale-110" name="branches" />
+                  <h3 className="relative mb-2 flex items-center gap-2 text-xl font-bold text-ink">
+                    <StatMark className="h-8 w-8 shrink-0 transition duration-300 group-hover:scale-110" name="branches" />
                     {label(locale, chromeCopy.branches, branch.name)}
                   </h3>
-                  <p className="mb-1.5 text-muted">{t(locale, branchesCopy.addresses[branch.name as keyof typeof branchesCopy.addresses])}</p>
-                  <p className="mb-1.5 text-muted"><a href={`tel:${branch.phone.replace(/\s/g, "")}`} dir="ltr">{branch.phone}</a></p>
-                  <p className="m-0 flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <p className="relative mb-1.5 text-ink/70">{t(locale, branchesCopy.addresses[branch.name as keyof typeof branchesCopy.addresses])}</p>
+                  <p className="relative mb-3 text-ink/70"><a href={`tel:${branch.phone.replace(/\s/g, "")}`} dir="ltr">{branch.phone}</a></p>
+                  <p className="relative m-0 flex flex-wrap items-center gap-x-2 gap-y-1">
                     <a className="inline-flex items-center gap-1.5 font-bold text-[#128C7E]" href={whatsapp} target="_blank" rel="noopener">
                       <WhatsAppIcon className="h-4 w-4" />
                       {t(locale, chromeCopy.buttons.whatsApp)}
                     </a>
-                    <span className="text-muted" aria-hidden="true">|</span>
-                    <a className="font-bold text-green" href={branch.map} target="_blank" rel="noopener">{t(locale, chromeCopy.buttons.googleMaps)}</a>
+                    <span className="text-ink/40" aria-hidden="true">|</span>
+                    <a className="font-bold text-green-dark" href={branch.map} target="_blank" rel="noopener">{t(locale, chromeCopy.buttons.googleMaps)}</a>
                   </p>
                 </article>
               );

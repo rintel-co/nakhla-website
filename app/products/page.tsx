@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CatalogueGrid } from "@/components/catalogue-grid";
 import { HeroLogo } from "@/components/hero-logo";
-import { PageMark } from "@/components/icons";
+import { PageMark, StatMark } from "@/components/icons";
 import { FaqList } from "@/components/faq-list";
 import { brandHref, brandLogo, catalogueBrandName } from "@/lib/brand";
 import { brands, CATALOGUE_PDF } from "@/lib/catalog";
@@ -51,8 +51,9 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
       <section className={`${pageBanner} bg-ink text-white`}>
         <img className="absolute inset-0 h-full w-full object-cover" src={bannerImage} alt={t(locale, productsCopy.bannerAlt)} />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20 rtl:bg-gradient-to-l" />
+        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black to-transparent" />
         <HeroLogo />
-        <div className={`${wrap} relative flex h-full flex-col justify-center py-8`}>
+        <div className={`${wrap} relative flex h-full flex-col justify-end py-10 text-white max-[640px]:py-8`}>
           <nav aria-label="Breadcrumb" className="mb-4 text-sm text-white/80">
             <ol className="flex flex-wrap items-center gap-2">
                 <li><Link className="hover:text-white" href="/">{t(locale, chromeCopy.nav.home)}</Link></li>
@@ -60,33 +61,33 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
                 <li aria-current="page">{t(locale, productsCopy.breadcrumb)}</li>
               </ol>
             </nav>
-          <h1 className="text-[40px] leading-tight font-semibold tracking-[-0.02em] text-white max-[640px]:text-[32px]">{t(locale, productsCopy.title)}</h1>
-          <p className="mt-3 max-w-[800px] text-base leading-relaxed text-white/80">{t(locale, productsCopy.lede)}</p>
-          <a className="mt-6 inline-flex h-11 w-fit items-center justify-center rounded-md bg-white px-4 text-sm font-semibold text-green-dark transition-colors hover:bg-leaf" href="#brands">{t(locale, productsCopy.chooseBrand)}</a>
+          <h1 className="hero-in max-w-[16ch] text-4xl leading-tight font-bold tracking-[-0.03em] text-white sm:text-6xl">{t(locale, productsCopy.title)}</h1>
+          <p className="hero-in hero-in-2 mt-3 max-w-[800px] text-base leading-relaxed text-white/80">{t(locale, productsCopy.lede)}</p>
+          <a className="hero-in hero-in-3 mt-6 inline-flex h-11 w-fit items-center justify-center rounded-md bg-white px-4 text-sm font-semibold text-green-dark transition-colors hover:bg-leaf" href="#brands">{t(locale, productsCopy.chooseBrand)}</a>
         </div>
       </section>
 
-      <section className="scroll-mt-20 border-b border-line py-12" id="brands" aria-labelledby="brand-logos-heading">
+      <section className="scroll-mt-20 bg-green-dark py-16 text-white sm:py-20" id="brands" aria-labelledby="brand-logos-heading">
         <div className={wrap}>
           <div className="max-w-[68ch]">
-            <h2 className={heading} id="brand-logos-heading">{t(locale, productsCopy.gridTitle)}</h2>
-            <p className={sectionSub}>{t(locale, productsCopy.gridLede)}</p>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl" id="brand-logos-heading">{t(locale, productsCopy.gridTitle)}</h2>
+            <p className="mt-3 max-w-[62ch] text-white/75">{t(locale, productsCopy.gridLede)}</p>
           </div>
-          <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {brands.map((item) => {
               const active = selected?.name === item.name;
               const labelName = catalogueBrandName(item.name) ?? item.name;
               return (
                 <li key={item.name}>
                   <Link
-                    className={`flex min-h-40 flex-col items-center justify-center gap-2 rounded-lg border bg-white px-3 py-4 text-center transition-colors hover:border-green ${active ? "border-green bg-leaf" : "border-line"}`}
+                    className={`flex min-h-40 flex-col items-center justify-center gap-2 rounded-2xl px-3 py-4 text-center transition-colors hover:bg-leaf ${active ? "bg-leaf" : "bg-white"}`}
                     href={brandHref(item.name)}
                     aria-current={active ? "true" : undefined}
                     aria-label={`${t(locale, productsCopy.viewBrand)}: ${labelName}`}
                   >
                     <img className="h-14 w-full object-contain" src={item.src} alt="" />
                     <span className="text-xs font-semibold leading-snug text-ink">{labelName}</span>
-                    <span className="text-xs font-semibold text-green">{t(locale, productsCopy.viewBrand)}</span>
+                    <span className="text-xs font-semibold text-green-dark">{t(locale, productsCopy.viewBrand)}</span>
                   </Link>
                 </li>
               );
@@ -95,33 +96,23 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-b border-line bg-green-dark py-14 text-white sm:py-16" aria-labelledby="why-brands-heading">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(147,192,44,0.38),transparent_55%),radial-gradient(ellipse_at_bottom_right,rgba(147,192,44,0.16),transparent_48%)]" aria-hidden="true" />
-        <div className={`${wrap} relative grid items-center gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-12`}>
-          <div>
-            <h2 className="max-w-[14ch] text-3xl leading-tight font-semibold tracking-[-0.02em] text-white sm:text-4xl" id="why-brands-heading">{t(locale, productsCopy.whyTitle)}</h2>
-            <p className="mt-3 max-w-[42ch] text-base leading-relaxed text-white/80">{t(locale, productsCopy.whyLede)}</p>
-            <Link className="mt-6 inline-flex h-11 items-center justify-center gap-2 rounded-md bg-white px-4 text-sm font-semibold text-green-dark transition-colors hover:bg-leaf" href="#catalogue">
+      <section className="bg-leaf py-16 sm:py-20" aria-labelledby="why-brands-heading">
+        <div className={wrap}>
+          <div className="relative overflow-hidden rounded-3xl bg-white px-6 py-10 text-ink sm:px-12 sm:py-14 lg:grid lg:grid-cols-[1fr_auto] lg:items-center lg:gap-10">
+            <StatMark className="pointer-events-none absolute -bottom-10 -end-6 h-48 w-48 opacity-20" name="products" />
+            <div className="relative">
+              <h2 className="max-w-[14ch] text-3xl leading-tight font-bold tracking-[-0.03em] text-ink sm:text-4xl" id="why-brands-heading">{t(locale, productsCopy.whyTitle)}</h2>
+              <p className="mt-3 max-w-[52ch] text-base leading-relaxed text-ink/70">{t(locale, productsCopy.whyLede)}</p>
+            </div>
+            <Link className="relative mt-6 inline-flex h-12 items-center justify-center gap-2 rounded-md bg-green-dark px-5 text-sm font-semibold text-white transition-colors hover:bg-ink lg:mt-0" href="#catalogue">
               {t(locale, productsCopy.exploreProducts)}
               <span className="inline-block rtl:-scale-x-100" aria-hidden="true">→</span>
             </Link>
           </div>
-          <ul className="grid grid-cols-3 gap-3">
-            {brands.slice(0, 6).map((item) => {
-              const labelName = catalogueBrandName(item.name) ?? item.name;
-              return (
-                <li key={item.name}>
-                  <Link className="flex h-24 items-center justify-center rounded-xl bg-white px-3 transition-colors hover:bg-leaf" href={brandHref(item.name)} aria-label={`${t(locale, productsCopy.viewBrand)}: ${labelName}`}>
-                    <img className="max-h-12 w-full object-contain" src={item.src} alt="" />
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
         </div>
       </section>
 
-      <section className="scroll-mt-20 border-b border-line py-12" id="catalogue" aria-labelledby="catalogue-heading">
+      <section className="scroll-mt-20 bg-page py-16 sm:py-20" id="catalogue" aria-labelledby="catalogue-heading">
         <div className={wrap}>
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div className="flex items-center gap-4">
@@ -147,11 +138,11 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         </div>
       </section>
 
-      <section className="border-t border-line py-16" aria-labelledby="brands-faq-heading">
+      <section className="bg-leaf py-16 sm:py-20" aria-labelledby="brands-faq-heading">
         <div className={wrap}>
-          <h2 className={heading} id="brands-faq-heading">{t(locale, faqCopy.title)}</h2>
-          <p className={`mt-3 ${sectionSub}`}>{t(locale, faqCopy.lede)}</p>
-          <div className="mt-8">
+          <h2 className="text-3xl font-bold text-green-dark sm:text-4xl" id="brands-faq-heading">{t(locale, faqCopy.title)}</h2>
+          <p className="mt-3 max-w-[62ch] text-ink/70">{t(locale, faqCopy.lede)}</p>
+          <div className="mt-8 rounded-3xl bg-white px-5 sm:px-8">
             <FaqList items={faqCopy.brands.map((item) => ({ q: t(locale, item.q), a: t(locale, item.a) }))} />
           </div>
         </div>
@@ -160,13 +151,14 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
       <section className="relative overflow-hidden bg-green-dark py-16 text-white sm:py-20" aria-labelledby="enquiry-heading">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(147,192,44,0.32),transparent_58%)]" aria-hidden="true" />
         <div className={`${wrap} relative`}>
-          <div className="mx-auto flex max-w-3xl flex-col items-center rounded-2xl border border-white/10 bg-white/10 px-6 py-10 text-center sm:px-12 sm:py-14">
-            <span className="grid h-14 w-14 place-items-center rounded-full bg-white" aria-hidden="true">
+          <div className="relative mx-auto overflow-hidden rounded-3xl bg-leaf px-6 py-12 text-ink sm:px-12 sm:py-16">
+            <PageMark className="pointer-events-none absolute -bottom-10 -end-6 h-48 w-48 opacity-20" name="mail" />
+            <span className="relative grid h-14 w-14 place-items-center rounded-full bg-white" aria-hidden="true">
               <PageMark className="h-9 w-9" name="mail" />
             </span>
-            <h2 className="mt-5 max-w-[16ch] text-3xl leading-tight font-semibold tracking-[-0.02em] text-white sm:text-4xl" id="enquiry-heading">{t(locale, productsCopy.enquiryTitle)}</h2>
-            <p className="mt-3 max-w-[46ch] text-base leading-relaxed text-white/80">{t(locale, productsCopy.enquiryLede)}</p>
-            <Link className="mt-6 inline-flex h-11 items-center justify-center gap-2 rounded-md bg-white px-4 text-sm font-semibold text-green-dark transition-colors hover:bg-leaf" href="/contact">
+            <h2 className="relative mt-5 max-w-[16ch] text-3xl leading-tight font-bold tracking-[-0.03em] text-ink sm:text-4xl" id="enquiry-heading">{t(locale, productsCopy.enquiryTitle)}</h2>
+            <p className="relative mt-3 max-w-[46ch] text-base leading-relaxed text-ink/70">{t(locale, productsCopy.enquiryLede)}</p>
+            <Link className="relative mt-6 inline-flex h-11 items-center justify-center gap-2 rounded-md bg-green-dark px-4 text-sm font-semibold text-white transition-colors hover:bg-ink" href="/contact">
               {t(locale, productsCopy.makeEnquiry)}
               <span className="inline-block rtl:-scale-x-100" aria-hidden="true">→</span>
             </Link>

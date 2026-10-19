@@ -31,18 +31,18 @@ export default async function FaqPage() {
   return (
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <section className="border-b border-line py-12">
+      <section className="bg-leaf py-16 sm:py-20">
         <div className={wrap}>
           <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted">
             <ol className="flex flex-wrap items-center gap-2">
-                <li><Link className="hover:text-green" href="/">{t(locale, chromeCopy.nav.home)}</Link></li>
+                <li><Link className="hover:text-green-dark" href="/">{t(locale, chromeCopy.nav.home)}</Link></li>
                 <li aria-hidden="true">/</li>
                 <li aria-current="page">{t(locale, faqCopy.title)}</li>
               </ol>
             </nav>
-          <h1 className="text-[40px] leading-tight font-semibold tracking-[-0.02em] max-[640px]:text-[32px]">{t(locale, faqCopy.title)}</h1>
-          <p className="mt-3 max-w-[62ch] text-muted">{t(locale, faqCopy.lede)}</p>
-          <div className="mt-8">
+          <h1 className="max-w-[16ch] text-4xl leading-tight font-bold tracking-[-0.03em] text-green-dark sm:text-5xl">{t(locale, faqCopy.title)}</h1>
+          <p className="mt-4 max-w-[62ch] text-ink/70">{t(locale, faqCopy.lede)}</p>
+          <div className="mt-8 rounded-3xl bg-white px-5 sm:px-8">
             <FaqList items={items} />
           </div>
         </div>

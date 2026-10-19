@@ -443,6 +443,18 @@ export function PageMark({ name, className }: { name: "vision" | "mission" | "va
   );
 }
 
+export function OfferMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true" className={className}>
+      <path d="M21 12h16a3 3 0 013 3v18a3 3 0 01-3 3H21L8 24 21 12z" {...stroke} strokeLinejoin="round" />
+      <circle cx="16.5" cy="24" r="1.8" {...green} />
+      <circle cx="28" cy="19" r="2" {...green} />
+      <circle cx="35" cy="29" r="2" {...green} />
+      <path d="M35 17.2L28 30.8" {...green} />
+    </svg>
+  );
+}
+
 export function UserMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 48 48" aria-hidden="true" className={className}>

@@ -127,9 +127,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </nav>
         </div>
       </section>
-      <section className="py-10">
+      <section className="bg-page py-10">
         <div className={`${wrap} grid items-start gap-10 lg:grid-cols-[minmax(280px,420px)_1fr]`}>
-          <div className="flex h-[420px] items-center justify-center overflow-hidden rounded-lg bg-soft max-[640px]:h-80">
+          <div className="flex h-[420px] items-center justify-center overflow-hidden rounded-3xl bg-leaf max-[640px]:h-80">
             {item.image ? (
               <img className="h-full w-full object-contain p-6" src={item.image} alt={item.name} />
             ) : (
@@ -142,7 +142,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <span aria-hidden="true"> · </span>
               <Link className="hover:text-green" href={`/products?tab=${encodeURIComponent(category)}`}>{label(locale, chromeCopy.categories, category)}</Link>
             </p>
-            <h1 className="mt-2 text-[40px] leading-tight font-semibold tracking-[-0.02em] max-[640px]:text-[32px]">{item.name}</h1>
+            <h1 className="mt-2 text-4xl leading-tight font-bold tracking-[-0.03em] text-green-dark sm:text-5xl">{item.name}</h1>
             <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-muted">{summary}</p>
             <dl className="mt-5 grid max-w-md gap-3 text-sm">
               <div className="grid grid-cols-[7rem_1fr] gap-3 border-b border-line pb-3">
@@ -173,7 +173,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
       {related.length > 0 && (
-        <section className="border-t border-line py-12">
+        <section className="bg-leaf py-16 sm:py-20">
           <div className={wrap}>
             <div className="mb-6 flex items-end justify-between gap-4">
               <h2 className={heading}>{t(locale, productCopyPhrases.similar)}</h2>

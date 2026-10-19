@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Bricolage_Grotesque, Figtree, Readex_Pro } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { LocaleProvider } from "@/components/locale-provider";
@@ -8,10 +8,23 @@ import { TradeProvider } from "@/components/trade-context";
 import { getLocale } from "@/lib/i18n/locale";
 import "./globals.css";
 
-const arabic = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic"],
-  weight: ["500"],
-  variable: "--font-ar",
+const display = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-bricolage",
+  display: "swap",
+});
+
+const sans = Figtree({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-figtree",
+  display: "swap",
+});
+
+const arabic = Readex_Pro({
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-readex",
   display: "swap",
 });
 
@@ -24,7 +37,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const locale = await getLocale();
 
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className={arabic.variable}>
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className={`${display.variable} ${sans.variable} ${arabic.variable}`}>
       <body suppressHydrationWarning>
         <LocaleProvider locale={locale}>
           <TradeProvider>

@@ -42,34 +42,34 @@ export default async function AboutPage() {
         action={{ href: "/products", label: t(locale, aboutCopy.exploreProducts) }}
       />
 
-      <section className="border-b border-line py-14" aria-labelledby="intro-heading">
+      <section className="bg-page py-16 sm:py-20" aria-labelledby="intro-heading">
         <div className={wrap}>
           <h2 className={heading} id="intro-heading">{t(locale, aboutCopy.introTitle)}</h2>
-          <p className="mt-3 max-w-[72ch] text-muted">{t(locale, aboutCopy.intro)}</p>
-          <Link className="mt-6 inline-flex h-11 items-center justify-center rounded-md border border-green bg-green px-4 text-sm font-semibold text-white transition-colors hover:border-green-dark hover:bg-green-dark" href="/contact">{t(locale, aboutCopy.contactTeam)}</Link>
+          <p className="mt-3 max-w-[72ch] text-ink/70">{t(locale, aboutCopy.intro)}</p>
+          <Link className="mt-6 inline-flex h-11 items-center justify-center rounded-md bg-green px-4 text-sm font-semibold text-green-dark transition-colors hover:bg-green-dark hover:text-white" href="/contact">{t(locale, aboutCopy.contactTeam)}</Link>
         </div>
       </section>
 
-      <section className="border-b border-line bg-leaf/40 py-14">
+      <section className="bg-green-dark py-16 sm:py-20">
         <div className={`${wrap} grid items-stretch gap-4 lg:grid-cols-3`}>
-          <article className="flex h-full flex-col rounded-lg border border-line bg-white p-5">
-            <span className="mb-4 grid h-12 w-12 place-items-center rounded-full bg-leaf"><PageMark className="h-7 w-7" name="vision" /></span>
-            <h2 className="mb-2 text-lg font-semibold">{t(locale, aboutCopy.visionTitle)}</h2>
-            <p className="m-0 text-muted">{t(locale, aboutCopy.vision)}</p>
+          <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-leaf p-6 text-ink">
+            <PageMark className="pointer-events-none absolute -bottom-6 -end-4 h-32 w-32 opacity-25 transition duration-300 group-hover:scale-110" name="vision" />
+            <h2 className="relative mb-2 text-2xl font-bold text-ink">{t(locale, aboutCopy.visionTitle)}</h2>
+            <p className="relative m-0 text-ink/70">{t(locale, aboutCopy.vision)}</p>
           </article>
-          <article className="flex h-full flex-col rounded-lg border border-line bg-white p-5">
-            <span className="mb-4 grid h-12 w-12 place-items-center rounded-full bg-leaf"><PageMark className="h-7 w-7" name="mission" /></span>
-            <h2 className="mb-2 text-lg font-semibold">{t(locale, aboutCopy.missionTitle)}</h2>
-            <p className="m-0 text-muted">{t(locale, aboutCopy.mission)}</p>
+          <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/10 p-6 text-white">
+            <PageMark className="pointer-events-none absolute -bottom-6 -end-4 h-32 w-32 opacity-25 brightness-0 invert transition duration-300 group-hover:scale-110" name="mission" />
+            <h2 className="relative mb-2 text-2xl font-bold text-white">{t(locale, aboutCopy.missionTitle)}</h2>
+            <p className="relative m-0 text-white/75">{t(locale, aboutCopy.mission)}</p>
           </article>
-          <article className="flex h-full flex-col rounded-lg border border-line bg-white p-5 lg:col-span-1">
-            <span className="mb-4 grid h-12 w-12 place-items-center rounded-full bg-leaf"><PageMark className="h-7 w-7" name="values" /></span>
-            <h2 className="mb-2 text-lg font-semibold">{t(locale, aboutCopy.valuesTitle)}</h2>
-            <ul className="m-0 space-y-3">
+          <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/10 p-6 text-white">
+            <PageMark className="pointer-events-none absolute -bottom-6 -end-4 h-32 w-32 opacity-25 brightness-0 invert transition duration-300 group-hover:scale-110" name="values" />
+            <h2 className="relative mb-3 text-2xl font-bold text-white">{t(locale, aboutCopy.valuesTitle)}</h2>
+            <ul className="relative m-0 space-y-3">
               {aboutCopy.values.map((value) => (
                 <li key={value.title.en}>
-                  <p className="text-sm font-semibold">{t(locale, value.title)}</p>
-                  <p className="mt-0.5 text-sm leading-relaxed text-muted">{t(locale, value.copy)}</p>
+                  <p className="text-sm font-semibold text-white">{t(locale, value.title)}</p>
+                  <p className="mt-0.5 text-sm leading-relaxed text-white/75">{t(locale, value.copy)}</p>
                 </li>
               ))}
             </ul>
@@ -77,12 +77,12 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="border-b border-line py-14" aria-labelledby="team-heading">
+      <section className="bg-page py-16 sm:py-20" aria-labelledby="team-heading">
         <div className={wrap}>
           <h2 className={heading} id="team-heading">{t(locale, aboutCopy.teamTitle)}</h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
             {directors.map((person) => (
-              <article className="flex overflow-hidden rounded-lg border border-line bg-white" key={person.name}>
+              <article className="flex overflow-hidden rounded-3xl bg-white" key={person.name}>
                 {person.photo ? (
                   <img className="h-auto w-28 shrink-0 object-cover object-top sm:w-36" src={person.photo} alt="" />
                 ) : (
@@ -90,9 +90,9 @@ export default async function AboutPage() {
                     <UserMark className="h-16 w-16" />
                   </div>
                 )}
-                <div className="p-4">
-                  <h3 className="text-base font-semibold leading-snug">{person.name}</h3>
-                  <p className="mt-1 text-sm font-medium text-green">{t(locale, roleCopy[person.role as keyof typeof roleCopy])}</p>
+                <div className="p-5">
+                  <h3 className="text-base font-bold leading-snug text-ink">{person.name}</h3>
+                  <p className="mt-1 text-sm font-medium text-green-dark">{t(locale, roleCopy[person.role as keyof typeof roleCopy])}</p>
                 </div>
               </article>
             ))}
@@ -100,20 +100,20 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="border-b border-line bg-leaf/40 py-14" aria-labelledby="brands-heading">
+      <section className="bg-green-dark py-16 text-white sm:py-20" aria-labelledby="brands-heading">
         <div className={wrap}>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-[62ch]">
-              <h2 className={heading} id="brands-heading">{t(locale, aboutCopy.brandsTitle)}</h2>
-              <p className="mt-2 text-sm text-muted">{t(locale, aboutCopy.brandsLede)}</p>
+              <h2 className="text-3xl font-bold text-white sm:text-4xl" id="brands-heading">{t(locale, aboutCopy.brandsTitle)}</h2>
+              <p className="mt-3 text-white/75">{t(locale, aboutCopy.brandsLede)}</p>
             </div>
-            <Link className="inline-flex h-11 items-center justify-center rounded-md border border-green bg-green px-4 text-sm font-semibold text-white transition-colors hover:border-green-dark hover:bg-green-dark" href="/products">{t(locale, aboutCopy.exploreAllBrands)}</Link>
+            <Link className="inline-flex h-11 items-center justify-center rounded-md bg-white px-4 text-sm font-semibold text-green-dark transition-colors hover:bg-leaf" href="/products">{t(locale, aboutCopy.exploreAllBrands)}</Link>
           </div>
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {brands.map((brand) => {
               const labelName = catalogueBrandName(brand.name) ?? brand.name;
               return (
-                <Link className="flex h-24 items-center justify-center rounded-lg border border-line bg-white px-4 transition-colors hover:border-green" href={brandHref(brand.name)} key={brand.name} aria-label={labelName}>
+                <Link className="flex h-24 items-center justify-center rounded-2xl bg-white px-4 transition-colors hover:bg-leaf" href={brandHref(brand.name)} key={brand.name} aria-label={labelName}>
                   <img className="max-h-12 max-w-full object-contain" src={brand.src} alt="" />
                 </Link>
               );
@@ -122,33 +122,27 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-green-dark py-14 text-white" id="about-contact" aria-labelledby="about-contact-heading">
+      <section className="bg-leaf py-16 sm:py-20" id="about-contact" aria-labelledby="about-contact-heading">
         <div className={wrap}>
-          <h2 className={`${heading} text-white`} id="about-contact-heading">{t(locale, aboutCopy.contactTitle)}</h2>
-          <dl className="mt-6 grid gap-5 sm:grid-cols-3">
-            <div className="flex gap-3">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/10"><StatMark className="h-6 w-6 brightness-0 invert" name="branches" /></span>
-              <div>
-                <dt className="text-xs font-semibold tracking-wide text-white/60">{t(locale, aboutCopy.addressLabel)}</dt>
-                <dd className="mt-1 text-sm text-white/90">{t(locale, aboutCopy.address)}</dd>
-              </div>
+          <h2 className={heading} id="about-contact-heading">{t(locale, aboutCopy.contactTitle)}</h2>
+          <dl className="mt-8 grid gap-4 sm:grid-cols-3">
+            <div className="group relative overflow-hidden rounded-3xl bg-white p-6">
+              <StatMark className="pointer-events-none absolute -bottom-6 -end-3 h-28 w-28 opacity-20 transition duration-300 group-hover:scale-110" name="branches" />
+              <dt className="relative text-xs font-semibold tracking-wide text-ink/60">{t(locale, aboutCopy.addressLabel)}</dt>
+              <dd className="relative mt-2 text-sm text-ink">{t(locale, aboutCopy.address)}</dd>
             </div>
-            <div className="flex gap-3">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/10"><PageMark className="h-6 w-6 brightness-0 invert" name="phone" /></span>
-              <div>
-                <dt className="text-xs font-semibold tracking-wide text-white/60">{t(locale, aboutCopy.phoneLabel)}</dt>
-                <dd className="mt-1 text-sm"><a className="text-white hover:text-leaf" href="tel:+966555729077">+966 555729077</a></dd>
-              </div>
+            <div className="group relative overflow-hidden rounded-3xl bg-white p-6">
+              <PageMark className="pointer-events-none absolute -bottom-6 -end-3 h-28 w-28 opacity-20 transition duration-300 group-hover:scale-110" name="phone" />
+              <dt className="relative text-xs font-semibold tracking-wide text-ink/60">{t(locale, aboutCopy.phoneLabel)}</dt>
+              <dd className="relative mt-2 text-sm"><a className="font-semibold text-green-dark" href="tel:+966555729077" dir="ltr">+966 555729077</a></dd>
             </div>
-            <div className="flex gap-3">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/10"><PageMark className="h-6 w-6 brightness-0 invert" name="mail" /></span>
-              <div>
-                <dt className="text-xs font-semibold tracking-wide text-white/60">{t(locale, aboutCopy.emailLabel)}</dt>
-                <dd className="mt-1 text-sm"><a className="text-white hover:text-leaf" href="mailto:contact@nbarari.com">contact@nbarari.com</a></dd>
-              </div>
+            <div className="group relative overflow-hidden rounded-3xl bg-white p-6">
+              <PageMark className="pointer-events-none absolute -bottom-6 -end-3 h-28 w-28 opacity-20 transition duration-300 group-hover:scale-110" name="mail" />
+              <dt className="relative text-xs font-semibold tracking-wide text-ink/60">{t(locale, aboutCopy.emailLabel)}</dt>
+              <dd className="relative mt-2 text-sm"><a className="font-semibold text-green-dark" href="mailto:contact@nbarari.com" dir="ltr">contact@nbarari.com</a></dd>
             </div>
           </dl>
-          <p className="mt-5 text-sm"><Link className="font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white" href="/contact">{t(locale, aboutCopy.contactPage)}</Link></p>
+          <p className="mt-6 text-sm"><Link className="font-semibold text-green-dark underline decoration-green-dark/40 underline-offset-4 hover:decoration-green-dark" href="/contact">{t(locale, aboutCopy.contactPage)}</Link></p>
         </div>
       </section>
     </main>

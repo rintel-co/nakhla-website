@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { UserMark } from "@/components/icons";
 import { PageBanner } from "@/components/page-banner";
 import { WhatsAppIcon, whatsappBtn } from "@/components/whatsapp-button";
 import { careersCopy } from "@/lib/i18n/pages/careers";
@@ -29,12 +30,15 @@ export default async function CareersPage() {
         imageAlt={t(locale, careersCopy.imageAlt)}
         imageClass="object-right"
       />
-      <section className="py-12">
+      <section className="bg-leaf py-16 sm:py-20">
         <div className={wrap}>
-          <a className={whatsappBtn} href={href} target="_blank" rel="noopener">
-            <WhatsAppIcon />
-            {t(locale, careersCopy.submitResume)}
-          </a>
+          <div className="relative overflow-hidden rounded-3xl bg-white p-8 sm:p-10">
+            <UserMark className="pointer-events-none absolute -bottom-8 -end-4 h-36 w-36 opacity-20" />
+            <a className={`${whatsappBtn} relative`} href={href} target="_blank" rel="noopener">
+              <WhatsAppIcon />
+              {t(locale, careersCopy.submitResume)}
+            </a>
+          </div>
         </div>
       </section>
     </main>

@@ -14,6 +14,14 @@ export const homeCopy = {
     "Nakhla Al Barari Trading Co. supplies products across food, frozen food, beverage and selected non-food categories for business customers. Explore our categories and contact our team to enquire about products and wholesale availability.",
     "توفر شركة نخلة البراري للتجارة منتجات ضمن فئات الأغذية والأغذية المجمدة والمشروبات وفئات مختارة من المنتجات غير الغذائية لعملاء قطاع الأعمال. استكشفوا فئاتنا وتواصلوا مع فريقنا للاستفسار عن المنتجات وتوافرها للبيع بالجملة.",
   ),
+  overviewKeywords: phrase("Saudi trading company; FMCG wholesale company", "شركة تجارة سعودية؛ شركة سلع استهلاكية بالجملة"),
+  overviewTitle: phrase("Your Wholesale Supply Partner", "شريككم لتوريد المنتجات بالجملة"),
+  overviewLede: phrase(
+    "Learn about our trading business, available product categories and how business customers can enquire about supply.",
+    "تعرّفوا على نشاطنا التجاري وفئات المنتجات المتاحة وكيف يمكن لعملاء قطاع الأعمال الاستفسار عن التوريد.",
+  ),
+  overviewButton: phrase("Discover Our Company", "اكتشفوا شركتنا"),
+  overviewImageAlt: phrase("Nakhla Al Barari", "نخلة البراري"),
   buttons: {
     requestPricing: phrase("Request Wholesale Pricing", "اطلبوا أسعار البيع بالجملة"),
     viewCategories: phrase("View All Categories", "عرض جميع الفئات"),
@@ -41,8 +49,14 @@ export const homeCopy = {
     "Browse food products, frozen foods, beverages and selected non-food products available for business enquiries.",
     "تصفحوا المنتجات الغذائية والأغذية المجمدة والمشروبات وفئات مختارة من المنتجات غير الغذائية المتاحة للاستفسارات التجارية.",
   ),
-  customersTitle: phrase("Stocked for hotels, hypermarkets, and grocery counters."),
-  customersLede: phrase("Importer, wholesaler, and distributor of tea, coffee, milk, rice, flour, oil, spices, frozen food, and soft drinks across Saudi Arabia."),
+  whyTitle: phrase("Why Work With Nakhla Al Barari?", "لماذا تتعاملون مع نخلة البراري؟"),
+  customersKeywords: phrase("wholesale supplier for supermarkets; grocery wholesale supplier", "مورد جملة للسوبرماركت؛ مورد مواد غذائية للبقالات"),
+  customersTitle: phrase("Supporting Business Customers", "ندعم عملاء قطاع الأعمال"),
+  customersLede: phrase(
+    "We welcome enquiries from businesses looking for products across our available categories. Contact us to discuss your requirements.",
+    "نرحب باستفسارات الشركات التي تبحث عن منتجات ضمن فئاتنا المتاحة. تواصلوا معنا لمناقشة احتياجاتكم.",
+  ),
+  customersButton: phrase("Discuss Your Requirements", "ناقشوا احتياجاتكم معنا"),
   audiences: {
     hotels: { title: phrase("Hotels & restaurants"), copy: phrase("5-star hotels, cafes, and restaurant kitchens.") },
     hypermarkets: { title: phrase("Hypermarkets"), copy: phrase("Large floors that reorder in cases.") },

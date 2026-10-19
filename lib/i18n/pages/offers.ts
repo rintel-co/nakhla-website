@@ -17,6 +17,7 @@ export const offersCopy = {
     "تصفحوا العروض المدرجة حسب الفرع والفترة الزمنية والفئة. يرجى تأكيد التوافر وشروط العرض مع الفرع المعني قبل الطلب.",
   ),
   breadcrumb: phrase("Offers"),
+  imageAlt: phrase("Supermarket aisle stocked with packaged food"),
   title: phrase("Weekly Wholesale Offers", "عروض البيع بالجملة الأسبوعية"),
   lede: phrase(
     "Browse the offers listed for the selected branch, date range and category. Confirm availability and offer terms with the relevant branch before ordering.",

@@ -23,10 +23,12 @@ const links = [
 ];
 
 const offersBtn =
-  "inline-flex h-9 items-center justify-center rounded-md border border-green bg-leaf px-3 text-sm font-semibold text-green-dark transition-colors hover:bg-green";
+  "inline-flex h-10 items-center justify-center rounded-md border border-green bg-leaf px-3 text-sm font-semibold text-green-dark transition-colors hover:bg-green";
 
-const accountBtn =
-  "inline-flex h-10 items-center justify-center gap-1.5 rounded-md border border-green bg-white px-3 text-sm font-semibold text-green-dark transition-colors hover:bg-leaf";
+function isCurrent(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export function Header() {
   const pathname = usePathname();
@@ -41,21 +43,22 @@ export function Header() {
   return (
     <>
       <header className="sticky top-0 z-20 border-b border-line bg-page">
-        <div className={`${wrap} relative flex h-16 items-center gap-3`}>
-          <Link className="flex min-w-0 items-center gap-2.5" href="/">
+        <div className={`${wrap} flex h-16 items-center gap-4`}>
+          <Link className="flex shrink-0 items-center" href="/" aria-label={t(locale, chromeCopy.nav.home)}>
             <LogoMark />
           </Link>
-          <div className="absolute left-1/2 max-[980px]:hidden -translate-x-1/2">
-            <nav className="flex items-center gap-6 text-sm font-medium text-ink">
-              {links.map((link) => (
-                <Link key={link.href} className={pathname === link.href ? "text-green" : "transition-colors hover:text-green"} href={link.href}>
+          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-1 min-[981px]:flex">
+            {links.map((link) => {
+              const current = isCurrent(pathname, link.href);
+              return (
+                <Link key={link.href} className={`inline-flex h-10 items-center rounded-md px-2.5 text-sm font-medium transition-colors ${current ? "bg-leaf text-green-dark" : "text-ink hover:bg-leaf hover:text-green-dark"}`} href={link.href}>
                   {t(locale, link.label)}
                 </Link>
-              ))}
-              <Link className={pathname.startsWith("/offers") ? `${offersBtn} bg-green` : offersBtn} href="/offers">{t(locale, chromeCopy.nav.offers)}</Link>
-            </nav>
-          </div>
-          <div className="ms-auto flex shrink-0 items-center gap-2">
+              );
+            })}
+            <Link className={pathname.startsWith("/offers") ? `${offersBtn} bg-green` : offersBtn} href="/offers">{t(locale, chromeCopy.nav.offers)}</Link>
+          </nav>
+          <div className="ms-auto flex shrink-0 items-center gap-2 min-[981px]:ms-0">
             <LanguageSwitcher className="max-[980px]:hidden" />
             <button
               className={`relative inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border transition-colors ${open ? "border-green bg-green text-green-dark" : "border-line bg-white text-ink hover:border-green hover:bg-leaf"}`}
@@ -76,15 +79,6 @@ export function Header() {
                 {slugs.length}
               </span>
             </button>
-            <div className="max-[980px]:hidden">
-              <Link className={pathname === "/contact" ? `${accountBtn} bg-leaf` : accountBtn} href="/contact">
-                <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <circle cx="8" cy="5.5" r="2.2" stroke="currentColor" strokeWidth="1.4" />
-                  <path d="M3.5 13.2c.6-2.2 2.3-3.2 4.5-3.2s3.9 1 4.5 3.2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-                </svg>
-                {t(locale, chromeCopy.buttons.tradeAccount)}
-              </Link>
-            </div>
             <div className="min-[981px]:hidden">
               <button
                 className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-line bg-white text-lg"
@@ -100,21 +94,17 @@ export function Header() {
         </div>
         {menu && (
           <div className="border-t border-line min-[981px]:hidden">
-            <nav className={`${wrap} flex flex-col py-2 text-sm font-medium text-ink`}>
-              <LanguageSwitcher className="my-2 w-fit" />
-              {links.map((link) => (
-                <Link key={link.href} className={`py-2.5 transition-colors hover:text-green ${pathname === link.href ? "text-green" : ""}`} href={link.href}>
-                  {t(locale, link.label)}
-                </Link>
-              ))}
-              <Link className={`${accountBtn} my-1 w-full`} href="/contact">
-                <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <circle cx="8" cy="5.5" r="2.2" stroke="currentColor" strokeWidth="1.4" />
-                  <path d="M3.5 13.2c.6-2.2 2.3-3.2 4.5-3.2s3.9 1 4.5 3.2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-                </svg>
-                {t(locale, chromeCopy.buttons.tradeAccount)}
-              </Link>
-              <Link className={`my-2 inline-flex h-11 items-center justify-center rounded-md border border-green px-3 text-sm font-semibold text-green-dark ${pathname.startsWith("/offers") ? "bg-green" : "bg-leaf"}`} href="/offers">{t(locale, chromeCopy.nav.offers)}</Link>
+            <nav className={`${wrap} flex flex-col gap-1 py-3 text-sm font-medium text-ink`}>
+              <LanguageSwitcher className="mb-2 w-full" />
+              {links.map((link) => {
+                const current = isCurrent(pathname, link.href);
+                return (
+                  <Link key={link.href} className={`flex h-11 items-center rounded-md px-3 transition-colors ${current ? "bg-leaf text-green-dark" : "hover:bg-leaf hover:text-green-dark"}`} href={link.href}>
+                    {t(locale, link.label)}
+                  </Link>
+                );
+              })}
+              <Link className={`${offersBtn} mt-1 w-full ${pathname.startsWith("/offers") ? "bg-green" : ""}`} href="/offers">{t(locale, chromeCopy.nav.offers)}</Link>
             </nav>
           </div>
         )}

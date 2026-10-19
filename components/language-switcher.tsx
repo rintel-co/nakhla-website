@@ -23,18 +23,22 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
   }
 
   return (
-    <div className={`inline-flex h-10 items-center rounded-md border border-line bg-white p-0.5 ${className}`} role="group" aria-label={t(locale, chromeCopy.language)}>
-      {options.map((option) => (
-        <button
-          key={option.code}
-          className={`h-8 cursor-pointer rounded px-2.5 text-xs font-semibold ${locale === option.code ? "bg-green text-green-dark" : "text-ink hover:bg-leaf"}`}
-          type="button"
-          aria-pressed={locale === option.code}
-          onClick={() => choose(option.code)}
-        >
-          {t(locale, option.label)}
-        </button>
-      ))}
+    <div className={`inline-grid h-10 grid-cols-2 rounded-md border border-line bg-white p-1 ${className}`} role="group" aria-label={t(locale, chromeCopy.language)}>
+      {options.map((option) => {
+        const active = locale === option.code;
+        return (
+          <button
+            key={option.code}
+            className={`inline-flex min-w-16 cursor-pointer items-center justify-center rounded px-3 text-sm font-semibold transition-colors ${option.code === "ar" ? "font-arabic" : "font-sans"} ${active ? "bg-green-dark text-white" : "text-ink/70 hover:bg-leaf hover:text-green-dark"}`}
+            type="button"
+            lang={option.code}
+            aria-pressed={active}
+            onClick={() => choose(option.code)}
+          >
+            {t(locale, option.label)}
+          </button>
+        );
+      })}
     </div>
   );
 }

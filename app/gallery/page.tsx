@@ -39,20 +39,20 @@ export default async function GalleryPage() {
         image={iftar}
         imageAlt={t(locale, galleryCopy.imageAlt)}
       />
-      <section className="py-12">
+      <section className="bg-leaf py-16 sm:py-20">
         <div className={wrap}>
           {albums.map((album, albumIndex) => {
             const copy = galleryCopy.albums[albumIndex];
             const title = t(locale, copy.title);
             return (
-            <div className="mt-10 first:mt-0" key={album.title}>
-              <div className="mb-3.5 flex flex-wrap items-baseline justify-between gap-2">
-                <h2 className="text-[22px]">{title}</h2>
-                <time className="text-sm font-semibold text-muted" dateTime={album.date}>{t(locale, copy.label)}</time>
+            <div className="mt-12 first:mt-0" key={album.title}>
+              <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+                <h2 className="text-2xl font-bold text-green-dark sm:text-3xl">{title}</h2>
+                <time className="text-sm font-semibold text-ink/60" dateTime={album.date}>{t(locale, copy.label)}</time>
               </div>
               <div className="grid grid-cols-3 gap-3 max-[800px]:grid-cols-2 max-[640px]:grid-cols-1">
                 {album.photos.map((src, index) => (
-                  <img className="aspect-[16/10] w-full rounded-lg object-cover" key={src} src={src} alt={fill(locale, galleryCopy.photoAlt, { title, index: String(index + 1) })} />
+                  <img className="aspect-[16/10] w-full rounded-3xl object-cover" key={src} src={src} alt={fill(locale, galleryCopy.photoAlt, { title, index: String(index + 1) })} />
                 ))}
               </div>
             </div>

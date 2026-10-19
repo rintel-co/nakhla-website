@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect } from "react";
 import { AddToList } from "@/components/add-to-list";
-import { CategoryMark, StatMark } from "@/components/icons";
+import { CategoryMark, OfferMark } from "@/components/icons";
 import { useLocale } from "@/components/locale-provider";
 import { branches } from "@/lib/catalog";
 import { catalogue } from "@/lib/catalogue";
@@ -42,22 +42,20 @@ export function OffersBoard({ initialBranch }: { initialBranch?: string }) {
         const pdf = offerPdfs[place.name];
         const headingId = `${offerBranchAnchor(place.name)}-heading`;
         return (
-          <section className="scroll-mt-20 overflow-hidden rounded-3xl border border-line bg-white" id={offerBranchAnchor(place.name)} key={place.name} aria-labelledby={headingId}>
-            <div className="relative overflow-hidden bg-[radial-gradient(ellipse_at_100%_0%,rgba(147,192,44,0.45),transparent_55%),linear-gradient(160deg,#163d10,#0d2b09)] px-5 py-5 text-white sm:px-6">
-              <div className="relative flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white" aria-hidden="true">
-                    <StatMark className="h-8 w-8" name="branches" />
-                  </span>
-                  <div>
-                    <h2 className="text-2xl font-semibold tracking-[-0.02em] text-white" id={headingId}>{label(locale, chromeCopy.branches, place.name)}</h2>
-                    <a className="text-sm text-white/80" dir="ltr" href={`tel:${place.phone.replace(/\s/g, "")}`}>{place.phone}</a>
-                  </div>
+          <section className="scroll-mt-20 overflow-hidden rounded-3xl bg-white" id={offerBranchAnchor(place.name)} key={place.name} aria-labelledby={headingId}>
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-5 py-5 sm:px-6">
+              <div className="flex items-center gap-3">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-leaf" aria-hidden="true">
+                  <OfferMark className="h-7 w-7" />
+                </span>
+                <div>
+                  <h2 className="text-2xl font-bold tracking-[-0.03em] text-ink" id={headingId}>{label(locale, chromeCopy.branches, place.name)}</h2>
+                  <a className="text-sm text-ink/60" dir="ltr" href={`tel:${place.phone.replace(/\s/g, "")}`}>{place.phone}</a>
                 </div>
-                {pdf ? (
-                  <a className="inline-flex h-10 items-center rounded-xl bg-white px-3 text-sm font-semibold text-green-dark" href={pdf} target="_blank" rel="noopener">{t(locale, offersCopy.viewPdf)}</a>
-                ) : null}
               </div>
+                {pdf ? (
+                  <a className="inline-flex h-10 items-center rounded-xl bg-green-dark px-3 text-sm font-semibold text-white" href={pdf} target="_blank" rel="noopener">{t(locale, offersCopy.viewPdf)}</a>
+                ) : null}
             </div>
             <div className="grid grid-cols-4 gap-4 p-4 max-[980px]:grid-cols-2 max-[640px]:grid-cols-1 sm:p-5">
               {offers.map((offer) => {
@@ -65,7 +63,7 @@ export function OffersBoard({ initialBranch }: { initialBranch?: string }) {
                 if (!item) return null;
                 const cat = item.cats[0];
                 return (
-                  <article className="flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition-shadow hover:shadow-[0_10px_28px_rgba(13,43,9,0.08)]" key={`${offer.weekStart}-${offer.slug}`}>
+                  <article className="flex flex-col overflow-hidden rounded-2xl border border-line bg-white" key={`${offer.weekStart}-${offer.slug}`}>
                     <Link href={`/products/${item.slug}`}>
                       <div className="relative flex h-52 items-center justify-center bg-soft">
                         <span className="absolute top-3 start-3 z-[1] rounded-full bg-green px-3 py-1 text-sm font-semibold text-green-dark">{fill(locale, offersCopy.percentOff, { percent: String(offer.percent) })}</span>
@@ -76,7 +74,7 @@ export function OffersBoard({ initialBranch }: { initialBranch?: string }) {
                         )}
                       </div>
                       <div className="p-3">
-                        <p className="text-sm font-semibold text-green">{item.brand}</p>
+                        <p className="text-sm font-semibold text-green-dark">{item.brand}</p>
                         <h3 className="mt-1 text-sm font-semibold leading-snug">{item.name}</h3>
                         <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-2 rounded-xl bg-leaf px-3 py-2.5 text-xs">
                           <div>
