@@ -35,7 +35,7 @@ export const shot = "relative flex h-44 items-center justify-center overflow-hid
 
 export const shotImg = "h-full w-full object-contain p-3";
 
-export const brandLabel = "absolute bottom-2 left-3 text-xs text-muted";
+export const brandLabel = "absolute bottom-2 start-3 text-xs text-muted";
 
 export const addBtn = "h-9 cursor-pointer rounded-md border border-line bg-white px-3 text-sm font-semibold text-ink transition-colors hover:border-green hover:bg-leaf hover:text-green";
 

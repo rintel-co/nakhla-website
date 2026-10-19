@@ -43,8 +43,9 @@ export const weeklyOffers: WeeklyOffer[] = [
   { branch: "Qassim", weekStart: "2026-09-28", weekLabel: "28 Sep–4 Oct 2026", slug: "bhai-bhai-indian-sella-rice-40-kg", percent: 7 },
 ];
 
-export const currentWeekStart = weeklyOffers.map((offer) => offer.weekStart).sort().at(-1) ?? "";
+/** Approved offer PDFs by branch. A branch is omitted until NB supplies that file. */
+export const offerPdfs: Partial<Record<string, string>> = {};
 
-export const offerWeeks = [...new Map(weeklyOffers.map((offer) => [offer.weekStart, offer.weekLabel])).entries()]
-  .sort((a, b) => b[0].localeCompare(a[0]))
-  .map(([start, label]) => ({ start, label }));
+export function offerBranchAnchor(name: string) {
+  return `branch-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
+}

@@ -3,31 +3,39 @@ import Link from "next/link";
 import { HeroLogo } from "@/components/hero-logo";
 import { OffersBoard } from "@/components/offers-board";
 import { GroupMark, StatMark } from "@/components/icons";
-import { brands } from "@/lib/catalog";
+import { brands, branches } from "@/lib/catalog";
 import { catalogue } from "@/lib/catalogue";
-import { weeklyOffers } from "@/lib/offers";
+import { offerBranchAnchor, offerPdfs, weeklyOffers } from "@/lib/offers";
+import { offersCopy } from "@/lib/i18n/pages/offers";
+import { chromeCopy } from "@/lib/i18n/pages/chrome";
+import { getLocale } from "@/lib/i18n/locale";
+import { label, t } from "@/lib/i18n/phrase";
 import { wrap } from "@/lib/ui";
 
-export const metadata: Metadata = {
-  title: "Offers — Nakhla Al Barari",
-  description: "Weekly offers for each Nakhla Al Barari branch. Riyadh, Aziziyah, Dammam, Hail, Hafar Al Batin, and Qassim publish their own lists. The branch confirms the offer.",
-  alternates: { canonical: "https://nakhlaalbarari.com/offers" },
-  openGraph: {
-    title: "Weekly offers — Nakhla Al Barari",
-    description: "Each branch keeps its own weekly offer list. The branch confirms the offer.",
-    url: "https://nakhlaalbarari.com/offers",
-    type: "website",
-    siteName: "Nakhla Al Barari",
-    locale: "en_SA",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return {
+    title: t(locale, offersCopy.metaTitle),
+    description: t(locale, offersCopy.metaDescription),
+    keywords: t(locale, offersCopy.keywords).split(/\s*[,،]\s*/),
+    alternates: { canonical: "https://nakhlaalbarari.com/offers" },
+    openGraph: {
+      title: t(locale, offersCopy.ogTitle),
+      description: t(locale, offersCopy.ogDescription),
+      url: "https://nakhlaalbarari.com/offers",
+      type: "website",
+      siteName: "Nakhla Al Barari",
+      locale: locale === "ar" ? "ar_SA" : "en_SA",
+    },
+  };
+}
 
 function offersSchema() {
   const bySlug = new Map(catalogue.map((item) => [item.slug, item]));
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Weekly offers by branch",
+    name: "Weekly Wholesale Offers",
     itemListElement: weeklyOffers.flatMap((offer, index) => {
       const item = bySlug.get(offer.slug);
       if (!item) return [];
@@ -55,6 +63,7 @@ function offersSchema() {
 
 export default async function OffersPage({ searchParams }: { searchParams: Promise<{ branch?: string }> }) {
   const { branch } = await searchParams;
+  const locale = await getLocale();
   const heroBrands = brands.slice(0, 6);
 
   return (
@@ -86,45 +95,40 @@ export default async function OffersPage({ searchParams }: { searchParams: Promi
           <div>
             <nav aria-label="Breadcrumb" className="mb-4 text-sm text-white/80">
               <ol className="flex flex-wrap items-center gap-2">
-                <li><Link className="hover:text-white" href="/">Home</Link></li>
+                <li><Link className="hover:text-white" href="/">{t(locale, chromeCopy.nav.home)}</Link></li>
                 <li aria-hidden="true">/</li>
-                <li aria-current="page">Offers</li>
+                <li aria-current="page">{t(locale, offersCopy.breadcrumb)}</li>
               </ol>
             </nav>
-            <p className="mb-2 text-sm text-white/75">General offers</p>
-            <h1 className="offer-lines max-w-[16ch] text-[52px] leading-[1.05] font-semibold tracking-[-0.03em] text-white max-[640px]:text-[36px]">
-              <span>Weekly offers for every branch.</span>
-              <span>This week’s lines, ready to add.</span>
-              <span>Each branch confirms the offer.</span>
-            </h1>
-            <p className="mt-3 max-w-[46ch] text-base leading-relaxed text-white/80">Each branch keeps its own list. The branch confirms the offer before you order.</p>
-            <a className="mt-6 inline-flex h-11 items-center rounded-full bg-white px-5 text-sm font-semibold text-green transition-colors hover:bg-leaf" href="#lists">See this week</a>
+            <h1 className="max-w-[18ch] text-[52px] leading-[1.05] font-semibold tracking-[-0.03em] text-white max-[640px]:text-[36px]">{t(locale, offersCopy.title)}</h1>
+            <p className="mt-3 max-w-[46ch] text-base leading-relaxed text-white/80">{t(locale, offersCopy.lede)}</p>
+            <a className="mt-6 inline-flex h-11 items-center rounded-full bg-white px-5 text-sm font-semibold text-green-dark transition-colors hover:bg-leaf" href="#lists">{t(locale, offersCopy.viewCurrent)}</a>
           </div>
-          <div className="grid gap-2.5 lg:w-[420px]">
-            <div className="grid grid-cols-6 gap-2" aria-label="Offer areas">
-              <div className="flex flex-col items-center gap-1">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/20"><StatMark className="h-6 w-6 brightness-0 invert" name="branches" /></span>
-                <span className="text-[10px] font-semibold text-white">Branches</span>
+          <div className="grid gap-3 rounded-3xl bg-white/10 p-4 lg:w-[420px]">
+            <div className="grid grid-cols-3 gap-3" aria-label={t(locale, offersCopy.areas)}>
+              <div className="flex flex-col items-center gap-2">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20"><StatMark className="h-7 w-7 brightness-0 invert" name="branches" /></span>
+                <span className="text-center text-xs font-semibold leading-tight text-white">{t(locale, offersCopy.branches)}</span>
               </div>
-              <div className="flex flex-col items-center gap-1">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/20"><GroupMark className="h-6 w-6 brightness-0 invert" name="Food Products" /></span>
-                <span className="text-[10px] font-semibold text-white">Food</span>
+              <div className="flex flex-col items-center gap-2">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20"><GroupMark className="h-7 w-7 brightness-0 invert" name="Food Products" /></span>
+                <span className="text-center text-xs font-semibold leading-tight text-white">{t(locale, offersCopy.food)}</span>
               </div>
-              <div className="flex flex-col items-center gap-1">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/20"><GroupMark className="h-6 w-6 brightness-0 invert" name="Frozen Foods" /></span>
-                <span className="text-[10px] font-semibold text-white">Frozen</span>
+              <div className="flex flex-col items-center gap-2">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20"><GroupMark className="h-7 w-7 brightness-0 invert" name="Frozen Foods" /></span>
+                <span className="text-center text-xs font-semibold leading-tight text-white">{t(locale, offersCopy.frozen)}</span>
               </div>
-              <div className="flex flex-col items-center gap-1">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/20"><GroupMark className="h-6 w-6 brightness-0 invert" name="Soft Drinks & Beverages" /></span>
-                <span className="text-[10px] font-semibold text-white">Drinks</span>
+              <div className="flex flex-col items-center gap-2">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20"><GroupMark className="h-7 w-7 brightness-0 invert" name="Soft Drinks & Beverages" /></span>
+                <span className="text-center text-xs font-semibold leading-tight text-white">{t(locale, offersCopy.drinks)}</span>
               </div>
-              <div className="flex flex-col items-center gap-1">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/20"><GroupMark className="h-6 w-6 brightness-0 invert" name="Non Food" /></span>
-                <span className="text-[10px] font-semibold text-white">Non food</span>
+              <div className="flex flex-col items-center gap-2">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20"><GroupMark className="h-7 w-7 brightness-0 invert" name="Non Food" /></span>
+                <span className="text-center text-xs font-semibold leading-tight text-white">{t(locale, offersCopy.nonFood)}</span>
               </div>
-              <div className="flex flex-col items-center gap-1">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/20"><StatMark className="h-6 w-6 brightness-0 invert" name="products" /></span>
-                <span className="text-[10px] font-semibold text-white">Products</span>
+              <div className="flex flex-col items-center gap-2">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20"><StatMark className="h-7 w-7 brightness-0 invert" name="products" /></span>
+                <span className="text-center text-xs font-semibold leading-tight text-white">{t(locale, offersCopy.products)}</span>
               </div>
             </div>
             <div className="grid grid-cols-3 gap-2.5">
@@ -137,26 +141,58 @@ export default async function OffersPage({ searchParams }: { searchParams: Promi
           </div>
         </div>
       </section>
+      <section className="bg-leaf/60 py-14" aria-labelledby="offer-documents">
+        <div className={wrap}>
+          <h2 className="text-2xl font-semibold tracking-[-0.02em]" id="offer-documents">{t(locale, offersCopy.documentsTitle)}</h2>
+          <p className="mt-2 max-w-[68ch] text-sm text-muted">{t(locale, offersCopy.documentsLede)}</p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {branches.map((place) => {
+              const pdf = offerPdfs[place.name];
+              const href = pdf ?? `#${offerBranchAnchor(place.name)}`;
+              return (
+                <a
+                  className="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-white p-4 transition-colors hover:border-green"
+                  href={href}
+                  key={place.name}
+                  rel={pdf ? "noopener" : undefined}
+                  target={pdf ? "_blank" : undefined}
+                >
+                  <span className="min-w-0">
+                    <span className="flex items-center gap-3">
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-leaf" aria-hidden="true">
+                        <StatMark className="h-6 w-6" name="branches" />
+                      </span>
+                      <span className="text-lg font-semibold text-ink">{label(locale, chromeCopy.branches, place.name)}</span>
+                    </span>
+                    <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-green-dark">
+                      {t(locale, pdf ? offersCopy.viewPdf : offersCopy.viewCurrent)}
+                    </span>
+                  </span>
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-leaf text-green-dark transition-colors group-hover:bg-green" aria-hidden="true">
+                    <span className="inline-block rtl:-scale-x-100">→</span>
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </section>
       <section className="scroll-mt-16 pt-8 pb-6" id="lists">
         <div className={wrap}>
           <OffersBoard initialBranch={branch} />
         </div>
       </section>
-      <section className={`${wrap} pb-16`} aria-labelledby="offer-questions">
-        <h2 className="text-2xl font-semibold tracking-[-0.02em]" id="offer-questions">Questions</h2>
-        <div className="mt-4 border-t border-line">
-          <details className="border-b border-line py-4">
-            <summary className="cursor-pointer text-base font-semibold">Is the list the same at every branch?</summary>
-            <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-muted">No. Riyadh, Aziziyah, Dammam, Hail, Hafar Al Batin, and Qassim each publish their own week.</p>
-          </details>
-          <details className="border-b border-line py-4">
-            <summary className="cursor-pointer text-base font-semibold">Where is the price?</summary>
-            <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-muted">The branch confirms the offer. This page does not show a public price.</p>
-          </details>
-          <details className="border-b border-line py-4">
-            <summary className="cursor-pointer text-base font-semibold">How do I order a line?</summary>
-            <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-muted">Add it to a trade list, then send the list from the site. The branch confirms price and delivery.</p>
-          </details>
+      <section className="border-t border-line bg-leaf/40 py-14" aria-labelledby="offer-questions">
+        <div className={wrap}>
+          <h2 className="text-2xl font-semibold tracking-[-0.02em]" id="offer-questions">{t(locale, offersCopy.questions)}</h2>
+          <div className="mt-6 rounded-2xl border border-line bg-white px-5">
+          {offersCopy.faqs.map((item) => (
+            <details className="border-b border-line py-4" key={item.q.en}>
+              <summary className="cursor-pointer text-base font-semibold">{t(locale, item.q)}</summary>
+              <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-muted">{t(locale, item.a)}</p>
+            </details>
+          ))}
+          </div>
         </div>
       </section>
     </main>

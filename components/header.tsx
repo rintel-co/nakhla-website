@@ -1,21 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { LogoMark } from "@/components/icons";
+import { useLocale } from "@/components/locale-provider";
 import { useTrade } from "@/components/trade-context";
 import { WhatsAppIcon, whatsappBtn } from "@/components/whatsapp-button";
+import { chromeCopy } from "@/lib/i18n/pages/chrome";
+import { t } from "@/lib/i18n/phrase";
 import { wrap } from "@/lib/ui";
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/products", label: "Our Brands" },
-  { href: "/services", label: "Services" },
-  { href: "/branches", label: "Branches" },
-  { href: "/about", label: "About" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: chromeCopy.nav.home },
+  { href: "/products", label: chromeCopy.nav.brands },
+  { href: "/services", label: chromeCopy.nav.services },
+  { href: "/branches", label: chromeCopy.nav.branches },
+  { href: "/about", label: chromeCopy.nav.about },
+  { href: "/gallery", label: chromeCopy.nav.gallery },
+  { href: "/contact", label: chromeCopy.nav.contact },
 ];
 
 const offersBtn =
@@ -26,8 +30,8 @@ const accountBtn =
 
 export function Header() {
   const pathname = usePathname();
-  const router = useRouter();
-  const { query, setQuery, slugs, toggle, open, setOpen, href, names } = useTrade();
+  const locale = useLocale();
+  const { slugs, toggle, open, setOpen, href, names } = useTrade();
   const [menu, setMenu] = useState(false);
 
   useEffect(() => {
@@ -45,17 +49,18 @@ export function Header() {
             <nav className="flex items-center gap-6 text-sm font-medium text-ink">
               {links.map((link) => (
                 <Link key={link.href} className={pathname === link.href ? "text-green" : "transition-colors hover:text-green"} href={link.href}>
-                  {link.label}
+                  {t(locale, link.label)}
                 </Link>
               ))}
-              <Link className={pathname.startsWith("/offers") ? `${offersBtn} bg-green` : offersBtn} href="/offers">Offers</Link>
+              <Link className={pathname.startsWith("/offers") ? `${offersBtn} bg-green` : offersBtn} href="/offers">{t(locale, chromeCopy.nav.offers)}</Link>
             </nav>
           </div>
-          <div className="ml-auto flex shrink-0 items-center gap-2">
+          <div className="ms-auto flex shrink-0 items-center gap-2">
+            <LanguageSwitcher className="max-[980px]:hidden" />
             <button
               className={`relative inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border transition-colors ${open ? "border-green bg-green text-green-dark" : "border-line bg-white text-ink hover:border-green hover:bg-leaf"}`}
               type="button"
-              aria-label="Trade list"
+              aria-label={t(locale, chromeCopy.buttons.tradeList)}
               aria-expanded={open}
               onClick={() => {
                 setMenu(false);
@@ -67,7 +72,7 @@ export function Header() {
                 <circle cx="6.5" cy="13" r="1" fill="currentColor" />
                 <circle cx="11.5" cy="13" r="1" fill="currentColor" />
               </svg>
-              <span className={slugs.length ? "absolute -top-1.5 -right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-green-dark px-1 text-[10px] font-semibold text-white" : "hidden"}>
+              <span className={slugs.length ? "absolute -top-1.5 -end-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-green-dark px-1 text-[10px] font-semibold text-white" : "hidden"}>
                 {slugs.length}
               </span>
             </button>
@@ -77,14 +82,14 @@ export function Header() {
                   <circle cx="8" cy="5.5" r="2.2" stroke="currentColor" strokeWidth="1.4" />
                   <path d="M3.5 13.2c.6-2.2 2.3-3.2 4.5-3.2s3.9 1 4.5 3.2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
                 </svg>
-                Trade account
+                {t(locale, chromeCopy.buttons.tradeAccount)}
               </Link>
             </div>
             <div className="min-[981px]:hidden">
               <button
                 className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-line bg-white text-lg"
                 type="button"
-                aria-label={menu ? "Close menu" : "Menu"}
+                aria-label={menu ? t(locale, chromeCopy.buttons.closeMenu) : t(locale, chromeCopy.buttons.menu)}
                 aria-expanded={menu}
                 onClick={() => setMenu((value) => !value)}
               >
@@ -96,9 +101,10 @@ export function Header() {
         {menu && (
           <div className="border-t border-line min-[981px]:hidden">
             <nav className={`${wrap} flex flex-col py-2 text-sm font-medium text-ink`}>
+              <LanguageSwitcher className="my-2 w-fit" />
               {links.map((link) => (
                 <Link key={link.href} className={`py-2.5 transition-colors hover:text-green ${pathname === link.href ? "text-green" : ""}`} href={link.href}>
-                  {link.label}
+                  {t(locale, link.label)}
                 </Link>
               ))}
               <Link className={`${accountBtn} my-1 w-full`} href="/contact">
@@ -106,37 +112,37 @@ export function Header() {
                   <circle cx="8" cy="5.5" r="2.2" stroke="currentColor" strokeWidth="1.4" />
                   <path d="M3.5 13.2c.6-2.2 2.3-3.2 4.5-3.2s3.9 1 4.5 3.2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
                 </svg>
-                Trade account
+                {t(locale, chromeCopy.buttons.tradeAccount)}
               </Link>
-              <Link className={`my-2 inline-flex h-11 items-center justify-center rounded-md border border-green px-3 text-sm font-semibold text-green-dark ${pathname.startsWith("/offers") ? "bg-green" : "bg-leaf"}`} href="/offers">Offers</Link>
+              <Link className={`my-2 inline-flex h-11 items-center justify-center rounded-md border border-green px-3 text-sm font-semibold text-green-dark ${pathname.startsWith("/offers") ? "bg-green" : "bg-leaf"}`} href="/offers">{t(locale, chromeCopy.nav.offers)}</Link>
             </nav>
           </div>
         )}
       </header>
       <aside
-        className={open ? "fixed top-20 right-4 z-30 flex w-[min(360px,calc(100%-32px))] flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_16px_40px_rgba(28,36,22,0.14)]" : "hidden"}
-        aria-label="Trade list"
+        className={open ? "fixed top-20 end-4 z-30 flex w-[min(360px,calc(100%-32px))] flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_16px_40px_rgba(28,36,22,0.14)]" : "hidden"}
+        aria-label={t(locale, chromeCopy.buttons.tradeList)}
       >
         <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
           <div>
-            <h3 className="text-base font-semibold">Trade list</h3>
-            <p className="text-xs text-muted">{slugs.length ? `${slugs.length} ${slugs.length === 1 ? "line" : "lines"}` : "Nothing added yet"}</p>
+            <h3 className="text-base font-semibold">{t(locale, chromeCopy.buttons.tradeList)}</h3>
+            <p className="text-xs text-muted">{slugs.length ? `${slugs.length} ${t(locale, slugs.length === 1 ? chromeCopy.buttons.line : chromeCopy.buttons.lines)}` : t(locale, chromeCopy.buttons.nothingAdded)}</p>
           </div>
-          <button className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-lg leading-none text-muted hover:bg-soft hover:text-ink" type="button" aria-label="Close trade list" onClick={() => setOpen(false)}>×</button>
+          <button className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-lg leading-none text-muted hover:bg-soft hover:text-ink" type="button" aria-label={t(locale, chromeCopy.buttons.closeTradeList)} onClick={() => setOpen(false)}>×</button>
         </div>
         <ul className="max-h-[min(360px,50vh)] overflow-y-auto px-3 py-3">
           {slugs.length ? slugs.map((slug, index) => (
             <li className="mb-2 flex items-start justify-between gap-3 rounded-xl bg-soft px-3 py-2.5 text-sm last:mb-0" key={slug}>
               <span className="leading-snug">{names[index]}</span>
-              <button className="shrink-0 cursor-pointer text-xs font-semibold text-green" type="button" onClick={() => toggle(slug)}>Remove</button>
+              <button className="shrink-0 cursor-pointer text-xs font-semibold text-green" type="button" onClick={() => toggle(slug)}>{t(locale, chromeCopy.buttons.remove)}</button>
             </li>
-          )) : <li className="px-1 py-2 text-sm text-muted">Add a line from the catalogue, then send it from here.</li>}
+          )) : <li className="px-1 py-2 text-sm text-muted">{t(locale, chromeCopy.buttons.emptyTrade)}</li>}
         </ul>
         {slugs.length > 0 && (
           <div className="border-t border-line p-3">
             <a className={`${whatsappBtn} w-full`} href={href} target="_blank" rel="noopener">
               <WhatsAppIcon />
-              Send on WhatsApp
+              {t(locale, chromeCopy.buttons.sendOnWhatsApp)}
             </a>
           </div>
         )}

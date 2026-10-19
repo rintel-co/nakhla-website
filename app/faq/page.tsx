@@ -1,22 +1,33 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FaqList } from "@/components/faq-list";
-import { faqs } from "@/lib/faq";
+import { faqCopy } from "@/lib/i18n/pages/faq";
+import { chromeCopy } from "@/lib/i18n/pages/chrome";
+import { getLocale } from "@/lib/i18n/locale";
+import { t } from "@/lib/i18n/phrase";
 import { wrap } from "@/lib/ui";
 
-export const metadata: Metadata = { title: "FAQ — Nakhla Al Barari" };
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return { title: t(locale, faqCopy.metaTitle) };
+}
+
+const faqItems = [...faqCopy.home, ...faqCopy.brands.filter((item) => !faqCopy.home.some((home) => home.q.en === item.q.en))];
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: faqs.map((item) => ({
+  mainEntity: faqItems.map((item) => ({
     "@type": "Question",
-    name: item.q,
-    acceptedAnswer: { "@type": "Answer", text: item.a },
+    name: item.q.en,
+    acceptedAnswer: { "@type": "Answer", text: item.a.en },
   })),
 };
 
-export default function FaqPage() {
+export default async function FaqPage() {
+  const locale = await getLocale();
+  const items = faqItems.map((item) => ({ q: t(locale, item.q), a: t(locale, item.a) }));
+
   return (
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
@@ -24,15 +35,15 @@ export default function FaqPage() {
         <div className={wrap}>
           <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted">
             <ol className="flex flex-wrap items-center gap-2">
-              <li><Link className="hover:text-green" href="/">Home</Link></li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page">FAQ</li>
-            </ol>
-          </nav>
-          <h1 className="text-[40px] leading-tight font-semibold tracking-[-0.02em] max-[640px]:text-[32px]">FAQ</h1>
-          <p className="mt-3 max-w-[62ch] text-muted">Wholesale orders, availability, returns, and how to reach us on WhatsApp.</p>
+                <li><Link className="hover:text-green" href="/">{t(locale, chromeCopy.nav.home)}</Link></li>
+                <li aria-hidden="true">/</li>
+                <li aria-current="page">{t(locale, faqCopy.title)}</li>
+              </ol>
+            </nav>
+          <h1 className="text-[40px] leading-tight font-semibold tracking-[-0.02em] max-[640px]:text-[32px]">{t(locale, faqCopy.title)}</h1>
+          <p className="mt-3 max-w-[62ch] text-muted">{t(locale, faqCopy.lede)}</p>
           <div className="mt-8">
-            <FaqList items={faqs} />
+            <FaqList items={items} />
           </div>
         </div>
       </section>

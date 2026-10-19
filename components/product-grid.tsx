@@ -1,17 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { useLocale } from "@/components/locale-provider";
 import { useTrade } from "@/components/trade-context";
 import { products } from "@/lib/catalog";
+import { catalogueCopy } from "@/lib/i18n/pages/catalogue";
+import { t } from "@/lib/i18n/phrase";
 import { addBtn, addBtnOn, card, shot, shotImg } from "@/lib/ui";
 
 export function ProductGrid() {
   const { query, slugs, toggle } = useTrade();
+  const locale = useLocale();
   const shown = products.filter((product) => (product.name + " " + product.brand).toLowerCase().includes(query.trim().toLowerCase()));
 
   return (
     <div className="grid grid-cols-4 gap-4 max-[980px]:grid-cols-2 max-[640px]:grid-cols-1">
-      {shown.length === 0 && <p className="col-span-full text-sm text-muted">None of these products match that search.</p>}
+      {shown.length === 0 && <p className="col-span-full text-sm text-muted">{t(locale, catalogueCopy.noneOnHome)}</p>}
       {shown.map((product) => {
         const added = slugs.includes(product.slug);
         return (

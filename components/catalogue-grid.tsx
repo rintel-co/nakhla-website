@@ -4,9 +4,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useRef, useState } from "react";
 import { CategoryMark } from "@/components/icons";
+import { useLocale } from "@/components/locale-provider";
 import { useTrade } from "@/components/trade-context";
-import { catalogueBrandName, normBrand } from "@/lib/brand";
+import { catalogueBrandName, normBrand, packDetail } from "@/lib/brand";
 import { catalogue, catalogueBrands, catalogueTabs } from "@/lib/catalogue";
+import { chromeCopy } from "@/lib/i18n/pages/chrome";
+import { catalogueCopy } from "@/lib/i18n/pages/catalogue";
+import { productCopyPhrases } from "@/lib/i18n/pages/product";
+import { label, t } from "@/lib/i18n/phrase";
 import { addBtn, addBtnOn, card, shot, shotImg } from "@/lib/ui";
 
 const markName: Record<string, string> = {
@@ -22,7 +27,7 @@ const markName: Record<string, string> = {
 };
 
 const selectClass =
-  "h-11 appearance-none rounded-md border border-line bg-white bg-[linear-gradient(45deg,transparent_50%,#222_50%),linear-gradient(135deg,#222_50%,transparent_50%)] bg-size-[6px_6px,6px_6px] bg-position-[calc(100%-16px)_18px,calc(100%-10px)_18px] bg-no-repeat pr-8 pl-3 text-sm font-medium text-ink";
+  "filter-select h-11 appearance-none rounded-md border border-line bg-white bg-[linear-gradient(45deg,transparent_50%,#222_50%),linear-gradient(135deg,#222_50%,transparent_50%)] bg-size-[6px_6px,6px_6px] bg-no-repeat pe-8 ps-3 text-sm font-medium text-ink";
 
 function resolveBrand(value?: string) {
   if (!value || value === "All brands") return "All brands";
@@ -35,6 +40,7 @@ function sameBrand(itemBrand: string, selected: string) {
 
 export function CatalogueGrid({ initialTab = "All Products", initialBrand }: { initialTab?: string; initialBrand?: string }) {
   const router = useRouter();
+  const locale = useLocale();
   const start = catalogueTabs.includes(initialTab as (typeof catalogueTabs)[number]) ? initialTab : "All Products";
   const [category, setCategory] = useState(start);
   const [brand, setBrand] = useState(resolveBrand(initialBrand));
@@ -85,7 +91,7 @@ export function CatalogueGrid({ initialTab = "All Products", initialBrand }: { i
     <div ref={catalogueRef}>
       <div className="sticky top-16 z-[15] flex flex-wrap items-end gap-3 border-b border-line bg-page pt-3 pb-3.5">
         <label className="grid min-w-[min(240px,100%)] gap-1.5">
-          <span className="text-xs font-medium text-muted">Category</span>
+          <span className="text-xs font-medium text-muted">{t(locale, catalogueCopy.category)}</span>
           <select
             className={selectClass}
             value={category}
@@ -97,18 +103,18 @@ export function CatalogueGrid({ initialTab = "All Products", initialBrand }: { i
             }}
           >
             {catalogueTabs.map((name) => (
-              <option key={name} value={name}>{name === "All Products" ? "All categories" : name}</option>
+              <option key={name} value={name}>{name === "All Products" ? t(locale, chromeCopy.categories["All categories"]) : label(locale, chromeCopy.categories, name)}</option>
             ))}
           </select>
         </label>
         <label className="grid min-w-[min(240px,100%)] gap-1.5">
-          <span className="text-xs font-medium text-muted">Brand</span>
+          <span className="text-xs font-medium text-muted">{t(locale, catalogueCopy.brand)}</span>
           <select
             className={selectClass}
             value={brand}
             onChange={(event) => applyBrand(event.target.value)}
           >
-            <option value="All brands">All brands</option>
+            <option value="All brands">{t(locale, chromeCopy.categories["All brands"])}</option>
             {catalogueBrands.map((name) => (
               <option key={name} value={name}>{name}</option>
             ))}
@@ -126,7 +132,7 @@ export function CatalogueGrid({ initialTab = "All Products", initialBrand }: { i
               scrollToFilters();
             }}
           >
-            Clear filters
+            {t(locale, catalogueCopy.clear)}
           </button>
         )}
       </div>
@@ -134,13 +140,14 @@ export function CatalogueGrid({ initialTab = "All Products", initialBrand }: { i
         {shown.length === 0 && (
           <p className="col-span-full py-8 text-center text-sm text-muted">
             {brand !== "All brands" && !catalogueBrands.some((name) => sameBrand(name, brand))
-              ? "This brand has no lines in the current wholesale catalogue."
-              : "No products match those filters."}
+              ? t(locale, catalogueCopy.noBrandLines)
+              : t(locale, catalogueCopy.noMatches)}
           </p>
         )}
         {shown.map((item) => {
           const cat = item.cats[0];
           const added = slugs.includes(item.slug);
+          const pack = packDetail(item.name);
           return (
             <article className={`${card} flex flex-col transition-colors hover:border-green`} key={item.slug}>
               <Link href={`/products/${item.slug}`}>
@@ -151,11 +158,12 @@ export function CatalogueGrid({ initialTab = "All Products", initialBrand }: { i
                     <CategoryMark className="h-16 w-16" name={markName[cat] ?? "Others"} />
                   )}
                 </div>
-                <p className="mt-3 text-xs text-muted">{item.brand} · {cat}</p>
-                <h3 className="mt-1 mb-3 text-sm font-medium leading-snug">{item.name}</h3>
+                <p className="mt-3 text-xs text-muted">{item.brand} · {label(locale, chromeCopy.categories, cat)}</p>
+                <h3 className="mt-1 text-sm font-medium leading-snug">{item.name}</h3>
+                {pack ? <p className="mt-1 mb-3 text-xs text-muted">{t(locale, productCopyPhrases.pack)} {pack}</p> : <span className="mb-3 block" />}
               </Link>
               <button className={`${added ? addBtnOn : addBtn} mt-auto w-full`} type="button" onClick={() => toggle(item.slug)}>
-                {added ? "Added" : "Add to list"}
+                {added ? t(locale, chromeCopy.buttons.added) : t(locale, chromeCopy.buttons.addToList)}
               </button>
             </article>
           );

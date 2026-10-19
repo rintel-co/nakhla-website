@@ -1,3 +1,8 @@
+"use client";
+
+import { useLocale } from "@/components/locale-provider";
+import { chromeCopy } from "@/lib/i18n/pages/chrome";
+import { t } from "@/lib/i18n/phrase";
 import { WHATSAPP } from "@/lib/catalog";
 
 export function WhatsAppIcon({ className = "h-4 w-4" }: { className?: string }) {
@@ -12,13 +17,15 @@ export const whatsappBtn =
   "inline-flex h-11 items-center justify-center gap-2 rounded-md bg-[#25D366] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#1DA851]";
 
 export function WhatsAppButton() {
+  const locale = useLocale();
+
   return (
     <a
-      className="fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-30 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgba(13,43,9,0.28)] transition-transform hover:scale-105 hover:bg-[#1DA851] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#128C7E]"
+      className="fixed end-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-30 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgba(13,43,9,0.28)] transition-transform hover:scale-105 hover:bg-[#1DA851] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#128C7E]"
       href={WHATSAPP}
       target="_blank"
       rel="noopener"
-      aria-label="WhatsApp +966 555729077"
+      aria-label={t(locale, chromeCopy.buttons.whatsAppFloat)}
     >
       <WhatsAppIcon className="h-7 w-7" />
     </a>

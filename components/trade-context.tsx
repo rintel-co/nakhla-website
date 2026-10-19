@@ -1,8 +1,11 @@
 "use client";
 
 import { createContext, useContext, useMemo, useState } from "react";
+import { useLocale } from "@/components/locale-provider";
 import { products, WHATSAPP } from "@/lib/catalog";
 import { catalogue } from "@/lib/catalogue";
+import { chromeCopy } from "@/lib/i18n/pages/chrome";
+import { t } from "@/lib/i18n/phrase";
 
 type TradeContextValue = {
   query: string;
@@ -18,6 +21,7 @@ type TradeContextValue = {
 const TradeContext = createContext<TradeContextValue | null>(null);
 
 export function TradeProvider({ children }: { children: React.ReactNode }) {
+  const locale = useLocale();
   const [query, setQuery] = useState("");
   const [slugs, setSlugs] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
@@ -25,9 +29,9 @@ export function TradeProvider({ children }: { children: React.ReactNode }) {
   const names = slugs.map((slug) => products.find((item) => item.slug === slug)?.name ?? catalogue.find((item) => item.slug === slug)?.name ?? slug);
   const href = useMemo(() => {
     if (!names.length) return WHATSAPP;
-    const text = encodeURIComponent("Nakhla Al Barari trade list:\n" + names.map((name) => "• " + name).join("\n"));
+    const text = encodeURIComponent(t(locale, chromeCopy.buttons.tradeListMessage) + "\n" + names.map((name) => "• " + name).join("\n"));
     return `${WHATSAPP}?text=${text}`;
-  }, [names]);
+  }, [names, locale]);
 
   function toggle(slug: string) {
     setSlugs((current) => {

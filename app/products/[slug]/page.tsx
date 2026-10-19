@@ -3,10 +3,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToList } from "@/components/add-to-list";
 import { CategoryMark } from "@/components/icons";
-import { brandHref, enquiryWhatsApp, packDetail } from "@/lib/brand";
+import { brandHref, packDetail } from "@/lib/brand";
 import { catalogue, type CatalogueItem } from "@/lib/catalogue";
 import { productCopy } from "@/lib/product-copy";
+import { chromeCopy } from "@/lib/i18n/pages/chrome";
+import { productCopyPhrases } from "@/lib/i18n/pages/product";
+import { productsCopy } from "@/lib/i18n/pages/products";
+import { getLocale } from "@/lib/i18n/locale";
+import { fill, label, t } from "@/lib/i18n/phrase";
 import { WhatsAppIcon, whatsappBtn } from "@/components/whatsapp-button";
+import { WHATSAPP } from "@/lib/catalog";
 import { card, heading, pillSolid, shot, shotImg, wrap } from "@/lib/ui";
 
 const markName: Record<string, string> = {
@@ -85,9 +91,19 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const item = findItem(slug);
   if (!item) notFound();
 
+  const locale = await getLocale();
   const category = item.cats[0];
-  const copy = productCopy(item);
   const pack = packDetail(item.name);
+  const categoryPhrase = productCopyPhrases.categoryLines[category as keyof typeof productCopyPhrases.categoryLines] ?? productCopyPhrases.categoryFallback;
+  const brandPhrase = productsCopy.brandLines[item.brand as keyof typeof productsCopy.brandLines];
+  const brandText = brandPhrase ? t(locale, brandPhrase) : fill(locale, productsCopy.brandLineFallback, { brand: item.brand });
+  const summary = fill(locale, productCopyPhrases.summary, { categoryLine: t(locale, categoryPhrase), brandLine: brandText });
+  const quote = `${WHATSAPP}?text=${encodeURIComponent([
+    fill(locale, chromeCopy.messages.enquiryAbout, { name: item.name }),
+    fill(locale, chromeCopy.messages.enquiryBrand, { brand: item.brand }),
+    fill(locale, chromeCopy.messages.enquiryCategory, { category: label(locale, chromeCopy.categories, category) }),
+    ...(pack ? [fill(locale, chromeCopy.messages.enquiryPack, { pack })] : []),
+  ].join("\n"))}`;
   const related = catalogue
     .filter((entry) => entry.slug !== item.slug && entry.cats.includes(category))
     .sort((a, b) => Number(b.brand === item.brand) - Number(a.brand === item.brand))
@@ -100,9 +116,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <div className={wrap}>
           <nav aria-label="Breadcrumb" className="text-sm text-muted">
             <ol className="flex flex-wrap items-center gap-2">
-              <li><Link className="hover:text-green" href="/">Home</Link></li>
+              <li><Link className="hover:text-green" href="/">{t(locale, chromeCopy.nav.home)}</Link></li>
               <li aria-hidden="true">/</li>
-              <li><Link className="hover:text-green" href="/products">Our Brands</Link></li>
+              <li><Link className="hover:text-green" href="/products">{t(locale, chromeCopy.nav.brands)}</Link></li>
               <li aria-hidden="true">/</li>
               <li><Link className="hover:text-green" href={brandHref(item.brand)}>{item.brand}</Link></li>
               <li aria-hidden="true">/</li>
@@ -124,33 +140,33 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <p className="text-sm text-muted">
               <Link className="hover:text-green" href={brandHref(item.brand)}>{item.brand}</Link>
               <span aria-hidden="true"> · </span>
-              <Link className="hover:text-green" href={`/products?tab=${encodeURIComponent(category)}`}>{category}</Link>
+              <Link className="hover:text-green" href={`/products?tab=${encodeURIComponent(category)}`}>{label(locale, chromeCopy.categories, category)}</Link>
             </p>
             <h1 className="mt-2 text-[40px] leading-tight font-semibold tracking-[-0.02em] max-[640px]:text-[32px]">{item.name}</h1>
-            <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-muted">{copy.summary}</p>
+            <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-muted">{summary}</p>
             <dl className="mt-5 grid max-w-md gap-3 text-sm">
               <div className="grid grid-cols-[7rem_1fr] gap-3 border-b border-line pb-3">
-                <dt className="text-muted">Brand</dt>
+                <dt className="text-muted">{t(locale, productCopyPhrases.brand)}</dt>
                 <dd><Link className="font-medium hover:text-green" href={brandHref(item.brand)}>{item.brand}</Link></dd>
               </div>
               <div className="grid grid-cols-[7rem_1fr] gap-3 border-b border-line pb-3">
-                <dt className="text-muted">Category</dt>
-                <dd className="font-medium">{category}</dd>
+                <dt className="text-muted">{t(locale, productCopyPhrases.category)}</dt>
+                <dd className="font-medium">{label(locale, chromeCopy.categories, category)}</dd>
               </div>
               {pack ? (
                 <div className="grid grid-cols-[7rem_1fr] gap-3 border-b border-line pb-3">
-                  <dt className="text-muted">Pack</dt>
+                  <dt className="text-muted">{t(locale, productCopyPhrases.pack)}</dt>
                   <dd className="font-medium">{pack}</dd>
                 </div>
               ) : null}
             </dl>
-            <p className="mt-4 text-sm text-ink">{copy.order}</p>
+            <p className="mt-4 text-sm text-ink">{t(locale, productCopyPhrases.order)}</p>
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <AddToList primary className="h-11 min-w-40 px-4" slug={item.slug} />
-              <Link className={pillSolid} href={`/contact?product=${item.slug}#enquiry`}>Contact Sales</Link>
-              <a className={whatsappBtn} href={enquiryWhatsApp(item)} target="_blank" rel="noopener">
+              <Link className={pillSolid} href={`/contact?product=${item.slug}#enquiry`}>{t(locale, chromeCopy.buttons.contactSales)}</Link>
+              <a className={whatsappBtn} href={quote} target="_blank" rel="noopener">
                 <WhatsAppIcon />
-                Request a quote
+                {t(locale, productCopyPhrases.requestQuote)}
               </a>
             </div>
           </div>
@@ -160,8 +176,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <section className="border-t border-line py-12">
           <div className={wrap}>
             <div className="mb-6 flex items-end justify-between gap-4">
-              <h2 className={heading}>Similar products</h2>
-              <Link className="text-sm font-semibold text-green" href={`/products?tab=${encodeURIComponent(category)}#catalogue`}>View all</Link>
+              <h2 className={heading}>{t(locale, productCopyPhrases.similar)}</h2>
+              <Link className="text-sm font-semibold text-green" href={`/products?tab=${encodeURIComponent(category)}#catalogue`}>{t(locale, productCopyPhrases.viewAll)}</Link>
             </div>
             <div className="grid grid-cols-4 gap-4 max-[980px]:grid-cols-2 max-[640px]:grid-cols-1">
               {related.map((entry) => (
@@ -174,7 +190,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                         <CategoryMark className="h-16 w-16" name={markName[entry.cats[0]] ?? "Others"} />
                       )}
                     </div>
-                    <p className="mt-3 text-xs text-muted">{entry.brand} · {entry.cats[0]}</p>
+                    <p className="mt-3 text-xs text-muted">{entry.brand} · {label(locale, chromeCopy.categories, entry.cats[0])}</p>
                     <h3 className="mt-1 mb-3 text-sm font-medium leading-snug">{entry.name}</h3>
                   </Link>
                   <AddToList className="mt-auto w-full" slug={entry.slug} />

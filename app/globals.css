@@ -21,6 +21,15 @@
   body {
     @apply bg-page font-sans text-base leading-relaxed text-ink antialiased;
   }
+  html[dir="rtl"] body {
+    font-family: var(--font-arabic);
+  }
+  .filter-select {
+    background-position: calc(100% - 16px) 18px, calc(100% - 10px) 18px;
+  }
+  html[dir="rtl"] .filter-select {
+    background-position: 16px 18px, 10px 18px;
+  }
   h1,
   h2,
   h3 {
