@@ -126,7 +126,9 @@ export default async function HomePage() {
             <p className="mt-3 max-w-[52ch] text-base leading-relaxed text-ink/70">{t(locale, homeCopy.overviewLede)}</p>
             <Link className={`${pillSolid} mt-6`} href="/about">{t(locale, homeCopy.overviewButton)}</Link>
           </div>
-          <img className="h-72 w-full rounded-3xl object-cover sm:h-80" src="https://nakhlaalbarari.com/wp-content/uploads/2026/06/Nakhla-Al-Barari-Contact-Us.avif" alt={t(locale, homeCopy.overviewImageAlt)} />
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-3xl lg:ms-auto lg:me-0 lg:max-w-[460px]">
+            <img className="absolute inset-0 h-full w-full object-cover object-bottom" src="https://nakhlaalbarari.com/wp-content/uploads/2026/06/Nakhla-Al-Barari-Contact-Us.avif" alt={t(locale, homeCopy.overviewImageAlt)} />
+          </div>
         </div>
       </section>
 

@@ -9,6 +9,22 @@ export const servicesCopy = {
     "استكشفوا فئات الأغذية والأغذية المجمدة والمشروبات والمنتجات غير الغذائية المختارة للاستفسارات التجارية.",
   ),
   browseProducts: phrase("Browse Products", "تصفحوا المنتجات"),
+  supplyTitle: phrase("Wholesale Supply Solutions for Businesses", "حلول التوريد بالجملة للمنشآت التجارية"),
+  supplyLede: phrase(
+    "Nakhla Al Barari provides products across multiple categories to support business purchasing requirements. Contact our team to discuss product requirements, quantities, and availability.",
+    "توفر نخلة البراري منتجات ضمن فئات متعددة لتلبية احتياجات الشراء لدى المنشآت التجارية. تواصلوا مع فريقنا لمناقشة احتياجاتكم والكميات ومدى التوفر.",
+  ),
+  quoteTitle: phrase("Request a Wholesale Quote", "اطلب عرض سعر للجملة"),
+  quoteLede: phrase(
+    "Share your requirements to enquire about product availability, quantities, and wholesale supply.",
+    "شاركونا متطلباتكم للاستفسار عن توفر المنتجات والكميات والتوريد بالجملة.",
+  ),
+  quoteButton: phrase("Request a Wholesale Quote", "اطلب عرض سعر للجملة"),
+  specificTitle: phrase("Looking for Specific Products?", "تبحثون عن منتجات محددة؟"),
+  specificLede: phrase(
+    "Tell us what your business needs. Contact our team about product availability, pack sizes, and wholesale orders.",
+    "أخبرونا باحتياجات منشأتكم. تواصلوا مع فريقنا للاستفسار عن توفر المنتجات وأحجام العبوات وطلبات الجملة.",
+  ),
   groups: {
     "Food Products": {
       name: phrase("Food Products", "المنتجات الغذائية"),

@@ -4,23 +4,41 @@ import { phrase } from "@/lib/i18n/phrase";
 export const productsCopy = {
   metaTitle: phrase("Explore Our Brands — Nakhla Al Barari", "استكشفوا علاماتنا التجارية — نخلة البراري"),
   breadcrumb: phrase("Our Brands", "علاماتنا التجارية"),
-  title: phrase("Explore Our Brands", "استكشفوا علاماتنا التجارية"),
+  title: phrase("Explore Our Brands", "اكتشفوا علاماتنا التجارية"),
   lede: phrase(
     "Discover the brands available through Nakhla Al Barari Trading Co. Select a brand to explore its associated products.",
     "اكتشفوا العلامات التجارية المتاحة لدى شركة نخلة البراري للتجارة. اختاروا علامة تجارية لاستعراض المنتجات المرتبطة بها.",
   ),
   chooseBrand: phrase("Choose a Brand", "اختر علامة تجارية"),
-  gridTitle: phrase("Choose a Brand", "اختاروا علامة تجارية"),
+  gridTitle: phrase("Discover Our Brand Portfolio", "تعرّفوا على مجموعة علاماتنا التجارية"),
   gridLede: phrase(
-    "Use approved brand logos and exact brand names. Each logo should lead to the correct brand or product listing.",
-    "استخدموا شعارات العلامات التجارية المعتمدة وأسماءها الصحيحة. يجب أن يقود كل شعار إلى صفحة العلامة التجارية أو قائمة منتجاتها الصحيحة.",
+    "Browse our selection of brands and explore their product ranges. Select a brand below to discover products available for wholesale purchasing.",
+    "تصفحوا مجموعة العلامات التجارية المتوفرة لدينا واستكشفوا منتجاتها. اختاروا إحدى العلامات التجارية أدناه للتعرف على المنتجات المتاحة للشراء بالجملة.",
   ),
-  viewBrand: phrase("View Brand", "عرض العلامة التجارية"),
-  whyTitle: phrase("Why Choose Our Brands?", "لماذا تختارون علاماتنا التجارية؟"),
+  viewProducts: phrase("View Products", "عرض المنتجات"),
+  whyTitle: phrase("Why Choose Our Products?", "لماذا تختارون منتجاتنا؟"),
   whyLede: phrase(
-    "Explore the brands in our portfolio and review the product options available for business enquiries.",
-    "اكتشفوا العلامات التجارية ضمن مجموعتنا واطلعوا على خيارات المنتجات المتاحة للاستفسارات التجارية.",
+    "Explore our diverse range of food products, beverages, frozen foods, and selected non-food essentials. We aim to make wholesale purchasing easier by offering products across multiple categories and brands to meet different business needs.",
+    "اكتشفوا مجموعتنا المتنوعة من المنتجات الغذائية والمشروبات والأغذية المجمدة والمنتجات غير الغذائية المختارة. نسعى إلى تسهيل عمليات الشراء بالجملة من خلال توفير منتجات ضمن فئات متعددة وعلامات تجارية متنوعة لتلبية احتياجات المنشآت التجارية.",
   ),
+  whyPoints: [
+    {
+      title: phrase("A Diverse Product Range", "تنوع المنتجات"),
+      copy: phrase("Explore products across the categories we offer.", "اكتشفوا المنتجات ضمن الفئات المتوفرة لدينا."),
+    },
+    {
+      title: phrase("Multiple Brands", "تعدد العلامات التجارية"),
+      copy: phrase("Discover products from a variety of brands across relevant categories.", "تعرّفوا على منتجات من علامات تجارية متنوعة ضمن الفئات ذات الصلة."),
+    },
+    {
+      title: phrase("Wholesale Purchasing", "الشراء بالجملة"),
+      copy: phrase("Enquire about products and quantities for your business needs.", "استفسروا عن المنتجات والكميات المناسبة لاحتياجات منشآتكم التجارية."),
+    },
+    {
+      title: phrase("Product Enquiry Support", "دعم الاستفسارات عن المنتجات"),
+      copy: phrase("Contact our team for product details, availability, and wholesale orders.", "تواصلوا مع فريقنا لمعرفة تفاصيل المنتجات ومدى توفرها وطلبات الجملة."),
+    },
+  ],
   exploreProducts: phrase("Explore Products", "استكشفوا المنتجات"),
   productsTitle: phrase("Products from Our Brands", "منتجات علاماتنا التجارية"),
   productsLede: phrase(

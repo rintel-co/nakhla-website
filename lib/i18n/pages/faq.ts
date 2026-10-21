@@ -147,4 +147,54 @@ export const faqCopy = {
     shared.nationwide,
     shared.sales,
   ],
+  page: [
+    qa(
+      "What products does Nakhla Al Barari Trading Co. supply?",
+      "ما المنتجات التي توفرها شركة نخلة البراري للتجارة؟",
+      "Nakhla Al Barari supplies a range of food products, beverages, frozen foods, and selected non-food essentials. Contact our team to enquire about specific products.",
+      "توفر نخلة البراري مجموعة من المنتجات الغذائية والمشروبات والأغذية المجمدة والمنتجات غير الغذائية المختارة. تواصلوا مع فريقنا للاستفسار عن منتجات محددة.",
+    ),
+    qa(
+      "Can I purchase products in large quantities?",
+      "هل يمكنني شراء المنتجات بكميات كبيرة؟",
+      "Contact our team to discuss wholesale purchasing requirements, quantities, and product availability.",
+      "تواصلوا مع فريقنا لمناقشة متطلبات الشراء بالجملة والكميات ومدى توفر المنتجات.",
+    ),
+    qa(
+      "Do you supply products from different brands?",
+      "هل توفرون منتجات من علامات تجارية مختلفة؟",
+      "Yes, we offer products across multiple brands. Explore our Brands page to discover available brands and their product ranges.",
+      "نعم، نوفر منتجات من علامات تجارية متعددة. تفضلوا بزيارة صفحة علاماتنا التجارية للتعرف على العلامات المتاحة ومجموعات منتجاتها.",
+    ),
+    qa(
+      "Who can purchase products from Nakhla Al Barari?",
+      "من يمكنه شراء المنتجات من نخلة البراري؟",
+      "Businesses looking for wholesale product supplies can contact our team to discuss their requirements.",
+      "يمكن للمنشآت التجارية التي تبحث عن التوريد بالجملة التواصل مع فريقنا لمناقشة متطلباتها.",
+    ),
+    qa(
+      "How can I check product availability and prices?",
+      "كيف يمكنني التحقق من توفر المنتجات وأسعارها؟",
+      "Contact our team with product names and required quantities to enquire about current availability and pricing.",
+      "تواصلوا مع فريقنا مع ذكر أسماء المنتجات والكميات المطلوبة للاستفسار عن التوفر الحالي والأسعار.",
+    ),
+    qa(
+      "How can I place a wholesale order?",
+      "كيف يمكنني تقديم طلب شراء بالجملة؟",
+      "Submit an enquiry through our Contact page or contact our team directly to discuss the products and quantities you need.",
+      "أرسلوا استفسارًا عبر صفحة التواصل أو تواصلوا مباشرة مع فريقنا لمناقشة المنتجات والكميات المطلوبة.",
+    ),
+    qa(
+      "Do you offer delivery to business locations?",
+      "هل توفرون التوصيل إلى مواقع المنشآت التجارية؟",
+      "Contact our team to confirm delivery availability for your location and applicable order requirements.",
+      "تواصلوا مع فريقنا للتأكد من توفر خدمة التوصيل إلى موقعكم ومعرفة متطلبات الطلب.",
+    ),
+    qa(
+      "How can I contact Nakhla Al Barari for a wholesale enquiry?",
+      "كيف يمكنني التواصل مع نخلة البراري للاستفسار عن التوريد بالجملة؟",
+      "Visit our Contact page to find contact details and submit an enquiry about products, wholesale orders, or business supply requirements.",
+      "زوروا صفحة التواصل للاطلاع على بيانات الاتصال وإرسال استفسار حول المنتجات أو طلبات الجملة أو احتياجات التوريد للمنشآت التجارية.",
+    ),
+  ],
 };

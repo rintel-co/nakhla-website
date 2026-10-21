@@ -63,7 +63,6 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
             </nav>
           <h1 className="hero-in max-w-[16ch] text-4xl leading-tight font-bold tracking-[-0.03em] text-white sm:text-6xl">{t(locale, productsCopy.title)}</h1>
           <p className="hero-in hero-in-2 mt-3 max-w-[800px] text-base leading-relaxed text-white/80">{t(locale, productsCopy.lede)}</p>
-          <a className="hero-in hero-in-3 mt-6 inline-flex h-11 w-fit items-center justify-center rounded-md bg-white px-4 text-sm font-semibold text-green-dark transition-colors hover:bg-leaf" href="#brands">{t(locale, productsCopy.chooseBrand)}</a>
         </div>
       </section>
 
@@ -73,21 +72,23 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
             <h2 className="text-3xl font-bold text-white sm:text-4xl" id="brand-logos-heading">{t(locale, productsCopy.gridTitle)}</h2>
             <p className="mt-3 max-w-[62ch] text-white/75">{t(locale, productsCopy.gridLede)}</p>
           </div>
-          <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          <ul className="mt-8 grid grid-cols-2 items-stretch gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-6">
             {brands.map((item) => {
               const active = selected?.name === item.name;
               const labelName = catalogueBrandName(item.name) ?? item.name;
               return (
-                <li key={item.name}>
+                <li className="h-full" key={item.name}>
                   <Link
-                    className={`flex min-h-40 flex-col items-center justify-center gap-2 rounded-2xl px-3 py-4 text-center transition-colors hover:bg-leaf ${active ? "bg-leaf" : "bg-white"}`}
+                    className={`flex h-full min-h-52 flex-col items-center rounded-2xl bg-white px-4 py-5 text-center transition-shadow hover:ring-2 hover:ring-green ${active ? "ring-2 ring-green-dark" : ""}`}
                     href={brandHref(item.name)}
                     aria-current={active ? "true" : undefined}
-                    aria-label={`${t(locale, productsCopy.viewBrand)}: ${labelName}`}
+                    aria-label={`${t(locale, productsCopy.viewProducts)}: ${labelName}`}
                   >
-                    <img className="h-14 w-full object-contain" src={item.src} alt="" />
-                    <span className="text-xs font-semibold leading-snug text-ink">{labelName}</span>
-                    <span className="text-xs font-semibold text-green-dark">{t(locale, productsCopy.viewBrand)}</span>
+                    <span className="flex h-20 w-full items-center justify-center sm:h-24">
+                      <img className="max-h-full max-w-full object-contain" src={item.src} alt="" />
+                    </span>
+                    <span className="mt-3 text-sm font-semibold leading-snug text-ink">{labelName}</span>
+                    <span className="mt-auto pt-3 text-sm font-semibold text-green-dark">{t(locale, productsCopy.viewProducts)}</span>
                   </Link>
                 </li>
               );
@@ -96,19 +97,22 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         </div>
       </section>
 
-      <section className="bg-leaf py-16 sm:py-20" aria-labelledby="why-brands-heading">
+      <section className="bg-leaf py-16 sm:py-20" aria-labelledby="why-products-heading">
         <div className={wrap}>
-          <div className="relative overflow-hidden rounded-3xl bg-white px-6 py-10 text-ink sm:px-12 sm:py-14 lg:grid lg:grid-cols-[1fr_auto] lg:items-center lg:gap-10">
-            <StatMark className="pointer-events-none absolute -bottom-10 -end-6 h-48 w-48 opacity-20" name="products" />
-            <div className="relative">
-              <h2 className="max-w-[14ch] text-3xl leading-tight font-bold tracking-[-0.03em] text-ink sm:text-4xl" id="why-brands-heading">{t(locale, productsCopy.whyTitle)}</h2>
-              <p className="mt-3 max-w-[52ch] text-base leading-relaxed text-ink/70">{t(locale, productsCopy.whyLede)}</p>
-            </div>
-            <Link className="relative mt-6 inline-flex h-12 items-center justify-center gap-2 rounded-md bg-green-dark px-5 text-sm font-semibold text-white transition-colors hover:bg-ink lg:mt-0" href="#catalogue">
-              {t(locale, productsCopy.exploreProducts)}
-              <span className="inline-block rtl:-scale-x-100" aria-hidden="true">→</span>
-            </Link>
-          </div>
+          <h2 className="max-w-[16ch] text-3xl font-bold tracking-[-0.03em] text-green-dark sm:text-4xl" id="why-products-heading">{t(locale, productsCopy.whyTitle)}</h2>
+          <p className="mt-3 max-w-[68ch] text-ink/70">{t(locale, productsCopy.whyLede)}</p>
+          <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+            {productsCopy.whyPoints.map((point, index) => (
+              <li className="group relative overflow-hidden rounded-3xl bg-white p-6" key={point.title.en}>
+                {index === 0 ? <StatMark className="pointer-events-none absolute -bottom-6 -end-4 h-28 w-28 opacity-20 transition duration-300 group-hover:scale-110" name="categories" /> : null}
+                {index === 1 ? <StatMark className="pointer-events-none absolute -bottom-6 -end-4 h-28 w-28 opacity-20 transition duration-300 group-hover:scale-110" name="products" /> : null}
+                {index === 2 ? <PageMark className="pointer-events-none absolute -bottom-6 -end-4 h-28 w-28 opacity-20 transition duration-300 group-hover:scale-110" name="usp" /> : null}
+                {index === 3 ? <PageMark className="pointer-events-none absolute -bottom-6 -end-4 h-28 w-28 opacity-20 transition duration-300 group-hover:scale-110" name="mail" /> : null}
+                <h3 className="relative text-lg font-bold text-ink">{t(locale, point.title)}</h3>
+                <p className="relative mt-2 max-w-[42ch] text-sm leading-relaxed text-ink/70">{t(locale, point.copy)}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -116,7 +120,11 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         <div className={wrap}>
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div className="flex items-center gap-4">
-              {selected ? <img className="h-12 w-24 object-contain" src={selected.src} alt="" /> : null}
+              {selected ? (
+                <span className="flex h-16 w-28 shrink-0 items-center justify-center">
+                  <img className="max-h-full max-w-full object-contain" src={selected.src} alt="" />
+                </span>
+              ) : null}
               <div>
                 <h2 className={heading} id="catalogue-heading">{t(locale, productsCopy.productsTitle)}</h2>
                 <p className={sectionSub}>{t(locale, productsCopy.productsLede)}</p>

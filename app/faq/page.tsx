@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t(locale, faqCopy.metaTitle) };
 }
 
-const faqItems = [...faqCopy.home, ...faqCopy.brands.filter((item) => !faqCopy.home.some((home) => home.q.en === item.q.en))];
+const faqItems = faqCopy.page;
 
 const faqSchema = {
   "@context": "https://schema.org",

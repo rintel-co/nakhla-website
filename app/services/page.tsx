@@ -6,19 +6,12 @@ import { servicesCopy } from "@/lib/i18n/pages/services";
 import { chromeCopy } from "@/lib/i18n/pages/chrome";
 import { getLocale } from "@/lib/i18n/locale";
 import { label, t } from "@/lib/i18n/phrase";
-import { wrap } from "@/lib/ui";
+import { pillSolid, wrap } from "@/lib/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   return { title: t(locale, servicesCopy.metaTitle) };
 }
-
-const routes: Record<string, { href: string }> = {
-  "Food Products": { href: "/products#catalogue" },
-  "Frozen Foods": { href: "/contact" },
-  "Soft Drinks & Beverages": { href: "/products?tab=Drinks#catalogue" },
-  "Non Food": { href: "/contact" },
-};
 
 function serviceId(name: string) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -41,9 +34,24 @@ export default async function ServicesPage() {
           <h1 className="max-w-[16ch] text-4xl leading-tight font-bold tracking-[-0.03em] text-white sm:text-5xl">{t(locale, servicesCopy.title)}</h1>
           <p className="mt-4 max-w-[62ch] text-white/75">{t(locale, servicesCopy.lede)}</p>
           <Link className="mt-6 inline-flex h-11 items-center justify-center rounded-md bg-white px-4 text-sm font-semibold text-green-dark transition-colors hover:bg-leaf" href="/products">{t(locale, servicesCopy.browseProducts)}</Link>
-          <div className="mt-10 grid gap-4">
+        </div>
+      </section>
+      <section className="bg-leaf py-16 sm:py-20" aria-labelledby="wholesale-supply-heading">
+        <div className={wrap}>
+          <h2 className="max-w-[18ch] text-3xl font-bold tracking-[-0.03em] text-green-dark sm:text-4xl" id="wholesale-supply-heading">{t(locale, servicesCopy.supplyTitle)}</h2>
+          <p className="mt-3 max-w-[68ch] text-ink/70">{t(locale, servicesCopy.supplyLede)}</p>
+          <div className="relative mt-8 overflow-hidden rounded-3xl bg-white p-6 sm:p-10">
+            <h3 className="text-2xl font-bold text-ink">{t(locale, servicesCopy.quoteTitle)}</h3>
+            <p className="mt-3 max-w-[62ch] text-ink/70">{t(locale, servicesCopy.quoteLede)}</p>
+            <Link className={`${pillSolid} mt-6`} href="/contact#enquiry">{t(locale, servicesCopy.quoteButton)}</Link>
+          </div>
+        </div>
+      </section>
+      <section className="bg-green-dark py-16 text-white sm:py-20" aria-labelledby="service-categories-heading">
+        <div className={wrap}>
+          <h2 className="sr-only" id="service-categories-heading">{t(locale, servicesCopy.title)}</h2>
+          <div className="grid gap-4">
             {serviceGroups.map((group, index) => {
-              const route = routes[group.name];
               const copy = servicesCopy.groups[group.name as keyof typeof servicesCopy.groups];
               const featured = index === 0;
               return (
@@ -65,14 +73,20 @@ export default async function ServicesPage() {
                           ))}
                         </ul>
                       ) : null}
-                      {route ? (
-                        <Link className={`mt-5 inline-flex h-11 items-center justify-center rounded-md px-4 text-sm font-semibold transition-colors ${featured ? "bg-green-dark text-white hover:bg-ink" : "bg-white text-green-dark hover:bg-leaf"}`} href={route.href}>{t(locale, copy.button)}</Link>
-                      ) : null}
                     </div>
                   </div>
                 </article>
               );
             })}
+          </div>
+        </div>
+      </section>
+      <section className="bg-leaf py-16 sm:py-20" aria-labelledby="specific-products-heading">
+        <div className={wrap}>
+          <div className="rounded-3xl bg-green-dark px-6 py-10 text-white sm:px-12 sm:py-14">
+            <h2 className="max-w-[16ch] text-3xl font-bold tracking-[-0.03em] text-white sm:text-4xl" id="specific-products-heading">{t(locale, servicesCopy.specificTitle)}</h2>
+            <p className="mt-3 max-w-[62ch] text-white/75">{t(locale, servicesCopy.specificLede)}</p>
+            <Link className="mt-6 inline-flex h-11 items-center justify-center rounded-md bg-white px-4 text-sm font-semibold text-green-dark transition-colors hover:bg-leaf" href="/contact#enquiry">{t(locale, servicesCopy.quoteButton)}</Link>
           </div>
         </div>
       </section>

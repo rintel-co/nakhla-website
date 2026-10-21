@@ -11,9 +11,15 @@ export const branchesCopy = {
   contactBranch: phrase("Contact a Branch", "تواصلوا مع أحد الفروع"),
   detailsTitle: phrase("Branch Contact Details", "بيانات التواصل مع الفروع"),
   detailsLede: phrase(
-    "Contact the relevant branch using the verified phone number, WhatsApp link or map directions.",
-    "تواصلوا مع الفرع المناسب عبر رقم الهاتف المعتمد أو رابط واتساب أو الاتجاهات على الخريطة.",
+    "Contact the relevant branch using the verified phone number.",
+    "تواصلوا مع الفرع المناسب عبر رقم الهاتف المعتمد.",
   ),
+  nearestTitle: phrase("Looking for Your Nearest Branch?", "تبحثون عن أقرب فرع إليكم؟"),
+  nearestLede: phrase(
+    "Contact our team to find the right branch for wholesale enquiries and product requirements.",
+    "تواصلوا مع فريقنا للاستفسار عن الفرع المناسب لاحتياجاتكم من المنتجات وطلبات الجملة.",
+  ),
+  contactTeam: phrase("Contact Our Team", "تواصلوا مع فريقنا"),
   whatsApp: phrase("WhatsApp", "واتساب"),
   googleMaps: phrase("Google Maps", "خرائط Google"),
   weeklyOffers: phrase("Weekly Offers", "العروض الأسبوعية"),

@@ -6,8 +6,8 @@ export const homeCopy = {
   metaDescription: phrase("Nakhla Al Barari Trading Company is an FMCG wholesaler in Riyadh. Food products, frozen foods, soft drinks and beverages, and non-food lines for hotels, hypermarkets, and grocery counters across Saudi Arabia."),
   heroAria: phrase("Nakhla Al Barari", "نخلة البراري"),
   heroTitle: phrase(
-    "Wholesale Food & Beverage Supply for Business Customers in Saudi Arabia",
-    "توريد الأغذية والمشروبات لعملاء قطاع الأعمال في المملكة العربية السعودية",
+    "Your Trusted Wholesale Food & Beverage Partner in Saudi Arabia",
+    "شريككم الموثوق لتوريد الأغذية والمشروبات بالجملة في المملكة العربية السعودية",
   ),
   heroEmphasis: phrase("across Saudi Arabia."),
   heroLede: phrase(
@@ -39,10 +39,10 @@ export const homeCopy = {
     contactTeam: phrase("Contact Our Team", "تواصلوا مع فريقنا"),
   },
   stats: {
-    branches: phrase("Branches"),
-    products: phrase("Products"),
-    customers: phrase("Customers"),
-    branchesAcross: phrase("{count} across Saudi Arabia"),
+    branches: phrase("Branches", "الفروع"),
+    products: phrase("Products", "المنتجات"),
+    customers: phrase("Customers", "العملاء"),
+    branchesAcross: phrase("{count} across Saudi Arabia", "{count} في أنحاء المملكة العربية السعودية"),
   },
   servicesTitle: phrase("Explore Our Product Categories", "استكشفوا فئات منتجاتنا"),
   servicesLede: phrase(

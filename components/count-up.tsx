@@ -39,7 +39,7 @@ export function CountUp({ value, className }: { value: string; className?: strin
   }, [target, value]);
 
   return (
-    <span ref={ref} className={className} aria-label={value}>
+    <span ref={ref} className={className} dir="ltr" aria-label={value}>
       {match ? `${shown.toLocaleString("en-US")}${suffix}` : value}
     </span>
   );
