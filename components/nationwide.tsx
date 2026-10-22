@@ -64,7 +64,7 @@ export function Nationwide() {
                 onFocus={() => setActive(pin.name)}
                 onBlur={() => setActive(null)}
               >
-                {pin.name}
+                {t(locale, nationwideCopy.pins[pin.name as keyof typeof nationwideCopy.pins])}
               </a>
             ))}
           </div>
@@ -83,7 +83,7 @@ export function Nationwide() {
                       href={pin.href}
                       target="_blank"
                       rel="noopener"
-                      aria-label={fill(locale, nationwideCopy.pinLabel, { name: pin.name })}
+                      aria-label={fill(locale, nationwideCopy.pinLabel, { name: t(locale, nationwideCopy.pins[pin.name as keyof typeof nationwideCopy.pins]) })}
                       onMouseEnter={() => setActive(pin.name)}
                       onMouseLeave={() => setActive(null)}
                       onFocus={() => setActive(pin.name)}
@@ -92,7 +92,7 @@ export function Nationwide() {
                       <span className={`pin-ring absolute h-4 w-4 rounded-full bg-green-dark ${on ? "opacity-100" : "opacity-50"}`} />
                       <span className={`relative h-3.5 w-3.5 rounded-full border-2 border-white ${on ? "scale-125 bg-green" : "bg-green-dark"}`} />
                       <span className={`pointer-events-none absolute bottom-full left-1/2 z-[1] mb-2 -translate-x-1/2 whitespace-nowrap rounded-full bg-green-dark px-3 py-1.5 text-xs font-semibold leading-none text-white ${on ? "opacity-100" : "opacity-0"}`}>
-                        {pin.name}
+                        {t(locale, nationwideCopy.pins[pin.name as keyof typeof nationwideCopy.pins])}
                       </span>
                     </a>
                   </li>

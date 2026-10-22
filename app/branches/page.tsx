@@ -11,7 +11,7 @@ import { wrap } from "@/lib/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return { title: t(locale, branchesCopy.metaTitle) };
+  return { title: t(locale, branchesCopy.metaTitle), description: t(locale, branchesCopy.lede) };
 }
 
 const corridor = "https://nakhlaalbarari.com/wp-content/uploads/2026/06/Inside-office-4.avif";
@@ -35,10 +35,10 @@ export default async function BranchesPage() {
             {branches.map((branch) => (
                 <article className="group relative overflow-hidden rounded-3xl bg-white p-6" key={branch.name}>
                   <StatMark className="pointer-events-none absolute -bottom-6 -end-3 h-28 w-28 opacity-15 transition duration-300 group-hover:scale-110" name="branches" />
-                  <h2 className="relative mb-2 flex items-center gap-2 text-xl font-bold text-ink">
+                  <h3 className="relative mb-2 flex items-center gap-2 text-xl font-bold text-ink">
                     <StatMark className="h-8 w-8 shrink-0 transition duration-300 group-hover:scale-110" name="branches" />
                     {label(locale, chromeCopy.branches, branch.name)}
-                  </h2>
+                  </h3>
                   <p className="relative mb-1.5 text-ink/70">{t(locale, branchesCopy.addresses[branch.name as keyof typeof branchesCopy.addresses])}</p>
                   <p className="relative text-ink/70"><a href={`tel:${branch.phone.replace(/\s/g, "")}`} dir="ltr">{branch.phone}</a></p>
                 </article>

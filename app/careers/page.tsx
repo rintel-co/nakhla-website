@@ -11,7 +11,7 @@ import { wrap } from "@/lib/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return { title: t(locale, careersCopy.metaTitle) };
+  return { title: t(locale, careersCopy.metaTitle), description: t(locale, careersCopy.lede) };
 }
 
 const office = "https://nakhlaalbarari.com/wp-content/uploads/2026/06/Inside-office-4.avif";

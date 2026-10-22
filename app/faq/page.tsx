@@ -9,7 +9,7 @@ import { wrap } from "@/lib/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return { title: t(locale, faqCopy.metaTitle) };
+  return { title: t(locale, faqCopy.metaTitle), description: t(locale, faqCopy.lede) };
 }
 
 const faqItems = faqCopy.page;
@@ -33,7 +33,7 @@ export default async function FaqPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <section className="bg-leaf py-16 sm:py-20">
         <div className={wrap}>
-          <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted">
+          <nav aria-label={t(locale, chromeCopy.breadcrumb)} className="mb-4 text-sm text-muted">
             <ol className="flex flex-wrap items-center gap-2">
                 <li><Link className="hover:text-green-dark" href="/">{t(locale, chromeCopy.nav.home)}</Link></li>
                 <li aria-hidden="true">/</li>

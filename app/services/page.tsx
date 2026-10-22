@@ -10,7 +10,7 @@ import { pillSolid, wrap } from "@/lib/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return { title: t(locale, servicesCopy.metaTitle) };
+  return { title: t(locale, servicesCopy.metaTitle), description: t(locale, servicesCopy.lede) };
 }
 
 function serviceId(name: string) {
@@ -24,7 +24,7 @@ export default async function ServicesPage() {
     <main>
       <section className="bg-green-dark py-16 text-white sm:py-20">
         <div className={wrap}>
-          <nav aria-label="Breadcrumb" className="mb-4 text-sm text-white/70">
+          <nav aria-label={t(locale, chromeCopy.breadcrumb)} className="mb-4 text-sm text-white/70">
             <ol className="flex flex-wrap items-center gap-2">
                 <li><Link className="hover:text-white" href="/">{t(locale, chromeCopy.nav.home)}</Link></li>
                 <li aria-hidden="true">/</li>

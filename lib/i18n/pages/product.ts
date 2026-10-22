@@ -2,13 +2,13 @@ import { phrase } from "@/lib/i18n/phrase";
 
 /** Product detail page. Product names stay as listed in the catalogue. */
 export const productCopyPhrases = {
-  metaFallback: phrase("Product — Nakhla Al Barari"),
-  brand: phrase("Brand"),
-  category: phrase("Category"),
-  pack: phrase("Pack"),
-  similar: phrase("Similar products"),
-  viewAll: phrase("View all"),
-  requestQuote: phrase("Request a quote"),
+  metaFallback: phrase("Product — Nakhla Al Barari", "منتج — نخلة البراري"),
+  brand: phrase("Brand", "العلامة التجارية"),
+  category: phrase("Category", "الفئة"),
+  pack: phrase("Pack", "العبوة"),
+  similar: phrase("Similar products", "منتجات مشابهة"),
+  viewAll: phrase("View all", "عرض الكل"),
+  requestQuote: phrase("Request a quote", "اطلبوا عرض سعر"),
   order: phrase("Price and delivery are confirmed with the branch. Add the line to a trade list, then send it from the site."),
   categoryLines: {
     Rice: phrase("Bagged rice for kitchens, hypermarkets, and grocery counters."),

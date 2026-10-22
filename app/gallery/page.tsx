@@ -7,7 +7,7 @@ import { wrap } from "@/lib/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return { title: t(locale, galleryCopy.metaTitle) };
+  return { title: t(locale, galleryCopy.metaTitle), description: t(locale, galleryCopy.lede) };
 }
 
 const iftar = "https://nakhlaalbarari.com/wp-content/uploads/2026/07/Nakhla-Al-Barari-Iftar-Party-1-1536x864.avif";

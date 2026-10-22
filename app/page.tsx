@@ -4,7 +4,7 @@ import { HeroLogo } from "@/components/hero-logo";
 import { AudienceMark, GroupMark, PageMark, StatMark, UserMark } from "@/components/icons";
 import { CountUp } from "@/components/count-up";
 import { Nationwide } from "@/components/nationwide";
-import { brandHref } from "@/lib/brand";
+import { brandHref, catalogueBrandName } from "@/lib/brand";
 import { brands, branches, CATALOGUE_PDF, PROFILE_PDF, serviceGroups } from "@/lib/catalog";
 import { chromeCopy } from "@/lib/i18n/pages/chrome";
 import { aboutCopy } from "@/lib/i18n/pages/about";
@@ -19,19 +19,17 @@ const audienceOrder = ["hotels", "hypermarkets", "grocery", "official"] as const
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  const title = "Nakhla Al Barari — Wholesale food across Saudi Arabia";
-  const description =
-    "Nakhla Al Barari Trading Company is an FMCG wholesaler in Riyadh. Food products, frozen foods, soft drinks and beverages, and non-food lines for hotels, hypermarkets, and grocery counters across Saudi Arabia.";
+  const title = t(locale, homeCopy.metaTitle);
+  const description = t(locale, homeCopy.metaDescription);
   return {
     title,
     description,
     keywords: [homeCopy.overviewKeywords, homeCopy.customersKeywords].flatMap((item) => t(locale, item).split(/\s*[;؛]\s*/)),
     openGraph: {
       title,
-      description:
-        "Food products, frozen foods, soft drinks and beverages, and non-food lines. Headquartered in Riyadh, supplying hotels, hypermarkets, and grocery counters across Saudi Arabia.",
+      description,
       type: "website",
-      locale: "en_SA",
+      locale: locale === "ar" ? "ar_SA" : "en_SA",
       siteName: "Nakhla Al Barari",
       url: "https://nakhlaalbarari.com/",
     },
@@ -286,7 +284,7 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {brands.map((brand) => (
-              <Link className="flex h-24 items-center justify-center rounded-2xl bg-white px-4 transition-colors hover:bg-leaf" href={brandHref(brand.name)} key={brand.name} aria-label={brand.name}>
+              <Link className="flex h-24 items-center justify-center rounded-2xl bg-white px-4 transition-colors hover:bg-leaf" href={brandHref(brand.name)} key={brand.name} aria-label={catalogueBrandName(brand.name) ?? brand.name}>
                 <img className="max-h-12 max-w-full object-contain" src={brand.src} alt="" />
               </Link>
             ))}
@@ -326,7 +324,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden bg-green-dark py-16 text-white sm:py-20" id="order" aria-labelledby="order-heading">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(147,192,44,0.28),transparent_52%)]" aria-hidden="true" />
         <div className={`${wrap} relative`}>
-          <h2 className={`${heading} max-w-[18ch] text-white`} id="enquiry-heading">{t(locale, homeCopy.enquiryTitle)}</h2>
+          <h2 className={`${heading} max-w-[18ch] text-white`} id="order-heading">{t(locale, homeCopy.enquiryTitle)}</h2>
           <p className="mt-3 max-w-[62ch] text-base leading-relaxed text-white/75">{t(locale, homeCopy.enquiryLede)}</p>
           <ol className="mt-8 grid gap-4 md:grid-cols-3">
             {homeCopy.steps.map((step, index) => {

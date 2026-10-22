@@ -10,39 +10,45 @@ export async function Footer() {
   const locale = await getLocale();
 
   return (
-    <footer className="bg-green-dark pt-12 pb-24 text-white" id="contact">
+    <footer className="bg-green-dark pt-14 pb-28 text-white" id="contact">
       <div className={wrap}>
-        <div className="grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-6 max-[980px]:grid-cols-1">
-          <div>
-            <Link className="mb-3 flex w-fit items-center rounded-xl bg-white px-3 py-2" href="/" aria-label={t(locale, chromeCopy.footer.logo)}>
+        <div className="grid grid-cols-1 gap-10 min-[640px]:grid-cols-2 min-[981px]:grid-cols-[minmax(220px,1.2fr)_minmax(280px,1.35fr)_minmax(140px,0.8fr)_auto] min-[981px]:items-start min-[981px]:gap-x-12">
+          <div className="min-w-0">
+            <Link className="inline-flex w-fit items-center rounded-xl bg-white px-3 py-2" href="/" aria-label={t(locale, chromeCopy.footer.logo)}>
               <LogoMark />
             </Link>
-            <p className="mt-4 max-w-[32ch] text-sm text-white/75">{t(locale, chromeCopy.footer.address)}</p>
+            <p className="mt-5 max-w-[28ch] text-sm leading-6 text-white/75">{t(locale, chromeCopy.footer.address)}</p>
           </div>
-          <div>
-            <h3 className="mb-2.5 text-sm font-semibold text-white">{t(locale, chromeCopy.footer.branches)}</h3>
-            <ul className="m-0 list-none p-0 text-sm text-white/75">
+          <div className="min-w-0">
+            <h3 className="text-sm font-semibold text-white">{t(locale, chromeCopy.footer.branches)}</h3>
+            <ul className="m-0 mt-4 list-none space-y-1.5 p-0 text-sm leading-6 text-white/75">
               {branches.map((branch) => (
-                <li className="mb-1.5" key={branch.name}><span>{label(locale, chromeCopy.branches, branch.name)}</span> · <span dir="ltr">{branch.phone}</span></li>
+                <li className="min-[981px]:whitespace-nowrap" key={branch.name}>
+                  <span>{label(locale, chromeCopy.branches, branch.name)}</span>
+                  <span aria-hidden="true"> · </span>
+                  <a className="hover:text-white" href={`tel:${branch.phone.replace(/\s/g, "")}`} dir="ltr">{branch.phone}</a>
+                </li>
               ))}
             </ul>
           </div>
-          <div>
-            <h3 className="mb-2.5 text-sm font-semibold text-white">{t(locale, chromeCopy.footer.company)}</h3>
-            <ul className="m-0 list-none p-0 text-sm text-white/75">
-              <li className="mb-1.5"><Link className="hover:text-white" href="/about">{t(locale, chromeCopy.nav.about)}</Link></li>
-              <li className="mb-1.5"><Link className="hover:text-white" href="/products">{t(locale, chromeCopy.nav.brands)}</Link></li>
-              <li className="mb-1.5"><Link className="hover:text-white" href="/services">{t(locale, chromeCopy.nav.services)}</Link></li>
-              <li className="mb-1.5"><Link className="hover:text-white" href="/offers">{t(locale, chromeCopy.nav.offers)}</Link></li>
-              <li className="mb-1.5"><Link className="hover:text-white" href="/careers">{t(locale, chromeCopy.nav.careers)}</Link></li>
-              <li className="mb-1.5"><Link className="hover:text-white" href="/gallery">{t(locale, chromeCopy.nav.gallery)}</Link></li>
-              <li className="mb-1.5"><Link className="hover:text-white" href="/faq">{t(locale, chromeCopy.nav.faq)}</Link></li>
-              <li className="mb-1.5" dir="ltr">contact@nbarari.com</li>
-            </ul>
+          <div className="min-w-0">
+            <h3 className="text-sm font-semibold text-white">{t(locale, chromeCopy.footer.company)}</h3>
+            <nav className="mt-4" aria-label={t(locale, chromeCopy.nav.footer)}>
+              <ul className="m-0 list-none space-y-1.5 p-0 text-sm leading-6 text-white/75">
+                <li><Link className="hover:text-white" href="/about">{t(locale, chromeCopy.nav.about)}</Link></li>
+                <li><Link className="hover:text-white" href="/products">{t(locale, chromeCopy.nav.brands)}</Link></li>
+                <li><Link className="hover:text-white" href="/services">{t(locale, chromeCopy.nav.services)}</Link></li>
+                <li><Link className="hover:text-white" href="/offers">{t(locale, chromeCopy.nav.offers)}</Link></li>
+                <li><Link className="hover:text-white" href="/careers">{t(locale, chromeCopy.nav.careers)}</Link></li>
+                <li><Link className="hover:text-white" href="/gallery">{t(locale, chromeCopy.nav.gallery)}</Link></li>
+                <li><Link className="hover:text-white" href="/faq">{t(locale, chromeCopy.nav.faq)}</Link></li>
+                <li><a className="hover:text-white" href="mailto:contact@nbarari.com" dir="ltr">contact@nbarari.com</a></li>
+              </ul>
+            </nav>
           </div>
-          <div>
-            <h3 className="mb-2.5 text-sm font-semibold text-white">{t(locale, chromeCopy.footer.follow)}</h3>
-            <ul className="m-0 flex list-none gap-3 p-0">
+          <div className="min-w-0 min-[981px]:justify-self-end">
+            <h3 className="text-sm font-semibold text-white">{t(locale, chromeCopy.footer.follow)}</h3>
+            <ul className="m-0 mt-4 flex list-none gap-3 p-0">
               <li>
                 <a className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white hover:text-green-dark" href="https://www.instagram.com/nakhlaalbarari" target="_blank" rel="noopener" aria-label="Instagram">
                   <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -69,9 +75,9 @@ export async function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-8 flex flex-wrap justify-between gap-3 border-t border-white/15 pt-4 text-xs text-white/70">
+        <div className="mt-10 flex flex-col items-start gap-2 border-t border-white/15 pt-4 text-xs text-white/70 min-[640px]:flex-row min-[640px]:items-center min-[640px]:justify-between">
           <span>{t(locale, chromeCopy.footer.copyright)}</span>
-          <span>{t(locale, chromeCopy.footer.registration)}</span>
+          <span dir="ltr">{t(locale, chromeCopy.footer.registration)}</span>
         </div>
       </div>
     </footer>

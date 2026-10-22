@@ -5,7 +5,9 @@ import { Header } from "@/components/header";
 import { LocaleProvider } from "@/components/locale-provider";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { TradeProvider } from "@/components/trade-context";
+import { chromeCopy } from "@/lib/i18n/pages/chrome";
 import { getLocale } from "@/lib/i18n/locale";
+import { t } from "@/lib/i18n/phrase";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({
@@ -41,8 +43,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body suppressHydrationWarning>
         <LocaleProvider locale={locale}>
           <TradeProvider>
+            <a className="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-green-dark" href="#main">{t(locale, chromeCopy.buttons.skip)}</a>
             <Header />
-            {children}
+            <div id="main">{children}</div>
             <Footer />
             <WhatsAppButton />
           </TradeProvider>

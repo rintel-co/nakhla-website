@@ -11,7 +11,7 @@ import { heading, wrap } from "@/lib/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return { title: t(locale, aboutCopy.metaTitle) };
+  return { title: t(locale, aboutCopy.metaTitle), description: t(locale, aboutCopy.lede) };
 }
 
 const aboutImage = "https://nakhlaalbarari.com/wp-content/uploads/2026/06/About-us.avif";

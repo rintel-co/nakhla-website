@@ -106,7 +106,7 @@ const shared = {
 };
 
 export const faqCopy = {
-  metaTitle: phrase("FAQ — Nakhla Al Barari"),
+  metaTitle: phrase("FAQ — Nakhla Al Barari", "الأسئلة الشائعة — نخلة البراري"),
   title: phrase("Frequently Asked Questions", "الأسئلة الشائعة"),
   lede: phrase(
     "Find answers about product categories, availability, wholesale enquiries and how to contact the team.",

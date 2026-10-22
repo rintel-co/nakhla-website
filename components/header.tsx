@@ -44,19 +44,19 @@ export function Header() {
     <>
       <header className="sticky top-0 z-20 border-b border-line bg-page">
         <div className={`${wrap} flex h-16 items-center gap-4`}>
-          <Link className="flex shrink-0 items-center" href="/" aria-label={t(locale, chromeCopy.nav.home)}>
+          <Link className="flex shrink-0 items-center" href="/" aria-label={t(locale, chromeCopy.footer.logo)}>
             <LogoMark />
           </Link>
-          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-1 min-[981px]:flex">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 min-[981px]:flex min-[1200px]:gap-1" aria-label={t(locale, chromeCopy.nav.primary)}>
             {links.map((link) => {
               const current = isCurrent(pathname, link.href);
               return (
-                <Link key={link.href} className={`inline-flex h-10 items-center rounded-md px-2.5 text-sm font-medium transition-colors ${current ? "bg-leaf text-green-dark" : "text-ink hover:bg-leaf hover:text-green-dark"}`} href={link.href}>
+                <Link key={link.href} className={`inline-flex h-10 items-center whitespace-nowrap rounded-md px-2 text-sm font-medium transition-colors min-[1200px]:px-2.5 ${current ? "bg-leaf text-green-dark" : "text-ink hover:bg-leaf hover:text-green-dark"}`} href={link.href} aria-current={current ? "page" : undefined}>
                   {t(locale, link.label)}
                 </Link>
               );
             })}
-            <Link className={pathname.startsWith("/offers") ? `${offersBtn} bg-green` : offersBtn} href="/offers">{t(locale, chromeCopy.nav.offers)}</Link>
+            <Link className={`${pathname.startsWith("/offers") ? `${offersBtn} bg-green` : offersBtn} whitespace-nowrap`} href="/offers" aria-current={pathname.startsWith("/offers") ? "page" : undefined}>{t(locale, chromeCopy.nav.offers)}</Link>
           </nav>
           <div className="ms-auto flex shrink-0 items-center gap-2 min-[981px]:ms-0">
             <LanguageSwitcher className="max-[980px]:hidden" />
@@ -94,17 +94,17 @@ export function Header() {
         </div>
         {menu && (
           <div className="border-t border-line min-[981px]:hidden">
-            <nav className={`${wrap} flex flex-col gap-1 py-3 text-sm font-medium text-ink`}>
+            <nav className={`${wrap} flex flex-col gap-1 py-3 text-sm font-medium text-ink`} aria-label={t(locale, chromeCopy.nav.primary)}>
               <LanguageSwitcher className="mb-2 w-full" />
               {links.map((link) => {
                 const current = isCurrent(pathname, link.href);
                 return (
-                  <Link key={link.href} className={`flex h-11 items-center rounded-md px-3 transition-colors ${current ? "bg-leaf text-green-dark" : "hover:bg-leaf hover:text-green-dark"}`} href={link.href}>
+                  <Link key={link.href} className={`flex h-11 items-center rounded-md px-3 transition-colors ${current ? "bg-leaf text-green-dark" : "hover:bg-leaf hover:text-green-dark"}`} href={link.href} aria-current={current ? "page" : undefined}>
                     {t(locale, link.label)}
                   </Link>
                 );
               })}
-              <Link className={`${offersBtn} mt-1 w-full ${pathname.startsWith("/offers") ? "bg-green" : ""}`} href="/offers">{t(locale, chromeCopy.nav.offers)}</Link>
+              <Link className={`${offersBtn} mt-1 w-full ${pathname.startsWith("/offers") ? "bg-green" : ""}`} href="/offers" aria-current={pathname.startsWith("/offers") ? "page" : undefined}>{t(locale, chromeCopy.nav.offers)}</Link>
             </nav>
           </div>
         )}
@@ -124,7 +124,7 @@ export function Header() {
           {slugs.length ? slugs.map((slug, index) => (
             <li className="mb-2 flex items-start justify-between gap-3 rounded-xl bg-soft px-3 py-2.5 text-sm last:mb-0" key={slug}>
               <span className="leading-snug">{names[index]}</span>
-              <button className="shrink-0 cursor-pointer text-xs font-semibold text-green" type="button" onClick={() => toggle(slug)}>{t(locale, chromeCopy.buttons.remove)}</button>
+              <button className="shrink-0 cursor-pointer text-xs font-semibold text-green" type="button" aria-label={`${t(locale, chromeCopy.buttons.remove)} ${names[index]}`} onClick={() => toggle(slug)}>{t(locale, chromeCopy.buttons.remove)}</button>
             </li>
           )) : <li className="px-1 py-2 text-sm text-muted">{t(locale, chromeCopy.buttons.emptyTrade)}</li>}
         </ul>

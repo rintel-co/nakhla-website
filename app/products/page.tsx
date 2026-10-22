@@ -15,7 +15,7 @@ import { heading, pageBanner, pill, pillSolid, sectionSub, wrap } from "@/lib/ui
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return { title: t(locale, productsCopy.metaTitle) };
+  return { title: t(locale, productsCopy.metaTitle), description: t(locale, productsCopy.lede) };
 }
 
 const bannerImage = "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=1600&q=80";
@@ -54,7 +54,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black to-transparent" />
         <HeroLogo />
         <div className={`${wrap} relative flex h-full flex-col justify-end py-10 text-white max-[640px]:py-8`}>
-          <nav aria-label="Breadcrumb" className="mb-4 text-sm text-white/80">
+          <nav aria-label={t(locale, chromeCopy.breadcrumb)} className="mb-4 text-sm text-white/80">
             <ol className="flex flex-wrap items-center gap-2">
                 <li><Link className="hover:text-white" href="/">{t(locale, chromeCopy.nav.home)}</Link></li>
                 <li aria-hidden="true">/</li>

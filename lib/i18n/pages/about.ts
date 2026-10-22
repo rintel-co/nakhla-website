@@ -9,7 +9,7 @@ export const aboutCopy = {
     "تعرّفوا على نشاطنا التجاري وفئات منتجاتنا ودورنا في توفير المنتجات لعملاء قطاع الأعمال.",
   ),
   exploreProducts: phrase("Explore Our Products", "استكشفوا منتجاتنا"),
-  imageAlt: phrase("Nakhla Al Barari"),
+  imageAlt: phrase("Nakhla Al Barari", "نخلة البراري"),
   introTitle: phrase("Company Introduction", "نبذة عن الشركة"),
   intro: phrase(
     "Nakhla Al Barari Trading Co. is a Saudi Arabia-based trading and distribution company specializing in fast-moving consumer goods (FMCG), including food products, frozen foods, beverages, and non-food essentials. We serve a diverse range of business customers, including grocery stores, supermarkets, hotels, and wholesale buyers. Through our portfolio of brands and broad product selection, we aim to make sourcing everyday essentials simpler and more convenient for our customers. We are committed to building strong business relationships through product quality, reliable service, and a customer-focused approach.",
@@ -75,10 +75,13 @@ export const aboutCopy = {
     "اكتشفوا العلامات التجارية المتاحة من خلال نشاطنا التجاري.",
   ),
   exploreAllBrands: phrase("Explore All Brands", "استكشفوا جميع العلامات التجارية"),
-  contactTitle: phrase("Contact"),
-  addressLabel: phrase("Address"),
-  address: phrase("Al Masani Dist., Domat Al Jandal Street. Warehouses 26 and 27, Riyadh."),
-  phoneLabel: phrase("Phone"),
-  emailLabel: phrase("Email"),
-  contactPage: phrase("Contact page"),
+  contactTitle: phrase("Contact", "تواصلوا"),
+  addressLabel: phrase("Address", "العنوان"),
+  address: phrase(
+    "Al Masani Dist., Domat Al Jandal Street. Warehouses 26 and 27, Riyadh.",
+    "حي المصانع، شارع دومة الجندل. المستودعات 26 و27، الرياض.",
+  ),
+  phoneLabel: phrase("Phone", "الهاتف"),
+  emailLabel: phrase("Email", "البريد الإلكتروني"),
+  contactPage: phrase("Contact page", "صفحة التواصل"),
 };

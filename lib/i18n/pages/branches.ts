@@ -23,14 +23,23 @@ export const branchesCopy = {
   whatsApp: phrase("WhatsApp", "واتساب"),
   googleMaps: phrase("Google Maps", "خرائط Google"),
   weeklyOffers: phrase("Weekly Offers", "العروض الأسبوعية"),
-  imageAlt: phrase("Corridor at the Nakhla Al Barari office"),
+  imageAlt: phrase("Corridor at the Nakhla Al Barari office", "ممر في مكتب نخلة البراري"),
   addresses: {
-    "Riyadh HQ": phrase("Al Masani Dist., Domat Al Jandal Street. Warehouses 26 and 27."),
-    Riyadh: phrase("Al Masani Dist., Domat Al Jandal Street, Riyadh."),
-    Aziziyah: phrase("Al Basala Street, Riyadh 14512."),
-    Dammam: phrase("Muhammadiyah Street, Dammam."),
-    Hail: phrase("King Khalid Road, behind NCB, Imam Shafi Street."),
-    "Hafar Al Batin": phrase("Al Baladiyah, Hafar Al Batin."),
-    Qassim: phrase("Al Ramish Al Sufla, Al Yarmouk Dist., Buraidah."),
+    "Riyadh HQ": phrase(
+      "Al Masani Dist., Domat Al Jandal Street. Warehouses 26 and 27.",
+      "حي المصانع، شارع دومة الجندل. المستودعات 26 و27.",
+    ),
+    Riyadh: phrase(
+      "Al Masani Dist., Domat Al Jandal Street, Riyadh.",
+      "حي المصانع، شارع دومة الجندل، الرياض.",
+    ),
+    Aziziyah: phrase("Al Basala Street, Riyadh 14512.", "شارع البصالة، الرياض 14512."),
+    Dammam: phrase("Muhammadiyah Street, Dammam.", "شارع المحمدية، الدمام."),
+    Hail: phrase(
+      "King Khalid Road, behind NCB, Imam Shafi Street.",
+      "طريق الملك خالد، خلف البنك الأهلي، شارع الإمام الشافعي.",
+    ),
+    "Hafar Al Batin": phrase("Al Baladiyah, Hafar Al Batin.", "البلدية، حفر الباطن."),
+    Qassim: phrase("Al Ramish Al Sufla, Al Yarmouk Dist., Buraidah.", "الرميش السفلى، حي اليرموك، بريدة."),
   },
 };

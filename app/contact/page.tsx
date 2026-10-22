@@ -20,7 +20,7 @@ function phoneDigits(phone: string) {
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return { title: t(locale, contactCopy.metaTitle) };
+  return { title: t(locale, contactCopy.metaTitle), description: t(locale, contactCopy.lede) };
 }
 
 const exterior = "https://nakhlaalbarari.com/wp-content/uploads/2026/06/Nakhla-Al-Barari-Contact-Us.avif";
@@ -50,7 +50,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         <HeroLogo />
         <div className={`${wrap} relative grid items-end gap-10 py-16 max-[640px]:py-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:py-20`}>
           <div>
-            <nav aria-label="Breadcrumb" className="mb-4 text-sm text-white/80">
+            <nav aria-label={t(locale, chromeCopy.breadcrumb)} className="mb-4 text-sm text-white/80">
               <ol className="flex flex-wrap items-center gap-2">
                 <li><Link className="hover:text-white" href="/">{t(locale, chromeCopy.nav.home)}</Link></li>
                 <li aria-hidden="true">/</li>

@@ -114,7 +114,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema(item)) }} />
       <section className="border-b border-line py-8">
         <div className={wrap}>
-          <nav aria-label="Breadcrumb" className="text-sm text-muted">
+          <nav aria-label={t(locale, chromeCopy.breadcrumb)} className="text-sm text-muted">
             <ol className="flex flex-wrap items-center gap-2">
               <li><Link className="hover:text-green" href="/">{t(locale, chromeCopy.nav.home)}</Link></li>
               <li aria-hidden="true">/</li>
