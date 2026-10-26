@@ -79,7 +79,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
               return (
                 <li className="h-full" key={item.name}>
                   <Link
-                    className={`flex h-full min-h-52 flex-col items-center rounded-2xl bg-white px-4 py-5 text-center transition-shadow hover:ring-2 hover:ring-green ${active ? "ring-2 ring-green-dark" : ""}`}
+                    className={`flex h-full min-h-44 flex-col items-center justify-center rounded-2xl bg-white px-4 py-5 text-center transition-shadow hover:ring-2 hover:ring-green ${active ? "ring-2 ring-green-dark" : ""}`}
                     href={brandHref(item.name)}
                     aria-current={active ? "true" : undefined}
                     aria-label={`${t(locale, productsCopy.viewProducts)}: ${labelName}`}
@@ -87,8 +87,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
                     <span className="flex h-20 w-full items-center justify-center sm:h-24">
                       <img className="max-h-full max-w-full object-contain" src={item.src} alt="" />
                     </span>
-                    <span className="mt-3 text-sm font-semibold leading-snug text-ink">{labelName}</span>
-                    <span className="mt-auto pt-3 text-sm font-semibold text-green-dark">{t(locale, productsCopy.viewProducts)}</span>
+                    <span className="mt-4 text-sm font-semibold text-green-dark">{t(locale, productsCopy.viewProducts)}</span>
                   </Link>
                 </li>
               );
@@ -151,7 +150,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
           <h2 className="text-3xl font-bold text-green-dark sm:text-4xl" id="brands-faq-heading">{t(locale, faqCopy.title)}</h2>
           <p className="mt-3 max-w-[62ch] text-ink/70">{t(locale, faqCopy.lede)}</p>
           <div className="mt-8 rounded-3xl bg-white px-5 sm:px-8">
-            <FaqList items={faqCopy.brands.map((item) => ({ q: t(locale, item.q), a: t(locale, item.a) }))} />
+            <FaqList items={faqCopy.brands.slice(0, 7).map((item) => ({ q: t(locale, item.q), a: t(locale, item.a) }))} />
           </div>
         </div>
       </section>

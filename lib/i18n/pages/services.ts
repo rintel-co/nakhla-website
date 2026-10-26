@@ -44,7 +44,10 @@ export const servicesCopy = {
         "Explore frozen food products currently available in the supply range. Contact the team to enquire about availability.",
         "استكشفوا منتجات الأغذية المجمدة المتاحة حاليًا ضمن مجموعة التوريد. تواصلوا مع الفريق للاستفسار عن التوافر.",
       ),
-      note: phrase(""),
+      note: phrase(
+        "We offer a wide range of frozen foods, with 3000+ options and counting. Partnering with top brands and suppliers, we guarantee premium quality, reliable stock, and consistent availability.",
+        "نوفر مجموعة واسعة من الأغذية المجمدة، بأكثر من 3,000 خيار، ونعمل باستمرار على توسيعها. نتعاون مع أبرز العلامات التجارية والموردين، ونحرص على الجودة العالية وتوفر المخزون واستمرارية التوافر.",
+      ),
       button: phrase("Enquire About Products", "استفسروا عن المنتجات"),
     },
     "Soft Drinks & Beverages": {
@@ -53,7 +56,10 @@ export const servicesCopy = {
         "Explore available beverage categories and enquire about products and pack sizes.",
         "استكشفوا فئات المشروبات المتاحة واستفسروا عن المنتجات وأحجام العبوات.",
       ),
-      note: phrase(""),
+      note: phrase(
+        "We provide a diverse selection of soft drinks and beverages, sourcing from leading brands and distributors. We prioritise quality, variety, and reliable availability.",
+        "نوفر تشكيلة متنوعة من المشروبات الغازية والمشروبات الأخرى من أبرز العلامات التجارية والموزعين. نحرص على الجودة والتنوع واستمرارية التوافر.",
+      ),
       button: phrase("View Products", "عرض المنتجات"),
     },
     "Non Food": {
@@ -62,7 +68,10 @@ export const servicesCopy = {
         "Explore selected non-food products available through the business supply range.",
         "استكشفوا المنتجات غير الغذائية المختارة المتاحة ضمن مجموعة التوريد التجارية.",
       ),
-      note: phrase(""),
+      note: phrase(
+        "We offer a wide range of non-food products, sourced from top brands and suppliers. We focus on quality, variety, and consistent availability to meet your needs.",
+        "نوفر مجموعة واسعة من المنتجات غير الغذائية من أبرز العلامات التجارية والموردين. نركز على الجودة والتنوع واستمرارية التوافر لتلبية احتياجاتكم.",
+      ),
       button: phrase("Enquire", "استفسروا"),
     },
   },

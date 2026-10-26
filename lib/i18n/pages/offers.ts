@@ -24,6 +24,7 @@ export const offersCopy = {
     "تصفحوا العروض المدرجة حسب الفرع والفترة الزمنية والفئة. يرجى تأكيد التوافر وشروط العرض مع الفرع المعني قبل الطلب.",
   ),
   viewCurrent: phrase("View Current Offers", "عرض العروض الحالية"),
+  bannersTitle: phrase("Current offers", "العروض الحالية"),
   documentsTitle: phrase("Offers by Branch or Region", "العروض حسب الفرع أو المنطقة"),
   documentsLede: phrase(
     "Select your branch or region to open the corresponding approved offers document.",
