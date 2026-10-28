@@ -9,6 +9,7 @@ import { pillSolid } from "@/lib/ui";
 
 const field = "w-full rounded-md border border-line bg-white px-3 py-3 text-base";
 
+const enquiryEmail = "contact@nbarari.com";
 const categories = ["Food Products", "Frozen Foods", "Soft Drinks & Beverages", "Non Food"] as const;
 const requestTypes = ["product", "wholesale", "partnership"] as const;
 
@@ -26,7 +27,7 @@ export function ContactForm({ initialMessage = "", initialCategory = "" }: { ini
     category: categories.includes(initialCategory as (typeof categories)[number]) ? initialCategory : "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<"idle" | "sent" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   function update(key: keyof FormState, value: string) {
     setValues((current) => ({ ...current, [key]: value }));
@@ -50,7 +51,7 @@ export function ContactForm({ initialMessage = "", initialCategory = "" }: { ini
     <form
       className="grid gap-4"
       noValidate
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault();
         const found = validate(values);
         setErrors(found);
@@ -59,20 +60,30 @@ export function ContactForm({ initialMessage = "", initialCategory = "" }: { ini
           return;
         }
         const requestLabel = fields.requestTypes[values.requestType as keyof typeof fields.requestTypes]?.en ?? values.requestType;
-        const body = [
-          `Request type: ${requestLabel}`,
-          `Name: ${values.name.trim()}`,
-          `Phone: ${values.phone.trim()}`,
-          `Email: ${values.email.trim()}`,
-          `Category: ${values.category.trim()}`,
-          `Products: ${values.products.trim()}`,
-          `Quantities: ${values.quantities.trim()}`,
-          "",
-          values.message.trim(),
-        ].join("\n");
-        const href = `mailto:contact@nbarari.com?subject=${encodeURIComponent(requestLabel)}&body=${encodeURIComponent(body)}`;
+        const categoryName = values.category as keyof typeof servicesCopy.groups;
+        const categoryLabel = values.category.trim() ? servicesCopy.groups[categoryName].name.en : "";
+        setStatus("sending");
         try {
-          window.location.href = href;
+          const response = await fetch(`https://formsubmit.co/ajax/${enquiryEmail}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify({
+              _subject: `Nakhla Al Barari — ${requestLabel}`,
+              _replyto: values.email.trim(),
+              _template: "table",
+              _captcha: "false",
+              "Request type": requestLabel,
+              Name: values.name.trim(),
+              "Contact number": values.phone.trim(),
+              Email: values.email.trim(),
+              Category: categoryLabel,
+              Products: values.products.trim(),
+              Quantities: values.quantities.trim(),
+              Message: values.message.trim(),
+            }),
+          });
+          if (!response.ok) throw new Error("send failed");
+          setValues({ ...empty });
           setStatus("sent");
         } catch {
           setStatus("error");
@@ -182,7 +193,7 @@ export function ContactForm({ initialMessage = "", initialCategory = "" }: { ini
         />
         {errors.message ? <span className="text-sm font-normal text-red-700" id="enquiry-message-error">{errors.message}</span> : null}
       </label>
-      <button className={`${pillSolid} w-full sm:w-fit`} type="submit">{t(locale, fields.send)}</button>
+      <button className={`${pillSolid} w-full sm:w-fit`} type="submit" disabled={status === "sending"}>{t(locale, status === "sending" ? fields.sending : fields.send)}</button>
       {status === "sent" ? <p className="text-sm" role="status">{t(locale, fields.sent)}</p> : null}
       {status === "error" && !Object.keys(errors).length ? <p className="text-sm text-red-700" role="alert">{t(locale, fields.error)}</p> : null}
     </form>

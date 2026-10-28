@@ -41,9 +41,10 @@ export const contactCopy = {
     quantities: phrase("Quantities", "الكميات"),
     message: phrase("Message", "الرسالة"),
     send: phrase("Send Message", "إرسال الرسالة"),
+    sending: phrase("Sending…", "جارٍ الإرسال…"),
     required: phrase("This field is required.", "هذا الحقل مطلوب."),
     emailInvalid: phrase("Enter a valid email address.", "أدخلوا بريدًا إلكترونيًا صالحًا."),
-    sent: phrase("Your email app should open with this enquiry addressed to contact@nbarari.com.", "يفترض أن يفتح تطبيق البريد هذه الرسالة إلى contact@nbarari.com."),
-    error: phrase("The enquiry could not be opened. Email contact@nbarari.com.", "تعذر فتح الاستفسار. راسلوا contact@nbarari.com."),
+    sent: phrase("Your enquiry was sent.", "أُرسل استفساركم."),
+    error: phrase("The enquiry could not be sent. Email contact@nbarari.com.", "تعذر إرسال الاستفسار. راسلوا contact@nbarari.com."),
   },
 };

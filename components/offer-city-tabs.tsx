@@ -58,12 +58,12 @@ export function OfferCityTabs({ label, tabs }: { label: string; tabs: CityTab[] 
         const id = panelId(tab.name);
         const selected = tab.name === active;
         return (
-          <div className="mt-8" hidden={!selected} id={id} key={tab.name} role="tabpanel" aria-labelledby={`offer-tab-${id}`}>
-            <p className="flex items-start gap-2 text-sm leading-relaxed text-ink/70">
+          <div className="mt-8 grid gap-8" hidden={!selected} id={id} key={tab.name} role="tabpanel" aria-labelledby={`offer-tab-${id}`}>
+            <p className="flex max-w-xl items-start gap-3 rounded-2xl bg-white px-4 py-3 text-sm leading-relaxed text-ink shadow-[0_4px_14px_rgba(0,0,0,0.05)]">
               <StatMark className="mt-0.5 h-5 w-5 shrink-0" name="branches" />
               <span>{tab.address}</span>
             </p>
-            <ul className="mt-4 grid max-w-xl grid-cols-2 gap-3">
+            <ul className="grid max-w-xl grid-cols-2 gap-3">
               {tab.banners.map((banner) => {
                 const image = (
                   <img className="h-auto w-full rounded-[14px]" src={banner.src} alt={banner.alt} width={828} height={1098} />

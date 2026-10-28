@@ -61,8 +61,7 @@ export default async function OffersPage() {
       />
       <section className="scroll-mt-16 bg-page py-10 sm:py-14" id="banners" aria-labelledby="offer-banners">
         <div className={wrap}>
-          <h2 className="text-3xl font-bold tracking-[-0.03em] text-green-dark sm:text-4xl" id="offer-banners">{t(locale, offersCopy.documentsTitle)}</h2>
-          <p className="mt-3 max-w-[68ch] text-ink/70">{t(locale, offersCopy.documentsLede)}</p>
+          <h2 className="sr-only" id="offer-banners">{t(locale, offersCopy.documentsTitle)}</h2>
           <OfferCityTabs
             label={t(locale, offersCopy.branches)}
             tabs={branches.map((place) => ({
