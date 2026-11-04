@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useLocale } from "@/components/locale-provider";
 import { contactCopy } from "@/lib/i18n/pages/contact";
 import { servicesCopy } from "@/lib/i18n/pages/services";
@@ -28,11 +28,12 @@ export function ContactForm({ initialMessage = "", initialCategory = "" }: { ini
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const sending = useRef(false);
 
   function update(key: keyof FormState, value: string) {
     setValues((current) => ({ ...current, [key]: value }));
     setErrors((current) => ({ ...current, [key]: undefined }));
-    setStatus("idle");
+    setStatus((current) => (current === "sending" ? current : "idle"));
   }
 
   function validate(next: FormState) {
@@ -53,12 +54,14 @@ export function ContactForm({ initialMessage = "", initialCategory = "" }: { ini
       noValidate
       onSubmit={async (event) => {
         event.preventDefault();
+        if (sending.current) return;
         const found = validate(values);
         setErrors(found);
         if (Object.keys(found).length) {
           setStatus("error");
           return;
         }
+        sending.current = true;
         const requestLabel = fields.requestTypes[values.requestType as keyof typeof fields.requestTypes]?.en ?? values.requestType;
         const categoryName = values.category as keyof typeof servicesCopy.groups;
         const categoryLabel = values.category.trim() ? servicesCopy.groups[categoryName].name.en : "";
@@ -87,6 +90,8 @@ export function ContactForm({ initialMessage = "", initialCategory = "" }: { ini
           setStatus("sent");
         } catch {
           setStatus("error");
+        } finally {
+          sending.current = false;
         }
       }}
     >
@@ -193,7 +198,7 @@ export function ContactForm({ initialMessage = "", initialCategory = "" }: { ini
         />
         {errors.message ? <span className="text-sm font-normal text-red-700" id="enquiry-message-error">{errors.message}</span> : null}
       </label>
-      <button className={`${pillSolid} w-full sm:w-fit`} type="submit" disabled={status === "sending"}>{t(locale, status === "sending" ? fields.sending : fields.send)}</button>
+      <button className={`${pillSolid} w-full disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60 sm:w-fit`} type="submit" disabled={status === "sending"} aria-busy={status === "sending"}>{t(locale, status === "sending" ? fields.sending : fields.send)}</button>
       {status === "sent" ? <p className="text-sm" role="status">{t(locale, fields.sent)}</p> : null}
       {status === "error" && !Object.keys(errors).length ? <p className="text-sm text-red-700" role="alert">{t(locale, fields.error)}</p> : null}
     </form>
