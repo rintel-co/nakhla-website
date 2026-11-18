@@ -58,8 +58,6 @@ export default async function OffersPage() {
       href: banner.href,
     })),
   }));
-  const hasOffers = tabs.some((tab) => tab.banners.length > 0);
-
   return (
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(offersSchema()) }} />
@@ -73,11 +71,7 @@ export default async function OffersPage() {
       <section className="scroll-mt-16 bg-page py-10 sm:py-14" id="banners" aria-labelledby="offer-banners">
         <div className={wrap}>
           <h2 className="sr-only" id="offer-banners">{t(locale, offersCopy.documentsTitle)}</h2>
-          {hasOffers ? (
-            <OfferCityTabs label={t(locale, offersCopy.branches)} tabs={tabs} />
-          ) : (
-            <p className="mt-6 max-w-xl text-base text-ink/70">{t(locale, offersCopy.empty)}</p>
-          )}
+          <OfferCityTabs label={t(locale, offersCopy.branches)} tabs={tabs} empty={t(locale, offersCopy.empty)} />
         </div>
       </section>
       <section className="bg-leaf py-16 sm:py-20" aria-labelledby="offer-questions">
