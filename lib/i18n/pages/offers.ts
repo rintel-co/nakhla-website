@@ -58,6 +58,7 @@ export const offersCopy = {
   earlier: phrase("Earlier"),
   allWeeks: phrase("All weeks"),
   clear: phrase("Clear"),
+  empty: phrase("There are no offers listed right now.", "لا توجد عروض مدرجة حالياً."),
   noMatches: phrase("No offers match those filters."),
   category: phrase("Category"),
   branch: phrase("Branch"),

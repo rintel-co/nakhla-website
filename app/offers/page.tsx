@@ -48,6 +48,17 @@ function offersSchema() {
 
 export default async function OffersPage() {
   const locale = await getLocale();
+  const tabs = branches.map((place) => ({
+    name: place.name,
+    label: label(locale, chromeCopy.branches, place.name),
+    address: t(locale, branchesCopy.addresses[place.name as keyof typeof branchesCopy.addresses]),
+    banners: bannersForBranch(place.name).map((banner) => ({
+      src: banner.src,
+      alt: t(locale, banner.alt),
+      href: banner.href,
+    })),
+  }));
+  const hasOffers = tabs.some((tab) => tab.banners.length > 0);
 
   return (
     <main>
@@ -62,19 +73,11 @@ export default async function OffersPage() {
       <section className="scroll-mt-16 bg-page py-10 sm:py-14" id="banners" aria-labelledby="offer-banners">
         <div className={wrap}>
           <h2 className="sr-only" id="offer-banners">{t(locale, offersCopy.documentsTitle)}</h2>
-          <OfferCityTabs
-            label={t(locale, offersCopy.branches)}
-            tabs={branches.map((place) => ({
-              name: place.name,
-              label: label(locale, chromeCopy.branches, place.name),
-              address: t(locale, branchesCopy.addresses[place.name as keyof typeof branchesCopy.addresses]),
-              banners: bannersForBranch(place.name).map((banner) => ({
-                src: banner.src,
-                alt: t(locale, banner.alt),
-                href: banner.href,
-              })),
-            }))}
-          />
+          {hasOffers ? (
+            <OfferCityTabs label={t(locale, offersCopy.branches)} tabs={tabs} />
+          ) : (
+            <p className="mt-6 max-w-xl text-base text-ink/70">{t(locale, offersCopy.empty)}</p>
+          )}
         </div>
       </section>
       <section className="bg-leaf py-16 sm:py-20" aria-labelledby="offer-questions">
