@@ -56,7 +56,7 @@ export function Header() {
                 </Link>
               );
             })}
-            {/* <Link className={`${pathname.startsWith("/offers") ? `${offersBtn} bg-green` : offersBtn} whitespace-nowrap`} href="/offers" aria-current={pathname.startsWith("/offers") ? "page" : undefined}>{t(locale, chromeCopy.nav.offers)}</Link> */}
+            <Link className={`${pathname.startsWith("/offers") ? `${offersBtn} bg-green` : offersBtn} whitespace-nowrap`} href="/offers" aria-current={pathname.startsWith("/offers") ? "page" : undefined}>{t(locale, chromeCopy.nav.offers)}</Link>
           </nav>
           <div className="ms-auto flex shrink-0 items-center gap-2 min-[981px]:ms-0">
             <LanguageSwitcher className="max-[980px]:hidden" />
