@@ -122,7 +122,7 @@ export default async function HomePage() {
           <div>
             <h2 className={`${heading} max-w-[16ch]`} id="overview-heading">{t(locale, homeCopy.overviewTitle)}</h2>
             <p className="mt-3 max-w-[52ch] text-base leading-relaxed text-ink/70">{t(locale, homeCopy.overviewLede)}</p>
-            <Link className={`${pillSolid} mt-6`} href="/about">{t(locale, homeCopy.overviewButton)}</Link>
+            <Link className={`${pillSolid} mt-6`} href="/about-us">{t(locale, homeCopy.overviewButton)}</Link>
           </div>
           <div className="relative mx-auto aspect-square w-full max-w-[380px] overflow-hidden rounded-3xl lg:ms-auto lg:me-0 lg:max-w-[420px]">
             <img className="absolute inset-0 h-full w-full object-cover object-[center_68%]" src="/media/Nakhla-Al-Barari-Contact-Us.avif" alt={t(locale, homeCopy.overviewImageAlt)} />

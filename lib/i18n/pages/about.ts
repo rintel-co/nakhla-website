@@ -1,6 +1,6 @@
 import { phrase } from "@/lib/i18n/phrase";
 
-/** /about. */
+/** /about-us. */
 export const aboutCopy = {
   metaTitle: phrase("About Nakhla Al Barari Trading Co.", "عن شركة نخلة البراري للتجارة"),
   title: phrase("About Nakhla Al Barari Trading Co.", "عن شركة نخلة البراري للتجارة"),

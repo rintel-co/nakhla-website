@@ -35,7 +35,7 @@ export async function Footer() {
             <h3 className="text-sm font-semibold text-white">{t(locale, chromeCopy.footer.company)}</h3>
             <nav className="mt-4" aria-label={t(locale, chromeCopy.nav.footer)}>
               <ul className="m-0 list-none space-y-1.5 p-0 text-sm leading-6 text-white/75">
-                <li><Link className="hover:text-white" href="/about">{t(locale, chromeCopy.nav.about)}</Link></li>
+                <li><Link className="hover:text-white" href="/about-us">{t(locale, chromeCopy.nav.about)}</Link></li>
                 <li><Link className="hover:text-white" href="/products">{t(locale, chromeCopy.nav.brands)}</Link></li>
                 <li><Link className="hover:text-white" href="/services">{t(locale, chromeCopy.nav.services)}</Link></li>
                 <li><Link className="hover:text-white" href="/offers">{t(locale, chromeCopy.nav.offers)}</Link></li>

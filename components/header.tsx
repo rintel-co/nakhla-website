@@ -17,7 +17,7 @@ const links = [
   { href: "/products", label: chromeCopy.nav.brands },
   { href: "/services", label: chromeCopy.nav.services },
   { href: "/branches", label: chromeCopy.nav.branches },
-  { href: "/about", label: chromeCopy.nav.about },
+  { href: "/about-us", label: chromeCopy.nav.about },
   { href: "/gallery", label: chromeCopy.nav.gallery },
   { href: "/contact", label: chromeCopy.nav.contact },
 ];
