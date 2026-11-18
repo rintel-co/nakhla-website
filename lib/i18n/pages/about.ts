@@ -16,7 +16,7 @@ export const aboutCopy = {
     "شركة نخلة البراري للتجارة هي شركة متخصصة في تجارة وتوزيع السلع الاستهلاكية سريعة التداول في المملكة العربية السعودية، وتشمل منتجاتها المواد الغذائية والأغذية المجمدة والمشروبات والمنتجات غير الغذائية الأساسية. نخدم مجموعة متنوعة من العملاء التجاريين، بما في ذلك محلات البقالة والسوبر ماركت والفنادق وتجار الجملة. ومن خلال محفظة العلامات التجارية وتنوع المنتجات، نسعى إلى تسهيل حصول عملائنا على احتياجاتهم اليومية من المنتجات. ونحرص على بناء علاقات تجارية قوية من خلال الاهتمام بجودة المنتجات وموثوقية الخدمة والتركيز على احتياجات العملاء.",
   ),
   contactTeam: phrase("Contact Our Team", "تواصلوا مع فريقنا"),
-  visionTitle: phrase("OUR VISION", "رؤيتنا"),
+  visionTitle: phrase("Our Vision", "رؤيتنا"),
   vision: phrase(
     "To become a trusted name in FMCG trading and distribution across Saudi Arabia by connecting businesses with quality products, recognized brands, and dependable supply solutions.",
     "أن نكون من الأسماء الموثوقة في تجارة وتوزيع السلع الاستهلاكية سريعة التداول في المملكة العربية السعودية، من خلال ربط الشركات بمنتجات عالية الجودة وعلامات تجارية معروفة وحلول توريد موثوقة.",
@@ -64,7 +64,7 @@ export const aboutCopy = {
       ),
     },
   ],
-  teamTitle: phrase("BOARD OF DIRECTORS", "مجلس إدارة"),
+  teamTitle: phrase("Board of Directors", "مجلس إدارة"),
   roles: {
     managingPartner: phrase("Managing Partner"),
     generalManager: phrase("General Manager"),
