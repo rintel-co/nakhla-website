@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t(locale, branchesCopy.metaTitle), description: t(locale, branchesCopy.lede) };
 }
 
-const corridor = "https://nakhlaalbarari.com/wp-content/uploads/2026/06/Inside-office-4.avif";
+const corridor = "/media/Inside-office-4.avif";
 
 export default async function BranchesPage() {
   const locale = await getLocale();

@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t(locale, careersCopy.metaTitle), description: t(locale, careersCopy.lede) };
 }
 
-const office = "https://nakhlaalbarari.com/wp-content/uploads/2026/06/Inside-office-4.avif";
+const office = "/media/Inside-office-4.avif";
 
 export default async function CareersPage() {
   const locale = await getLocale();

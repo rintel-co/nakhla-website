@@ -125,7 +125,7 @@ export default async function HomePage() {
             <Link className={`${pillSolid} mt-6`} href="/about">{t(locale, homeCopy.overviewButton)}</Link>
           </div>
           <div className="relative mx-auto aspect-square w-full max-w-[380px] overflow-hidden rounded-3xl lg:ms-auto lg:me-0 lg:max-w-[420px]">
-            <img className="absolute inset-0 h-full w-full object-cover object-[center_68%]" src="https://nakhlaalbarari.com/wp-content/uploads/2026/06/Nakhla-Al-Barari-Contact-Us.avif" alt={t(locale, homeCopy.overviewImageAlt)} />
+            <img className="absolute inset-0 h-full w-full object-cover object-[center_68%]" src="/media/Nakhla-Al-Barari-Contact-Us.avif" alt={t(locale, homeCopy.overviewImageAlt)} />
           </div>
         </div>
       </section>
@@ -175,7 +175,7 @@ export default async function HomePage() {
       <section className={`${homeSection} bg-page`} id="why" aria-labelledby="why-heading">
         <div className={`${wrap} grid items-stretch gap-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]`}>
           <div className="relative min-h-80 overflow-hidden rounded-3xl lg:min-h-full">
-            <img className="absolute inset-0 h-full w-full object-cover" src="https://nakhlaalbarari.com/wp-content/uploads/2026/06/About-us.avif" alt={t(locale, aboutCopy.imageAlt)} />
+            <img className="absolute inset-0 h-full w-full object-cover" src="/media/About-us.avif" alt={t(locale, aboutCopy.imageAlt)} />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
               <p className="text-sm font-semibold text-green">{t(locale, aboutCopy.valuesTitle)}</p>
@@ -355,7 +355,7 @@ export default async function HomePage() {
           </div>
           <div className="grid items-stretch gap-4 lg:grid-cols-[1.15fr_0.85fr]">
             <article className="overflow-hidden rounded-3xl border border-line bg-white">
-              <img className="h-72 w-full object-cover object-[center_55%]" src="https://nakhlaalbarari.com/wp-content/uploads/2026/06/STRONG-START-TO-EVERY-MORING-AL-AZIMA-BAKED-BEANS-400-GM.avif" alt={t(locale, homeCopy.journalAlt)} />
+              <img className="h-72 w-full object-cover object-[center_55%]" src="/media/STRONG-START-TO-EVERY-MORING-AL-AZIMA-BAKED-BEANS-400-GM.avif" alt={t(locale, homeCopy.journalAlt)} />
               <div className="p-5">
                 <p className="text-sm font-semibold text-green">{t(locale, homeCopy.journalKicker)}</p>
                 <h3 className="mt-1 text-lg font-semibold">{t(locale, homeCopy.journalTitle)}</h3>

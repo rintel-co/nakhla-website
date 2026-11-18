@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t(locale, galleryCopy.metaTitle), description: t(locale, galleryCopy.lede) };
 }
 
-const iftar = "https://nakhlaalbarari.com/wp-content/uploads/2026/07/Nakhla-Al-Barari-Iftar-Party-1-1536x864.avif";
+const iftar = "/media/Nakhla-Al-Barari-Iftar-Party-1-1536x864.avif";
 
 const albums = [
   {

@@ -14,14 +14,14 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t(locale, aboutCopy.metaTitle), description: t(locale, aboutCopy.lede) };
 }
 
-const aboutImage = "https://nakhlaalbarari.com/wp-content/uploads/2026/06/About-us.avif";
+const aboutImage = "/media/About-us.avif";
 
 const directors: { name: string; role: string; photo?: string }[] = [
   { name: "Yazeed Mohammed Al Suwaylih", role: "Managing Partner" },
-  { name: "Basheer Nadammel", role: "General Manager", photo: "https://nakhlaalbarari.com/wp-content/uploads/2026/06/BASHEER-NADAMMEL.avif" },
-  { name: "Shameer Cheriya Puthan Veetil", role: "Managing Partner", photo: "https://nakhlaalbarari.com/wp-content/uploads/2026/06/SHAMEER-CHERIYA-PUTHAN-VEETIL.avif" },
-  { name: "Sohail Abdulrazzaq", role: "Managing Partner", photo: "https://nakhlaalbarari.com/wp-content/uploads/2026/06/SOHAIL-ABDULRAZZAQ.avif" },
-  { name: "Yahiya Purayil", role: "Managing Partner", photo: "https://nakhlaalbarari.com/wp-content/uploads/2026/06/YAHIYA-PURAYIL.avif" },
+  { name: "Basheer Nadammel", role: "General Manager", photo: "/media/BASHEER-NADAMMEL.avif" },
+  { name: "Shameer Cheriya Puthan Veetil", role: "Managing Partner", photo: "/media/SHAMEER-CHERIYA-PUTHAN-VEETIL.avif" },
+  { name: "Sohail Abdulrazzaq", role: "Managing Partner", photo: "/media/SOHAIL-ABDULRAZZAQ.avif" },
+  { name: "Yahiya Purayil", role: "Managing Partner", photo: "/media/YAHIYA-PURAYIL.avif" },
 ];
 
 const roleCopy = {

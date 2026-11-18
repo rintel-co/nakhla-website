@@ -23,8 +23,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t(locale, contactCopy.metaTitle), description: t(locale, contactCopy.lede) };
 }
 
-const exterior = "https://nakhlaalbarari.com/wp-content/uploads/2026/06/Nakhla-Al-Barari-Contact-Us.avif";
-const meetingRoom = "https://nakhlaalbarari.com/wp-content/uploads/2026/06/Home-Office.avif";
+const exterior = "/media/Nakhla-Al-Barari-Contact-Us.avif";
+const meetingRoom = "/media/Home-Office.avif";
 
 const enquiryCategories = ["Food Products", "Frozen Foods", "Soft Drinks & Beverages", "Non Food"];
 
